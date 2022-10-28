@@ -12,7 +12,7 @@ public class TankHeadMovement : MonoBehaviour
         // Turretの最初の角度を取得する。
         angle = transform.eulerAngles;
 
-        audioS = GetComponent<AudioSource>();
+        //audioS = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -20,33 +20,33 @@ public class TankHeadMovement : MonoBehaviour
         // 割り当てるボタン（キー）は自由に変更可能
         if (Input.GetKey(KeyCode.Q))
         {
-            audioS.enabled = true;
+            //audioS.enabled = true;
 
-            angle.y -= 0.5f;
+            angle.y -= 0.2f;
 
             // （ポイント）親の「旋回角度」に合わせるのが「transform.root.eulerAngles.y」の部分
-            transform.eulerAngles = new Vector3(angle.y, transform.root.eulerAngles.y, 0);
+            transform.eulerAngles = new Vector3(0, transform.root.eulerAngles.y + angle.y, 0);
 
             // 移動できる角度に制限を加える。
             if (angle.y < 70)
             {
-                angle.y = 70;
+                //angle.y = 70;
             }
         }
         else if (Input.GetKey(KeyCode.E))
         {
-            audioS.enabled = true;
-            angle.y += 0.5f;
-            transform.eulerAngles = new Vector3(angle.y, transform.root.eulerAngles.y, 0);
+            //audioS.enabled = true;
+            angle.y += 0.2f;
+            transform.eulerAngles = new Vector3(0, transform.root.eulerAngles.y + angle.y, 0);
 
             if (angle.y > 90)
             {
-                angle.y = 90;
+                //angle.y = 90;
             }
         }
         else
         {
-            audioS.enabled = false;
+            //audioS.enabled = false;
         }
     }
 }
