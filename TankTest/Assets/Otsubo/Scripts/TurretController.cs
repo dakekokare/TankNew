@@ -28,9 +28,9 @@ public class TurretController : MonoBehaviour
             transform.eulerAngles = new Vector3(angle.x, transform.root.eulerAngles.y, 0);
 
             // ˆÚ“®‚Å‚«‚éŠp“x‚É§ŒÀ‚ğ‰Á‚¦‚éB
-            if (angle.x < 70)
+            if (angle.x < 40)
             {
-                angle.x = 70;
+                angle.x = 40;
             }
         }
         else if (Input.GetKey(KeyCode.L))
