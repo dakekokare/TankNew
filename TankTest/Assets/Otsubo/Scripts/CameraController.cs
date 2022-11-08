@@ -11,13 +11,20 @@ public class CameraController : MonoBehaviour
     // 「bool」は「true」か「false」の二択の情報を扱うことができます（ポイント）
     private bool mainCameraON = true;
 
+    //[SerializeField]
+    private GameObject aimImage;
+
     void Start()
     {
         FPScamera = GameObject.Find("FPSCamera").GetComponent<Camera>();
         TPScamera = GameObject.Find("TPSCamera").GetComponent<Camera>();
+        aimImage  = GameObject.Find("AimImage");
 
-        FPScamera.enabled = true;
-        TPScamera.enabled = false;
+        FPScamera.enabled = false;
+        TPScamera.enabled = true;
+
+        // （発想）主観カメラ（FPSカメラ）がオンの時だけ、照準器もオンにする。
+        aimImage.SetActive(false);
     }
 
     void Update()
@@ -28,18 +35,22 @@ public class CameraController : MonoBehaviour
         // もしも「Cボタン」を押した時、「かつ」、「mainCameraON」のステータスが「true」の時（条件）
         if (Input.GetKeyDown(KeyCode.C) && mainCameraON == true)
         {
-            FPScamera.enabled = false;
-            TPScamera.enabled = true;
+            FPScamera.enabled = true;
+            TPScamera.enabled = false;
 
             mainCameraON = false;
+
+            aimImage.SetActive(true);
 
         } // もしも「Cボタン」を押した時、「かつ」、「mainCameraON」のステータスが「false」の時（条件）
         else if (Input.GetKeyDown(KeyCode.C) && mainCameraON == false)
         {
-            FPScamera.enabled = true;
-            TPScamera.enabled = false;
+            FPScamera.enabled = false;
+            TPScamera.enabled = true;
 
             mainCameraON = true;
+
+            aimImage.SetActive(false);
         }
     }
 }
