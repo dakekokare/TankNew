@@ -23,17 +23,18 @@ public class TurretMouse : MonoBehaviour
 
         angle.x -= Input.GetAxis("Mouse Y") * sensitiveRotate;
 
-        transform.eulerAngles = new Vector3(angle.x, transform.parent.eulerAngles.y, 0);
+        transform.eulerAngles = new Vector3(angle.x, transform.parent.parent.eulerAngles.y, 0);
+                                //空のオブジェクトに入れてみる
 
         // 移動できる角度に制限を加える。
-        if (angle.x < 50)
+        if (angle.x < 80)
         {
-            angle.x = 50;
+            angle.x = 80;
         }
 
-        if (angle.x > 110)
+        if (angle.x > 95)
         {
-            angle.x = 110;
+            angle.x = 95;
         }
 
 
