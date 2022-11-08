@@ -28,5 +28,6 @@ public class Scene : MonoBehaviourPunCallbacks
         // （ネットワークオブジェクト）を生成する
         var position = new Vector3(0.0f,0.1f,0.0f);
         PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
+        //PhotonNetwork.Instantiate("Canvas", position, Quaternion.identity);
     }
 }

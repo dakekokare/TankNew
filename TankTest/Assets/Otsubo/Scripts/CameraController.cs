@@ -12,13 +12,20 @@ public class CameraController : MonoBehaviour
     private bool mainCameraON = true;
 
     //[SerializeField]
+    private GameObject canvas;
     private GameObject aimImage;
 
     void Start()
     {
         FPScamera = GameObject.Find("FPSCamera").GetComponent<Camera>();
         TPScamera = GameObject.Find("TPSCamera").GetComponent<Camera>();
-        aimImage  = GameObject.Find("AimImage");
+        //aimImage  = GameObject.Find("AimImage");
+        //canvas = GameObject.Find("Canvas");
+
+        canvas = (GameObject)Resources.Load("Canvas");
+
+
+        aimImage = canvas.transform.GetChild(1).gameObject;
 
         FPScamera.enabled = false;
         TPScamera.enabled = true;
