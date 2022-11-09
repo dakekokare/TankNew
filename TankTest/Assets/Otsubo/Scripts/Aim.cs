@@ -7,7 +7,7 @@ public class Aim : MonoBehaviour
 {
     [SerializeField]
     private Image aimImage;
-
+    
     void Update()
     {
         // レーザー（ray）を飛ばす「起点」と「方向」
