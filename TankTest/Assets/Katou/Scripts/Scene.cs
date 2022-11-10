@@ -26,8 +26,9 @@ public class Scene : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         // （ネットワークオブジェクト）を生成する
-        var position = new Vector3(0.0f,0.1f,0.0f);
-        PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
+        var position = new Vector3(0.0f, 0.1f, 0.0f);
         PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
+
     }
 }

@@ -20,18 +20,18 @@ public class CameraController : MonoBehaviour
         FPScamera = GameObject.Find("FPSCamera").GetComponent<Camera>();
         TPScamera = GameObject.Find("TPSCamera").GetComponent<Camera>();
         //aimImage  = GameObject.Find("AimImage");
-        //canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("CanvasObj(Clone)");
 
-        canvas = (GameObject)Resources.Load("Canvas");
+        //canvas = (GameObject)Resources.Load("CanvasObj");
 
 
-        aimImage = canvas.transform.GetChild(1).gameObject;
+        aimImage = canvas.transform.GetChild(0).GetChild(1).gameObject;
 
         FPScamera.enabled = false;
         TPScamera.enabled = true;
 
         // （発想）主観カメラ（FPSカメラ）がオンの時だけ、照準器もオンにする。
-        aimImage.SetActive(false);
+        aimImage.gameObject.SetActive(false);
     }
 
     void Update()
@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour
 
             mainCameraON = false;
 
-            aimImage.SetActive(true);
+            aimImage.gameObject.SetActive(true);
 
         } // もしも「Cボタン」を押した時、「かつ」、「mainCameraON」のステータスが「false」の時（条件）
         else if (Input.GetKeyDown(KeyCode.C) && mainCameraON == false)
@@ -57,7 +57,7 @@ public class CameraController : MonoBehaviour
 
             mainCameraON = true;
 
-            aimImage.SetActive(false);
+            aimImage.gameObject.SetActive(false);
         }
     }
 }
