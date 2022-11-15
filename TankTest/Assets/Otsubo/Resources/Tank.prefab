@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5265717304710684530}
   - component: {fileID: 2570226455399604621}
+  - component: {fileID: 4141593579413383839}
   m_Layer: 0
   m_Name: ShotShell
   m_TagString: Untagged
@@ -122,9 +123,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732682639750271454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00bf5f1125c711044af403be30c67e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotSpeed: 500
+  shellPrefab: {fileID: 5514375730990815353, guid: 31db37dd6dd1f664d8721999e348bfc6, type: 3}
+  shotSound: {fileID: 8300000, guid: 8c571f4cc1c305a4d80ad5e0af532e76, type: 3}
+--- !u!114 &4141593579413383839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732682639750271454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8651e89908e4ed34aaa450a64a2df0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shotSpeed: 500
@@ -699,6 +715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2534721661194909183}
   - component: {fileID: 7165394045786162658}
+  - component: {fileID: 3790202134858574872}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -728,9 +745,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5219377713402729236}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ac2394b56b108c4aab17ae4d2b7a264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3790202134858574872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219377713402729236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3642f30cc85f94b96ec213bd0aef90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6570201763289469733
@@ -997,6 +1026,8 @@ GameObject:
   - component: {fileID: 7482263563476499350}
   - component: {fileID: 1170569001653382852}
   - component: {fileID: 872693858122898302}
+  - component: {fileID: 1871348286902498246}
+  - component: {fileID: 6866259521410861275}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -1086,7 +1117,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7652158556081977965}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aaf5afb3e7a2c541a7e4bdc69f7ae21, type: 3}
   m_Name: 
@@ -1106,6 +1137,154 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 1.7, z: 4.8}
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &1871348286902498246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7652158556081977965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665e47d8a38ea374298dd86ede9a91d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  turnSpeed: 100
+--- !u!114 &6866259521410861275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7652158556081977965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: caf89c9bc357b6e4fa904ce512c2064e, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1871348286902498246}
+        m_TargetAssemblyTypeName: TankPadMovement, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fa16b2f3-cdeb-42a2-b1f7-22e134046393
+    m_ActionName: Player/Move[/XInputControllerWindows1/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7065511213191242776}
+        m_TargetAssemblyTypeName: PadTurret, Assembly-CSharp
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3b44c148-6deb-40e0-9f55-8c03bb33acab
+    m_ActionName: Player/Look[/XInputControllerWindows1/rightStick,/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4141593579413383839}
+        m_TargetAssemblyTypeName: PadShotShell, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f898191-ec51-4c47-9d49-ae5912bca8aa
+    m_ActionName: Player/Fire[/XInputControllerWindows1/rightTrigger,/Mouse/leftButton,/XInputControllerWindows1/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9582c0c7-4514-4703-b2b5-35b3254bdb93
+    m_ActionName: UI/Navigate[/XInputControllerWindows1/leftStick/up,/XInputControllerWindows1/rightStick/up,/XInputControllerWindows1/leftStick/down,/XInputControllerWindows1/rightStick/down,/XInputControllerWindows1/leftStick/left,/XInputControllerWindows1/rightStick/left,/XInputControllerWindows1/leftStick/right,/XInputControllerWindows1/rightStick/right,/XInputControllerWindows1/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2c1245fe-971f-4ecb-ae9d-07c6e6ea0200
+    m_ActionName: UI/Submit[/Keyboard/enter,/XInputControllerWindows1/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7a808c96-8da3-4603-b618-1b3b54ada4e0
+    m_ActionName: UI/Cancel[/Keyboard/escape,/XInputControllerWindows1/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 357db8c3-580d-45e6-b5cc-bde7b97983f2
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d6e2753a-29b5-4d48-ba10-faf8620aebd2
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e2a4c4ac-ba56-4abb-b2ec-5896ed5933cc
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 61595229-8afc-457a-befc-591d9286ea53
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 54a904dd-5abe-41b2-b660-45b51eea9c4d
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f05dea9-e097-445d-8487-b10edc2fd5ef
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 534cad7a-cf6b-4347-81f4-8942d3349df8
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3790202134858574872}
+        m_TargetAssemblyTypeName: PadCameraController, Assembly-CSharp
+        m_MethodName: OnChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7fe4216e-a79d-4c33-93df-bfdc0b069dbd
+    m_ActionName: Player/Change[/XInputControllerWindows1/leftShoulder]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &8071699695971357925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1369,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8114395944026510791}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ceaf95147e237e4099a92d515dcda86, type: 3}
   m_Name: 
@@ -1208,6 +1387,7 @@ GameObject:
   - component: {fileID: 6838468230709345715}
   - component: {fileID: 8787746582764543493}
   - component: {fileID: 4687368998097685804}
+  - component: {fileID: 7065511213191242776}
   m_Layer: 0
   m_Name: axis
   m_TagString: Untagged
@@ -1301,9 +1481,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9026962930050240310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b11b85aee3c4114c996cf8b6b9887d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7065511213191242776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9026962930050240310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7052ce3fa9b1a4e47895516e5b186c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7652158554532158509
