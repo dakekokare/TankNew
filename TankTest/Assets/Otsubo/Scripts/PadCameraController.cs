@@ -20,13 +20,8 @@ public class PadCameraController : MonoBehaviour
     {
         FPScamera = GameObject.Find("FPSCamera").GetComponent<Camera>();
         TPScamera = GameObject.Find("TPSCamera").GetComponent<Camera>();
-        //aimImage  = GameObject.Find("AimImage");
-        //canvas = GameObject.Find("Canvas");
-
-        canvas = (GameObject)Resources.Load("Canvas");
-
-
-        aimImage = canvas.transform.GetChild(1).gameObject;
+        canvas = GameObject.Find("CanvasObj(Clone)");
+        aimImage = canvas.transform.GetChild(0).GetChild(1).gameObject;
 
         FPScamera.enabled = false;
         TPScamera.enabled = true;

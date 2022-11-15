@@ -3,20 +3,22 @@ using Photon.Realtime;
 using UnityEngine;
 
 // MonoBehaviourPunCallbacksを継承して、PUNのコールバックを受け取れるようにする
-public class Scene : MonoBehaviourPunCallbacks, IPunObservable
+public class Scene : MonoBehaviourPunCallbacks
 {
     //プレイヤースポーン座標   
     [SerializeField] private GameObject spawnA;
     [SerializeField] private GameObject spawnB;
-    //プレイヤー数
-    private int playerNum = 0;
+
+    //プレイヤー数監視
+    private SendVariable sendVariable;
     private void Start()
     {
         // プレイヤー自身の名前を"Player"に設定する
         PhotonNetwork.NickName = "Player";
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
-
+        //プレイヤー数変数管理
+        sendVariable = GetComponent<SendVariable>();
     }
 
 
@@ -34,10 +36,10 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
         
         //スポーン座標代入
         var position=Vector3.zero;
-        if (playerNum == 0)
+        if (sendVariable.playerNum == 0)
         {
             position = spawnA.transform.position;
-            playerNum++;
+            sendVariable.playerNum++;
         }
         else
             position = spawnB.transform.position;
@@ -48,22 +50,5 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
 
 
     }
-
-    //変数同期
-    #region IPunObservable implementation
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            //データの送信
-            stream.SendNext(playerNum);
-        }
-        else
-        {
-            //データの受信
-            this.playerNum = (int)stream.ReceiveNext();
-        }
-    }
-    #endregion
 
 }

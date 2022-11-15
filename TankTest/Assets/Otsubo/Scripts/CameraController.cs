@@ -19,12 +19,7 @@ public class CameraController : MonoBehaviour
     {
         FPScamera = GameObject.Find("FPSCamera").GetComponent<Camera>();
         TPScamera = GameObject.Find("TPSCamera").GetComponent<Camera>();
-        //aimImage  = GameObject.Find("AimImage");
         canvas = GameObject.Find("CanvasObj(Clone)");
-
-        //canvas = (GameObject)Resources.Load("CanvasObj");
-
-
         aimImage = canvas.transform.GetChild(0).GetChild(1).gameObject;
 
         FPScamera.enabled = false;

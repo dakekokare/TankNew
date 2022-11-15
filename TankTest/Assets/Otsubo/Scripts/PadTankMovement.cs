@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public class PadTankMovement : MonoBehaviour
+using Photon.Pun;
+public class PadTankMovement : MonoBehaviourPunCallbacks
 {
     Vector3 move;
     public float moveSpeed;
@@ -14,12 +14,14 @@ public class PadTankMovement : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        if(photonView.IsMine)
+            rb = GetComponent<Rigidbody>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        move = context.ReadValue<Vector2>();
+        if (photonView.IsMine)
+            move = context.ReadValue<Vector2>();
     }
 
     public void OnFire(InputAction.CallbackContext context)
@@ -34,9 +36,11 @@ public class PadTankMovement : MonoBehaviour
     {
         //const float Speed = 100f;
         //transform.Translate(move * Speed * Time.deltaTime);
-
-        TankMove();
-        TankTurn();
+        if (photonView.IsMine)
+        {
+            TankMove();
+            TankTurn();
+        }
     }
 
     // 前進・後退のメソッド
