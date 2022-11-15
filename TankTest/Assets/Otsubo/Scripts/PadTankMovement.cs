@@ -14,13 +14,13 @@ public class PadTankMovement : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        if(photonView.IsMine)
+        //if(photonView.IsMine)
             rb = GetComponent<Rigidbody>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (photonView.IsMine)
+        //if (photonView.IsMine)
             move = context.ReadValue<Vector2>();
     }
 
@@ -36,7 +36,7 @@ public class PadTankMovement : MonoBehaviourPunCallbacks
     {
         //const float Speed = 100f;
         //transform.Translate(move * Speed * Time.deltaTime);
-        if (photonView.IsMine)
+        //if (photonView.IsMine)
         {
             TankMove();
             TankTurn();
