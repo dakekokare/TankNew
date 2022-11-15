@@ -12,10 +12,16 @@ public class PadTankMovement : MonoBehaviourPunCallbacks
     private float movementInputValue;
     private float turnInputValue;
 
+    // ƒRƒ“ƒgƒ[ƒ‰İ’è
+    private TestInputActions m_input = null;
+
     void Start()
     {
+        m_input = new TestInputActions();
+        m_input.Enable();
+
         //if(photonView.IsMine)
-            rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void OnMove(InputAction.CallbackContext context)

@@ -1,24 +1,33 @@
-using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class SendVariable : MonoBehaviourPunCallbacks,IPunObservable
+using Photon.Pun;
+public class SendVariable : MonoBehaviourPunCallbacks, IPunObservable
 {
     public int playerNum = 0;
-    //変数同期
-    #region IPunObservable implementation
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        // オーナーの場合
         if (stream.IsWriting)
         {
-            //データの送信
-            stream.SendNext(playerNum);
+            stream.SendNext(this.playerNum);
         }
+        // オーナー以外の場合
         else
         {
-            //データの受信
             this.playerNum = (int)stream.ReceiveNext();
         }
     }
-    #endregion
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
