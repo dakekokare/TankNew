@@ -51,7 +51,7 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
     //変数同期
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isWriting)
+        if (stream.IsWriting)
         {
             //データの送信
             stream.SendNext(playerNum);
