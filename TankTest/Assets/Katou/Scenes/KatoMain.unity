@@ -2109,7 +2109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c600985f89cc56645994675f68e2f653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
 --- !u!114 &1956896853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,7 +2125,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 2
   observableSearch: 0
   ObservedComponents:
   - {fileID: 1956896852}

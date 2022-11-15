@@ -31,6 +31,7 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnJoinedRoom()
     {
+        
         //スポーン座標代入
         var position=Vector3.zero;
         if (playerNum == 0)
@@ -49,6 +50,7 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     //変数同期
+    #region IPunObservable implementation
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -62,5 +64,6 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
             this.playerNum = (int)stream.ReceiveNext();
         }
     }
+    #endregion
 
 }
