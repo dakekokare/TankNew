@@ -24,10 +24,8 @@ public class Scene : MonoBehaviourPunCallbacks
     // マスターサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnConnectedToMaster()
     {
-
-
         // "Room"という名前のルームに参加する（ルームが存在しなければ作成して参加する）
-        if(PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions(), TypedLobby.Default))
+        if (PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions(), TypedLobby.Default))
         {
             Debug.Log("生成");
             ////スポーン座標代入
@@ -75,17 +73,17 @@ public class Scene : MonoBehaviourPunCallbacks
 
 
 
-            if (sendVariable.playerNum == 0)
-            {
-                position = spawnA.transform.position;
-                sendVariable.playerNum++;
-            }
-            else
-                position = spawnB.transform.position;
+        if (sendVariable.playerNum == 0)
+        {
+            position = spawnA.transform.position;
+            sendVariable.playerNum++;
+        }
+        else
+            position = spawnB.transform.position;
 
-            // （ネットワークオブジェクト）を生成する
-            PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
-            PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
+        // （ネットワークオブジェクト）を生成する
+        PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
 
     }
 }
