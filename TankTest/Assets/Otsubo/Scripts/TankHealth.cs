@@ -39,14 +39,17 @@ public class TankHealth : MonoBehaviourPunCallbacks
                     }
                 }
         }
+        else
+        {
             // HP‚ð‚P‚¸‚ÂŒ¸­‚³‚¹‚éB
-        
+
             tankHP -= 1;
 
             HPLabel.text = "HPF" + tankHP;
+        }
 
-            // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘ŠŽè•ûi“G‚Ì–C’ej‚ð”j‰ó‚·‚éB
-            PhotonView.Destroy(other.gameObject);
+        // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘ŠŽè•ûi“G‚Ì–C’ej‚ð”j‰ó‚·‚éB
+        PhotonView.Destroy(other.gameObject);
 
             if (tankHP > 0)
             {
