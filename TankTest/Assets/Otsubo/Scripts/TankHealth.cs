@@ -24,7 +24,7 @@ public class TankHealth : MonoBehaviour
         //HPLabel = canvas.transform.GetChild(0).GetChild(0).gameObject;
         HPLabel = canvas.GetComponent<Text>();
 
-        HPLabel.text = "HP:" + tankHP;
+        HPLabel.text = "HPF" + tankHP;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,7 +35,7 @@ public class TankHealth : MonoBehaviour
             // HP‚ğ‚P‚¸‚ÂŒ¸­‚³‚¹‚éB
             tankHP -= 1;
 
-            HPLabel.text = "HP:" + tankHP;
+            HPLabel.text = "HPF" + tankHP;
 
             // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
             Destroy(other.gameObject);

@@ -66,6 +66,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4776881657037664209, guid: 5076afd87cb240e42a2b3f0a88e172d5, type: 3}
+      propertyPath: m_Text
+      value: "HP\uFF1A"
+      objectReference: {fileID: 0}
     - target: {fileID: 4776881657338497058, guid: 5076afd87cb240e42a2b3f0a88e172d5, type: 3}
       propertyPath: m_Name
       value: Canvas
