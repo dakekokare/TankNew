@@ -17,8 +17,6 @@ public class Scene : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = "Player";
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
-        //プレイヤー数変数管理
-        sendVariable = GetComponent<SendVariable>();
     }
 
 
@@ -33,9 +31,29 @@ public class Scene : MonoBehaviourPunCallbacks
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnJoinedRoom()
     {
-        
+
         //スポーン座標代入
         var position=Vector3.zero;
+
+
+        GameObject obj = GameObject.Find("PlayerNumVariable(Clone)");
+        //nullだったら
+        if (obj == null)
+        {
+            position = Vector3.zero;
+
+            // （ネットワークオブジェクト）を生成する
+            PhotonNetwork.Instantiate("PlayerNumVariable", position, Quaternion.identity);
+
+            //プレイヤー数管理変数
+            GameObject gb = GameObject.Find("PlayerNumVariable(Clone)");
+
+            sendVariable = gb.GetComponent<SendVariable>();
+        }
+
+
+
+
         if (sendVariable.playerNum == 0)
         {
             position = spawnA.transform.position;
@@ -47,6 +65,7 @@ public class Scene : MonoBehaviourPunCallbacks
         // （ネットワークオブジェクト）を生成する
         PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
         PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
+
 
 
     }
