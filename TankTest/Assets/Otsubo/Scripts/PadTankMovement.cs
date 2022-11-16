@@ -15,23 +15,34 @@ public class PadTankMovement : MonoBehaviourPunCallbacks
     // コントローラ設定
     private TestInputActions m_input = null;
 
+    private MoveManager moveManager;
     void Start()
     {
+
+
         m_input = new TestInputActions();
         m_input.Enable();
 
         //if(photonView.IsMine)
         rb = GetComponent<Rigidbody>();
+
+        moveManager = GameObject.Find("MoveManager").GetComponent<MoveManager>();
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         //if (photonView.IsMine)
-            move = context.ReadValue<Vector2>();
+        move = context.ReadValue<Vector2>();
+        moveManager.SetVec(move);
+        moveManager.SetRb(rb);
     }
 
     public void OnFire(InputAction.CallbackContext context)
     {
+        moveManager.SetVec(move);
+        moveManager.SetRb(rb);
+
         if (context.phase == InputActionPhase.Performed)
         {
             Debug.Log("Fire");
@@ -43,10 +54,9 @@ public class PadTankMovement : MonoBehaviourPunCallbacks
         //const float Speed = 100f;
         //transform.Translate(move * Speed * Time.deltaTime);
         //if (photonView.IsMine)
-        {
-            TankMove();
-            TankTurn();
-        }
+        
+        //TankMove();
+        //TankTurn();
     }
 
     // 前進・後退のメソッド
