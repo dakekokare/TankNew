@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class TurretMouse : MonoBehaviour
+using Photon.Pun;
+public class TurretMouse : MonoBehaviourPunCallbacks
 {
     private Vector3 angle;
     private AudioSource audioS;

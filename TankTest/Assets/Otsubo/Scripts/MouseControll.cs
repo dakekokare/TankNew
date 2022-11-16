@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class MouseControll : MonoBehaviour
+public class MouseControll : MonoBehaviourPunCallbacks
 {
     private Vector3 angle;
     private AudioSource audioS;
