@@ -15,7 +15,9 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
     private float timeBetweenShot = 0.75f;
     private float timer;
-
+    private int nextBulletId = 0;
+    [SerializeField]
+    private BulletNet bulletPre;
     void Update()
     {
 
@@ -31,22 +33,40 @@ public class ShotShell : MonoBehaviourPunCallbacks
                 // タイマーの時間を０に戻す。
                 timer = 0.0f;
 
-                // 砲弾のプレハブを実体化（インスタンス化）する。
-                GameObject shell = PhotonNetwork.Instantiate("Shell", transform.position, Quaternion.identity);
+                // 弾を発射するたびに弾のIDを1ずつ増やしていく
+                photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++);
 
-                // 砲弾に付いているRigidbodyコンポーネントにアクセスする。
-                Rigidbody shellRb = shell.GetComponent<Rigidbody>();
-
-                // forward（青軸＝Z軸）の方向に力を加える。
-                shellRb.AddForce(transform.forward * shotSpeed);
-
-                // 発射した砲弾を３秒後に破壊する。
-                // （重要な考え方）不要になった砲弾はメモリー上から削除すること。
-                Destroy(shell, 3.0f);
-
-                // 砲弾の発射音を出す。
-                AudioSource.PlayClipAtPoint(shotSound, transform.position);
             }
         }
+    }
+
+     [PunRPC]
+    private void FireBullet(int id)
+    {
+        //var shell = PhotonNetwork.Instantiate(
+        //    "Shell", transform.position, Quaternion.identity
+        //    ).GetComponent<BulletNet>();
+        var shell = Instantiate(bulletPre);
+
+        shell.Init(id, photonView.OwnerActorNr);
+        // 砲弾のプレハブを実体化（インスタンス化）する。
+        //GameObject shell = PhotonNetwork.Instantiate("Shell", transform.position, Quaternion.identity);
+
+        // 砲弾に付いているRigidbodyコンポーネントにアクセスする。
+        Rigidbody shellRb = shell.GetComponent<Rigidbody>();
+
+        //座標移動
+        shellRb.transform.position = transform.position;
+
+        // forward（青軸＝Z軸）の方向に力を加える。
+        shellRb.AddForce(transform.forward * shotSpeed);
+
+        // 発射した砲弾を３秒後に破壊する。
+        // （重要な考え方）不要になった砲弾はメモリー上から削除すること。
+        //Destroy(shell, 3.0f);
+        PhotonView.Destroy(shell, 3.0f);
+        // 砲弾の発射音を出す。
+        AudioSource.PlayClipAtPoint(shotSound, transform.position);
+
     }
 }

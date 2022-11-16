@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class TankHealth : MonoBehaviour
+using Photon.Pun;
+public class TankHealth : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private GameObject effectPrefab1;
@@ -29,16 +29,24 @@ public class TankHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // ‚à‚µ‚à‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè‚ÌTag‚ªhEnemyShellh‚Å‚ ‚Á‚½‚È‚ç‚ÎiğŒj
-        if (other.gameObject.tag == "EnemyShell")
+        if (photonView.IsMine)
         {
+           if (other.TryGetComponent<BulletNet>(out var shell))
+                {
+                    if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
+                    {
+                        photonView.RPC(nameof(HitBullet), RpcTarget.All, shell.Id, shell.OwnerId);
+                    }
+                }
+        }
             // HP‚ğ‚P‚¸‚ÂŒ¸­‚³‚¹‚éB
+        
             tankHP -= 1;
 
             HPLabel.text = "HPF" + tankHP;
 
             // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-            Destroy(other.gameObject);
+            PhotonView.Destroy(other.gameObject);
 
             if (tankHP > 0)
             {
@@ -52,6 +60,20 @@ public class TankHealth : MonoBehaviour
 
                 // ƒvƒŒ[ƒ„[‚ğ”j‰ó‚·‚éB
                 Destroy(gameObject);
+            }
+        }
+
+
+    [PunRPC]
+    private void HitBullet(int id, int ownerId)
+    {
+        var bullets = FindObjectsOfType<BulletNet>();
+        foreach (var bullet in bullets)
+        {
+            if (bullet.Equals(id, ownerId))
+            {
+                Destroy(bullet.gameObject);
+                break;
             }
         }
     }
