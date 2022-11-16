@@ -25,7 +25,30 @@ public class Scene : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         // "Room"という名前のルームに参加する（ルームが存在しなければ作成して参加する）
-        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions(), TypedLobby.Default);
+        if (PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions(), TypedLobby.Default))
+        {
+            Debug.Log("生成");
+            //スポーン座標代入
+            var position = Vector3.zero;
+
+            // （ネットワークオブジェクト）を生成する
+            PhotonNetwork.Instantiate("PlayerNumVariable", position, Quaternion.identity);
+
+            //    //プレイヤー数管理変数
+            GameObject gb = GameObject.Find("PlayerNumVariable(Clone)");
+
+            sendVariable = gb.GetComponent<SendVariable>();
+
+        }
+        else
+        {
+            Debug.Log("すでに生成されている");
+            //    //プレイヤー数管理変数
+            GameObject gb = GameObject.Find("PlayerNumVariable(Clone)");
+
+            sendVariable = gb.GetComponent<SendVariable>();
+
+        }
     }
 
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック

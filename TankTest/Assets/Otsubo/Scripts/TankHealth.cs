@@ -11,13 +11,19 @@ public class TankHealth : MonoBehaviour
     private GameObject effectPrefab2;
     public int tankHP;
 
-    [SerializeField]
+    //[SerializeField]
+    //private Text HPLabel;
+
+    private GameObject canvas;
+
     private Text HPLabel;
-
-
 
     void Start()
     {
+        canvas = GameObject.Find("CanvasObj(Clone)").transform.GetChild(0).GetChild(0).gameObject;
+        //HPLabel = canvas.transform.GetChild(0).GetChild(0).gameObject;
+        HPLabel = canvas.GetComponent<Text>();
+
         HPLabel.text = "HP:" + tankHP;
     }
 
