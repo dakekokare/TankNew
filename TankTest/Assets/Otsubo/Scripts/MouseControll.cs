@@ -18,12 +18,15 @@ public class MouseControll : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        float sensitiveRotate = 5.0f;
+        if (photonView.IsMine)
+        {
 
-        float rotateX = Input.GetAxis("Mouse X") * sensitiveRotate;
+            float sensitiveRotate = 5.0f;
 
-        transform.Rotate(0.0f, rotateX, 0.0f);
+            float rotateX = Input.GetAxis("Mouse X") * sensitiveRotate;
 
+            transform.Rotate(0.0f, rotateX, 0.0f);
+        }
 
 
         //// 割り当てるボタン（キー）は自由に変更可能
