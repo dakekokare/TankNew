@@ -28,25 +28,17 @@ public class Scene : MonoBehaviourPunCallbacks
         if (PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions(), TypedLobby.Default))
         {
             Debug.Log("生成");
-            //スポーン座標代入
-            var position = Vector3.zero;
+            ////スポーン座標代入
+            //var position = Vector3.zero;
 
-            // （ネットワークオブジェクト）を生成する
-            PhotonNetwork.Instantiate("PlayerNumVariable", position, Quaternion.identity);
+            //// （ネットワークオブジェクト）を生成する
+            //PhotonNetwork.Instantiate("PlayerNumVariable", position, Quaternion.identity);
 
-            //    //プレイヤー数管理変数
-            GameObject gb = GameObject.Find("PlayerNumVariable(Clone)");
-
-            sendVariable = gb.GetComponent<SendVariable>();
 
         }
         else
         {
             Debug.Log("すでに生成されている");
-            //    //プレイヤー数管理変数
-            GameObject gb = GameObject.Find("PlayerNumVariable(Clone)");
-
-            sendVariable = gb.GetComponent<SendVariable>();
 
         }
     }
@@ -56,11 +48,16 @@ public class Scene : MonoBehaviourPunCallbacks
     {
 
         //スポーン座標代入
-        var position=Vector3.zero;
+        var position = Vector3.zero;
 
+        //int view = 0;
+        //view = GameObject.Find("PlayerNumVariable(Clone)").GetComponent<PhotonView>().ViewID;
+        //PhotonView obj;
+        //if (view!=0)
+        //    obj = PhotonView.Find(view);
 
         GameObject obj = GameObject.Find("PlayerNumVariable(Clone)");
-        //nullだったら
+        //nullだった
         if (obj == null)
         {
             position = Vector3.zero;
@@ -68,12 +65,11 @@ public class Scene : MonoBehaviourPunCallbacks
             // （ネットワークオブジェクト）を生成する
             PhotonNetwork.Instantiate("PlayerNumVariable", position, Quaternion.identity);
 
-            //プレイヤー数管理変数
+            //    //プレイヤー数管理変数
             GameObject gb = GameObject.Find("PlayerNumVariable(Clone)");
 
             sendVariable = gb.GetComponent<SendVariable>();
         }
-
 
 
 
@@ -89,8 +85,5 @@ public class Scene : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
         PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
 
-
-
     }
-
 }
