@@ -6,9 +6,9 @@ public class ShotShell : MonoBehaviourPunCallbacks
 {
     public float shotSpeed;
 
-    // privateの状態でもInspector上から設定できるようにするテクニック。
-    [SerializeField]
-    private GameObject shellPrefab;
+    //// privateの状態でもInspector上から設定できるようにするテクニック。
+    //[SerializeField]
+    //private GameObject shellPrefab;
 
     [SerializeField]
     private AudioClip shotSound;
@@ -32,7 +32,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
                 timer = 0.0f;
 
                 // 砲弾のプレハブを実体化（インスタンス化）する。
-                GameObject shell = Instantiate(shellPrefab, transform.position, Quaternion.identity);
+                GameObject shell = PhotonNetwork.Instantiate("Shell", transform.position, Quaternion.identity);
 
                 // 砲弾に付いているRigidbodyコンポーネントにアクセスする。
                 Rigidbody shellRb = shell.GetComponent<Rigidbody>();

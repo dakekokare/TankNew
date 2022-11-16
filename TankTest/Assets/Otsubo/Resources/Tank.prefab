@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotSpeed: 500
-  shellPrefab: {fileID: 5514375730990815353, guid: 31db37dd6dd1f664d8721999e348bfc6, type: 3}
   shotSound: {fileID: 8300000, guid: 8c571f4cc1c305a4d80ad5e0af532e76, type: 3}
 --- !u!114 &4141593579413383839
 MonoBehaviour:
