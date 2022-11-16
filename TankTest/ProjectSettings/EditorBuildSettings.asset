@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Katou/Scenes/KatoMain.unity
+    guid: d3fe3321b313d244da01db8ba05ae8fa
   m_configObjects: {}
