@@ -6,9 +6,7 @@ using UnityEngine;
 public class Scene : MonoBehaviourPunCallbacks
 {
     //プレイヤースポーン座標   
-    [SerializeField] private GameObject spawnA;
-    [SerializeField] private GameObject spawnB;
-
+    public GameObject[] array;
     //プレイヤー数監視
     private SendVariable sendVariable;
     private void Start()
@@ -49,40 +47,41 @@ public class Scene : MonoBehaviourPunCallbacks
 
         //スポーン座標代入
         var position = Vector3.zero;
+        
+        //PhotonView.Owner.UserId
+        //photonView.OwnerActorNr
+        //GameObject obj= PhotonView.Find(PhotonView.view).gameObject;
 
-        //int view = 0;
-        //view = GameObject.Find("PlayerNumVariable(Clone)").GetComponent<PhotonView>().ViewID;
-        //PhotonView obj;
-        //if (view!=0)
-        //    obj = PhotonView.Find(view);
-
-        GameObject obj = GameObject.Find("PlayerNumVariable(Clone)");
+        //PhotonView obj = GameObject.Find("PlayerNumVariable(Clone)").GetComponent<PhotonView>();
         //nullだった
-        if (obj == null)
-        {
-            position = Vector3.zero;
+        //if (obj == null)
+        //{
+        //    position = Vector3.zero;
 
-            // （ネットワークオブジェクト）を生成する
-            PhotonNetwork.Instantiate("PlayerNumVariable", position, Quaternion.identity);
+        //    // （ネットワークオブジェクト）を生成する
+        //    PhotonNetwork.Instantiate("PlayerNumVariable", position, Quaternion.identity);
 
-            //    //プレイヤー数管理変数
-            GameObject gb = GameObject.Find("PlayerNumVariable(Clone)");
+        //    //    //プレイヤー数管理変数
+        //    GameObject gb = GameObject.Find("PlayerNumVariable(Clone)");
 
-            sendVariable = gb.GetComponent<SendVariable>();
-        }
+        //    sendVariable = gb.GetComponent<SendVariable>();
+        //}
 
 
 
-        if (sendVariable.playerNum == 0)
-        {
-            position = spawnA.transform.position;
-            sendVariable.playerNum++;
-        }
-        else
-            position = spawnB.transform.position;
+        //if (sendVariable.playerNum == 0)
+        //{
+        //    position = spawnA.transform.position;
+        //    sendVariable.playerNum++;
+        //}
+        //else
+        //    position = spawnB.transform.position;
 
         // （ネットワークオブジェクト）を生成する
         PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
+
+        int r=Random.Range(0, 6);
+        position=array[r].gameObject.transform.position;
         PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
 
     }
