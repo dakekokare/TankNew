@@ -1179,7 +1179,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1871348286902498246}
-        m_TargetAssemblyTypeName: TankPadMovement, Assembly-CSharp
+        m_TargetAssemblyTypeName: PadTankMovement, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
