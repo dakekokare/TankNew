@@ -19,7 +19,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
     [SerializeField]
     private BulletNet bulletPre;
 
-    private bool shotLock = false;
+    private bool shotLock = true;
 
     void Update()
     {
