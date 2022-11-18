@@ -29,10 +29,6 @@ public class Scene : MonoBehaviourPunCallbacks
             ////スポーン座標代入
             //var position = Vector3.zero;
 
-            //// （ネットワークオブジェクト）を生成する
-            //PhotonNetwork.Instantiate("PlayerNumVariable", position, Quaternion.identity);
-
-
         }
         else
         {
@@ -47,7 +43,7 @@ public class Scene : MonoBehaviourPunCallbacks
 
         //スポーン座標代入
         var position = Vector3.zero;
-        
+
         //PhotonView.Owner.UserId
         //photonView.OwnerActorNr
         //GameObject obj= PhotonView.Find(PhotonView.view).gameObject;
@@ -77,12 +73,30 @@ public class Scene : MonoBehaviourPunCallbacks
         //else
         //    position = spawnB.transform.position;
 
+
+        ////プレイヤー数管理変数を探索
+        //GameObject gb = GameObject.Find("PlayerCount(Clone)");
+        ////null だったら生成
+        //if (gb == null)
+        //{   
+        //    //// （ネットワークオブジェクト）を生成する
+        //    PhotonNetwork.Instantiate("PlayerCount", position, Quaternion.identity);
+        //    //プレイヤー数管理変数
+        //    gb = GameObject.Find("PlayerCount(Clone)");
+        //    SendVariable sb= gb.GetComponent<SendVariable>();
+        //    sb.Init(sb.photonView.ViewID, photonView.OwnerActorNr);
+        //}
+
+
+
         // （ネットワークオブジェクト）を生成する
         PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
 
         int r=Random.Range(0, 5);
         position=array[r].gameObject.transform.position;
         PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
+
+
 
     }
 }
