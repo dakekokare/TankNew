@@ -14,7 +14,7 @@ public class TankMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        moveLock = false;
+        moveLock = true;
     }
 
     void Update()
