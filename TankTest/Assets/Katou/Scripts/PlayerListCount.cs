@@ -18,10 +18,8 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
         int count = 0;
         foreach (var p in PhotonNetwork.PlayerList)
         {
-            count++;
-
             //2人いたら
-            if (count%2==0)
+            if (count==2)
             {
                 //// （ネットワークオブジェクト）を生成する
                 //Instantiate("CountDownCanvas", position, Quaternion.identity);

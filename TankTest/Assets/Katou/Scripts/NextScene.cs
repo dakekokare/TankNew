@@ -21,6 +21,7 @@ public class NextScene : MonoBehaviourPunCallbacks
     public void Next()
     {
         PhotonNetwork.DestroyAll();
+        PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("Title");
     }
 }
