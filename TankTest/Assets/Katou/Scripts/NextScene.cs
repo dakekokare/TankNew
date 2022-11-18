@@ -20,7 +20,8 @@ public class NextScene : MonoBehaviourPunCallbacks
     }
     public void Next()
     {
-        PhotonNetwork.DestroyAll();
+        if(PhotonNetwork.IsMasterClient)
+              PhotonNetwork.DestroyAll();
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("Title");
     }
