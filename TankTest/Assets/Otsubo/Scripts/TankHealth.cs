@@ -65,6 +65,9 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 //Destroy(gameObject);
 
                 PhotonNetwork.Destroy(gameObject);
+                //Lose UI ’Ç‰Á
+                GameObject lose = GameObject.Find("LOSECanvas").gameObject;
+                lose.SetActive(true);
             }
         }
 
