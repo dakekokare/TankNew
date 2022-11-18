@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 public class PlayerListCount : MonoBehaviourPunCallbacks
 {
+    public GameObject countDown;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,14 +19,15 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
         foreach (var p in PhotonNetwork.PlayerList)
         {
             count++;
+
             //2人いたら
-            if(count==2)
+            if (count==2)
             {
-                Vector3 position = Vector3.zero;
-
                 //// （ネットワークオブジェクト）を生成する
-                //PhotonNetwork.Instantiate("PlayerCount", position, Quaternion.identity);
-
+                //Instantiate("CountDownCanvas", position, Quaternion.identity);
+                Instantiate(countDown);
+                //アクティブ状態をオフにする
+                this.gameObject.SetActive(false);
             }
         }
     }

@@ -29,7 +29,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
-        if (photonView.IsMine)
+        if (!photonView.IsMine)
         {
            if (other.TryGetComponent<BulletNet>(out var shell))
                 {
