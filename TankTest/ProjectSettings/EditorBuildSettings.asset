@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Otsubo/Scenes/OtsuboMain.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Katou/Scenes/Title.unity
+    guid: 3a498eba6f28011479abb3a26779cb48
   m_configObjects: {}

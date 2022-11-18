@@ -79,10 +79,21 @@ public class TankHealth : MonoBehaviourPunCallbacks
         }
     }
 
+    private void NextScene()
+    {
+        //タイトルへ
+        Debug.Log("titleへ");
+        //win Uiをアクティブする
+        photonView.RPC(nameof(LoadTitle), RpcTarget.All);
+    }
+
 
     [PunRPC]
     private void HitBullet(int id, int ownerId)
     {
+        //弾削除
+        Debug.Log("弾削除");
+
         //弾を削除する
         var bullets = FindObjectsOfType<BulletNet>();
         foreach (var bullet in bullets)
@@ -95,14 +106,15 @@ public class TankHealth : MonoBehaviourPunCallbacks
         }
     }
 
-    private void NextScene()
+    [PunRPC]
+    public void LoadTitle()
     {
+        //次のシーンへ
         //タイトルへ
-        Debug.Log("titleへ");
-        //win Uiをアクティブする
-        photonView.RPC(nameof(LoadTitle), RpcTarget.All);
+        Debug.Log("遷移");
+        //タイトルロード
+        SceneManager.LoadScene("Title");
     }
-
 
     [PunRPC]
     public void WinActive()
@@ -113,15 +125,6 @@ public class TankHealth : MonoBehaviourPunCallbacks
         win.SetActive(true);
         if (tankHP == 0)
             win.SetActive(false);
-    }
-    [PunRPC]
-    public void LoadTitle()
-    {
-        //次のシーンへ
-        //タイトルへ
-        Debug.Log("遷移");
-        //タイトルロード
-        SceneManager.LoadScene("Title");
     }
 
 }
