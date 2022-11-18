@@ -74,7 +74,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
             //Invoke("NextScene", 3);
 
             //// プレーヤーを破壊する。
-            //PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
             //gameObject.SetActive(false);
         }
     }
@@ -113,7 +113,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
         //タイトルへ
         Debug.Log("遷移");
         //タイトルロード
-        SceneManager.LoadScene("Title");
+        //SceneManager.LoadScene("Title");
     }
 
     [PunRPC]
