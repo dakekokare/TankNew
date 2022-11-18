@@ -21,7 +21,7 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
             count++;
 
             //2人いたら
-            if (count==2)
+            if (count%2==0)
             {
                 //// （ネットワークオブジェクト）を生成する
                 //Instantiate("CountDownCanvas", position, Quaternion.identity);
