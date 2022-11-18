@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
-public class NextScene : MonoBehaviour
+public class NextScene : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class NextScene : MonoBehaviour
     }
     public void Next()
     {
+        PhotonNetwork.DestroyAll();
         SceneManager.LoadScene("Title");
     }
 }

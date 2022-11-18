@@ -33,7 +33,6 @@ public class Scene : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("Ç∑Ç≈Ç…ê∂ê¨Ç≥ÇÍÇƒÇ¢ÇÈ");
-
         }
     }
 
