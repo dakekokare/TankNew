@@ -9,21 +9,16 @@ public class TankMovement : MonoBehaviour
     private Rigidbody rb;
     private float movementInputValue;
     private float turnInputValue;
-    private bool moveLock;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        moveLock = true;
     }
 
     void Update()
     {
-        if(moveLock == false)
-        {
             TankMove();
             TankTurn();
-        }
     }
 
     // 前進・後退のメソッド
@@ -41,10 +36,5 @@ public class TankMovement : MonoBehaviour
         float turn = turnInputValue * turnSpeed * Time.deltaTime;
         Quaternion turnRotation = Quaternion.Euler(0, turn, 0);
         rb.MoveRotation(rb.rotation * turnRotation);
-    }
-
-    public void TankUnlock()
-    {
-        moveLock = false;
     }
 }

@@ -18,6 +18,9 @@ public class ShotShell : MonoBehaviourPunCallbacks
     private int nextBulletId = 0;
     [SerializeField]
     private BulletNet bulletPre;
+
+    private bool shotLock = false;
+
     void Update()
     {
 
@@ -28,7 +31,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
         {
             // もしもSpaceキーを押したならば（条件）
             // 「Space」の部分を変更することで他のキーにすることができる（ポイント）
-            if (Input.GetKeyDown(KeyCode.Space) && timer > timeBetweenShot)
+            if (Input.GetKeyDown(KeyCode.Space) && timer > timeBetweenShot && shotLock == false)
             {
                 // タイマーの時間を０に戻す。
                 timer = 0.0f;
@@ -68,5 +71,10 @@ public class ShotShell : MonoBehaviourPunCallbacks
         // 砲弾の発射音を出す。
         AudioSource.PlayClipAtPoint(shotSound, transform.position);
 
+    }
+
+    public void ShotUnlock()
+    {
+        shotLock = false;
     }
 }
