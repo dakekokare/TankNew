@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: abdb53aac5d4afb4fa5592dffd8a13d7, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1016,7 +1016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &412502399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2298,6 +2298,7 @@ GameObject:
   - component: {fileID: 986801602}
   - component: {fileID: 986801601}
   - component: {fileID: 986801608}
+  - component: {fileID: 986801609}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -2459,6 +2460,19 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &986801609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986801600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c708783430bed3b4aa3407d155dc79e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countDown: {fileID: 6520458544034234109, guid: fc1c87f58c9a9d7408892b5b6c02f7af, type: 3}
 --- !u!1 &1013152026
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,7 +3286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &951636147216987253
 GameObject:
   m_ObjectHideFlags: 0
