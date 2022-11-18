@@ -96,7 +96,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void WinActive()
+    public void WinActive()
     {
         Debug.Log("勝利");
         //win をアクティブする
@@ -105,13 +105,17 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void NextScene()
     {
+        //タイトルへ
+        Debug.Log("titleへ");
         //win Uiをアクティブする
         photonView.RPC(nameof(LoadTitle), RpcTarget.All);
     }
     [PunRPC]
-    private void LoadTitle()
+    public void LoadTitle()
     {
         //次のシーンへ
+        //タイトルへ
+        Debug.Log("遷移");
         //タイトルロード
         SceneManager.LoadScene("Title");
     }
