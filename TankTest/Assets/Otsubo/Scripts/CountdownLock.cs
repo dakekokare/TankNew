@@ -5,17 +5,17 @@ using UnityEngine;
 public class CountdownLock : MonoBehaviour
 {
     private GameObject tank;
-    private TankMovement tankMovement;
+    private ShotShell shotShell;
 
     // Start is called before the first frame update
     private void Start()
     {
-        tank = GameObject.Find("Tank(Clone)");
-        tankMovement = tank.GetComponent<TankMovement>();
+        tank = GameObject.Find("ShotShell(Clone)");
+        shotShell = tank.GetComponent<ShotShell>();
     }
 
-    private void MoveUnlock()
+    private void ShotUnlock()
     {
-        tankMovement.TankUnlock();
+        shotShell.ShotUnlock();
     }
 }
