@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
+
 public class TankHealth : MonoBehaviourPunCallbacks
 {
     [SerializeField]
@@ -66,8 +68,16 @@ public class TankHealth : MonoBehaviourPunCallbacks
 
                 PhotonNetwork.Destroy(gameObject);
                 //Lose UI 追加
-                GameObject lose = GameObject.Find("LOSECanvas").gameObject;
+                GameObject lose = GameObject.Find("LOSECanvas").gameObject.transform.GetChild(0).gameObject;
                 lose.SetActive(true);
+
+            //win Uiをアクティブする
+            photonView.RPC(nameof(WinActive), RpcTarget.Others);
+
+            //3秒後にメソッドを実行する
+            Invoke("NextScene", 3);
+
+            
             }
         }
 
@@ -75,6 +85,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     [PunRPC]
     private void HitBullet(int id, int ownerId)
     {
+        //弾を削除する
         var bullets = FindObjectsOfType<BulletNet>();
         foreach (var bullet in bullets)
         {
@@ -85,4 +96,24 @@ public class TankHealth : MonoBehaviourPunCallbacks
             }
         }
     }
+
+    [PunRPC]
+    private void WinActive()
+    {
+        //win をアクティブする
+        GameObject win = GameObject.Find("WINCanvas").gameObject.transform.GetChild(0).gameObject;
+        win.SetActive(true);
+    }
+    private void NextScene()
+    {
+        //win Uiをアクティブする
+        photonView.RPC(nameof(LoadTitle), RpcTarget.All);
+    }
+    [PunRPC]
+    private void LoadTitle()
+    {
+        //タイトルロード
+        SceneManager.LoadScene("Title");
+    }
+
 }

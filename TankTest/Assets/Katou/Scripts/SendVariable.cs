@@ -30,7 +30,7 @@ public class SendVariable : MonoBehaviourPunCallbacks/*, IPunObservable*/
 
     private void Update()
     {
-        Debug.Log("更新");
+        //Debug.Log("更新");
         //int count = 0;
         ////foreach (var p in PhotonNetwork.PlayerList)
         ////{
