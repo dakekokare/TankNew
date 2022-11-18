@@ -18,6 +18,7 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
         int count = 0;
         foreach (var p in PhotonNetwork.PlayerList)
         {
+            count++;
             //2êlÇ¢ÇΩÇÁ
             if (count==2)
             {
