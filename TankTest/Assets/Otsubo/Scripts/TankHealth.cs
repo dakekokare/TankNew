@@ -62,7 +62,9 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 Destroy(effect2, 1.0f);
 
                 // プレーヤーを破壊する。
-                Destroy(gameObject);
+                //Destroy(gameObject);
+
+                PhotonNetwork.Destroy(gameObject);
             }
         }
 
