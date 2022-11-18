@@ -63,10 +63,6 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 GameObject effect2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
                 Destroy(effect2, 1.0f);
 
-                // プレーヤーを破壊する。
-                //Destroy(gameObject);
-
-                PhotonNetwork.Destroy(gameObject);
                 //Lose UI 追加
                 GameObject lose = GameObject.Find("LOSECanvas").gameObject.transform.GetChild(0).gameObject;
                 lose.SetActive(true);
@@ -77,9 +73,11 @@ public class TankHealth : MonoBehaviourPunCallbacks
             //3秒後にメソッドを実行する
             Invoke("NextScene", 3);
 
-            
-            }
+            //// プレーヤーを破壊する。
+            //PhotonNetwork.Destroy(gameObject);
+            gameObject.SetActive(false);
         }
+    }
 
 
     [PunRPC]
@@ -100,6 +98,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     [PunRPC]
     private void WinActive()
     {
+        Debug.Log("勝利");
         //win をアクティブする
         GameObject win = GameObject.Find("WINCanvas").gameObject.transform.GetChild(0).gameObject;
         win.SetActive(true);
@@ -112,6 +111,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     [PunRPC]
     private void LoadTitle()
     {
+        //次のシーンへ
         //タイトルロード
         SceneManager.LoadScene("Title");
     }
