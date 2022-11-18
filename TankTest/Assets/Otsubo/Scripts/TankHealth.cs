@@ -70,23 +70,12 @@ public class TankHealth : MonoBehaviourPunCallbacks
             //win Uiをアクティブする
             photonView.RPC(nameof(WinActive), RpcTarget.All);
             
-            //3秒後にメソッドを実行する
-            //Invoke("NextScene", 3);
 
             //// プレーヤーを破壊する。
-            //PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
             //gameObject.SetActive(false);
         }
     }
-
-    private void NextScene()
-    {
-        //タイトルへ
-        Debug.Log("titleへ");
-        //win Uiをアクティブする
-        photonView.RPC(nameof(LoadToTitle), RpcTarget.Others);
-    }
-
 
     [PunRPC]
     private void HitBullet(int id, int ownerId)
@@ -104,16 +93,6 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 break;
             }
         }
-    }
-
-    [PunRPC]
-    private void LoadToTitle()
-    {
-        //次のシーンへ
-        //タイトルへ
-        Debug.Log("遷移");
-        //タイトルロード
-        SceneManager.LoadScene("Title");
     }
 
     [PunRPC]

@@ -44,51 +44,6 @@ public class Scene : MonoBehaviourPunCallbacks
         //スポーン座標代入
         var position = Vector3.zero;
 
-        //PhotonView.Owner.UserId
-        //photonView.OwnerActorNr
-        //GameObject obj= PhotonView.Find(PhotonView.view).gameObject;
-
-        //PhotonView obj = GameObject.Find("PlayerNumVariable(Clone)").GetComponent<PhotonView>();
-        //nullだった
-        //if (obj == null)
-        //{
-        //    position = Vector3.zero;
-
-        //    // （ネットワークオブジェクト）を生成する
-        //    PhotonNetwork.Instantiate("PlayerNumVariable", position, Quaternion.identity);
-
-        //    //    //プレイヤー数管理変数
-        //    GameObject gb = GameObject.Find("PlayerNumVariable(Clone)");
-
-        //    sendVariable = gb.GetComponent<SendVariable>();
-        //}
-
-
-
-        //if (sendVariable.playerNum == 0)
-        //{
-        //    position = spawnA.transform.position;
-        //    sendVariable.playerNum++;
-        //}
-        //else
-        //    position = spawnB.transform.position;
-
-
-        ////プレイヤー数管理変数を探索
-        //GameObject gb = GameObject.Find("PlayerCount(Clone)");
-        ////null だったら生成
-        //if (gb == null)
-        //{   
-        //    //// （ネットワークオブジェクト）を生成する
-        //    PhotonNetwork.Instantiate("PlayerCount", position, Quaternion.identity);
-        //    //プレイヤー数管理変数
-        //    gb = GameObject.Find("PlayerCount(Clone)");
-        //    SendVariable sb= gb.GetComponent<SendVariable>();
-        //    sb.Init(sb.photonView.ViewID, photonView.OwnerActorNr);
-        //}
-
-
-
         // （ネットワークオブジェクト）を生成する
         PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
 
