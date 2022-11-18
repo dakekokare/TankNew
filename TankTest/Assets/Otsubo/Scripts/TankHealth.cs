@@ -68,8 +68,8 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 lose.SetActive(true);
 
             //win Uiをアクティブする
-            photonView.RPC(nameof(WinActive), RpcTarget.Others);
-
+            photonView.RPC(nameof(WinActive), RpcTarget.All);
+            
             //3秒後にメソッドを実行する
             Invoke("NextScene", 3);
 
@@ -102,6 +102,8 @@ public class TankHealth : MonoBehaviourPunCallbacks
         //win をアクティブする
         GameObject win = GameObject.Find("WINCanvas").gameObject.transform.GetChild(0).gameObject;
         win.SetActive(true);
+        if (tankHP == 0)
+            win.SetActive(false);
     }
     private void NextScene()
     {
