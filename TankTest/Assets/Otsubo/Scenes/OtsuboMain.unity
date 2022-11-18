@@ -1011,7 +1011,7 @@ GameObject:
   - component: {fileID: 412502400}
   - component: {fileID: 412502399}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CountdownCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2317,7 +2317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c600985f89cc56645994675f68e2f653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
 --- !u!114 &986801602
 MonoBehaviour:
   m_ObjectHideFlags: 0
