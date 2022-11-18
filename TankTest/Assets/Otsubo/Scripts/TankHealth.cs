@@ -33,13 +33,13 @@ public class TankHealth : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine)
         {
-           if (other.TryGetComponent<BulletNet>(out var shell))
+            if (other.TryGetComponent<BulletNet>(out var shell))
+            {
+                if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
                 {
-                    if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
-                    {
-                        photonView.RPC(nameof(HitBullet), RpcTarget.All, shell.Id, shell.OwnerId);
-                    }
+                    photonView.RPC(nameof(HitBullet), RpcTarget.All, shell.Id, shell.OwnerId);
                 }
+            }
         }
         else
         {
@@ -53,19 +53,19 @@ public class TankHealth : MonoBehaviourPunCallbacks
         // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘ŠŽè•ûi“G‚Ì–C’ej‚ð”j‰ó‚·‚éB
         PhotonView.Destroy(other.gameObject);
 
-            if (tankHP > 0)
-            {
-                GameObject effect1 = Instantiate(effectPrefab1, transform.position, Quaternion.identity);
-                Destroy(effect1, 1.0f);
-            }
-            else
-            {
-                GameObject effect2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
-                Destroy(effect2, 1.0f);
+        if (tankHP > 0)
+        {
+            GameObject effect1 = Instantiate(effectPrefab1, transform.position, Quaternion.identity);
+            Destroy(effect1, 1.0f);
+        }
+        else
+        {
+            GameObject effect2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
+            Destroy(effect2, 1.0f);
 
-                //Lose UI ’Ç‰Á
-                GameObject lose = GameObject.Find("LOSECanvas").gameObject.transform.GetChild(0).gameObject;
-                lose.SetActive(true);
+            //Lose UI ’Ç‰Á
+            GameObject lose = GameObject.Find("LOSECanvas").gameObject.transform.GetChild(0).gameObject;
+            lose.SetActive(true);
 
             //win Ui‚ðƒAƒNƒeƒBƒu‚·‚é
             photonView.RPC(nameof(WinActive), RpcTarget.All);
