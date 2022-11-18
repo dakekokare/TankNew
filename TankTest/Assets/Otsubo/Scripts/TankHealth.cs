@@ -71,7 +71,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
             photonView.RPC(nameof(WinActive), RpcTarget.All);
             
             //3秒後にメソッドを実行する
-            Invoke("NextScene", 3);
+            //Invoke("NextScene", 3);
 
             //// プレーヤーを破壊する。
             //PhotonNetwork.Destroy(gameObject);
