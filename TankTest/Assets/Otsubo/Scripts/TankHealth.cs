@@ -45,7 +45,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
         {
             // HP‚ğ‚P‚¸‚ÂŒ¸­‚³‚¹‚éB
 
-            tankHP -= 1;
+            tankHP -= 0;
 
             HPLabel.text = "HPF" + tankHP;
         }

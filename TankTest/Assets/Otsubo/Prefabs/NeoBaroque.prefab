@@ -17624,6 +17624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8435783867939898686}
   - component: {fileID: 539908639835913943}
+  - component: {fileID: 9095226207616969620}
   m_Layer: 0
   m_Name: NeoBaroque
   m_TagString: Untagged
@@ -17871,6 +17872,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.5, y: 6, z: 6.5}
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &9095226207616969620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9104655666839494532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0903c6122e98b459bd2ae3b0bf4750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
 --- !u!1 &9118881525687309909
 GameObject:
   m_ObjectHideFlags: 0
