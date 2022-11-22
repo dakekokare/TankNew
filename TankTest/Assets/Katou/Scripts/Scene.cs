@@ -46,7 +46,7 @@ public class Scene : MonoBehaviourPunCallbacks
         // （ネットワークオブジェクト）を生成する
         PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
 
-        int r=Random.Range(0, 5);
+        int r=Random.Range(0,8);
         position=array[r].gameObject.transform.position;
         PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
 

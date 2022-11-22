@@ -31,7 +31,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
         {
             // もしもSpaceキーを押したならば（条件）
             // 「Space」の部分を変更することで他のキーにすることができる（ポイント）
-            if (Input.GetKeyDown(KeyCode.Space) && timer > timeBetweenShot && shotLock == false)
+            if (Input.GetMouseButtonDown(0) && timer > timeBetweenShot && shotLock == false)
             {
                 // タイマーの時間を０に戻す。
                 timer = 0.0f;

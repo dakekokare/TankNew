@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
         // 「A && B」は「A かつ B」（条件AとBの両方が揃った時という意味）
         // 「==」は「左右が等しい」という意味
         // もしも「Cボタン」を押した時、「かつ」、「mainCameraON」のステータスが「true」の時（条件）
-        if (Input.GetKeyDown(KeyCode.C) && mainCameraON == true)
+        if (Input.GetMouseButtonDown(1) && mainCameraON == true)
         {
             FPScamera.enabled = true;
             TPScamera.enabled = false;
@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
             aimImage.gameObject.SetActive(true);
 
         } // もしも「Cボタン」を押した時、「かつ」、「mainCameraON」のステータスが「false」の時（条件）
-        else if (Input.GetKeyDown(KeyCode.C) && mainCameraON == false)
+        else if (Input.GetMouseButtonDown(1) && mainCameraON == false)
         {
             FPScamera.enabled = false;
             TPScamera.enabled = true;
