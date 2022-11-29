@@ -8,30 +8,38 @@ public class HPController : MonoBehaviourPunCallbacks, IPunObservable
 
     [SerializeField]
     private Image HpBar = default;
+    [SerializeField]
+    private Image DamageBar = default;
+    //hp
+    private float greenHp = MaxHp;
+    //redHp
+    private float redHp = MaxHp;
 
-    private float currentHp = MaxHp;
-
+    //赤ダメージ減少フラグ
+    private bool damageFlag = false;
     private void Update()
     {
         if (photonView.IsMine)
         {
-            var input = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0f);
-            if (input.sqrMagnitude > 0f)
+            if (Input.GetMouseButtonDown(0))
             {
-                // 入力があったら、スタミナを減少させる
-                //currentHp = Mathf.Max(0f, currentHp - Time.deltaTime);
+                //ダメージ処理
+                Damage(20);
             }
-            else
+            if(damageFlag)
             {
-                // 入力がなかったら、スタミナを回復させる
-                //currentHp = Mathf.Min(currentHp + Time.deltaTime * 2, MaxHp);
+                //hpがダメージHPより小さい場合
+                if(greenHp<redHp)
+                    redHp = Mathf.Max(0f, redHp - Time.deltaTime*20.0f);
+                else
+                {
+                    damageFlag = false;
+                }
+                // ゲージに反映する
+                DamageBar.fillAmount = redHp / MaxHp;
             }
         }
-        // 入力があったら、スタミナを減少させる
-        currentHp = Mathf.Max(0f, currentHp - Time.deltaTime);
 
-        // スタミナをゲージに反映する
-        HpBar.fillAmount = currentHp / MaxHp;
     }
 
     void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -46,5 +54,18 @@ public class HPController : MonoBehaviourPunCallbacks, IPunObservable
             // 他プレイヤーのアバターのスタミナを受信する
             //currentHp = (float)stream.ReceiveNext();
         }
+    }
+    public void Damage(float damage)
+    {
+        // 入力があったら減少させる
+        greenHp -= damage;
+        // ゲージに反映する
+        HpBar.fillAmount = greenHp / MaxHp;
+        //　一定時間後にHPバーを減らすフラグを設定
+        Invoke("StartRedHP", 0.3f);
+    }
+    public void StartRedHP()
+    {
+        damageFlag = true;
     }
 }
