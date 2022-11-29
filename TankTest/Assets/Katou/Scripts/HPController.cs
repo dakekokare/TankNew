@@ -17,6 +17,9 @@ public class HPController : MonoBehaviourPunCallbacks, IPunObservable
 
     //赤ダメージ減少フラグ
     private bool damageFlag = false;
+
+    //通信用受け取るHP
+    private float reciveHp = 0;
     private void Update()
     {
         if (photonView.IsMine)
@@ -47,12 +50,12 @@ public class HPController : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             // 自身のアバターのスタミナを送信する
-            //stream.SendNext(currentHp);
+            stream.SendNext(greenHp);
         }
         else
         {
             // 他プレイヤーのアバターのスタミナを受信する
-            //currentHp = (float)stream.ReceiveNext();
+            reciveHp = (float)stream.ReceiveNext();
         }
     }
     public void Damage(float damage)
