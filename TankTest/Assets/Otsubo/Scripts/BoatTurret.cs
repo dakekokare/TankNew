@@ -34,9 +34,9 @@ public class BoatTurret : MonoBehaviourPunCallbacks
                 angle.z = 0;
             }
 
-            if (angle.z > 30)
+            if (angle.z > 50)
             {
-                angle.z = 30;
+                angle.z = 50;
             }
 
         }
