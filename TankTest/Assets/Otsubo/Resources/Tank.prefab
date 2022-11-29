@@ -73,7 +73,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587855572503728505}
-  m_Mesh: {fileID: -5708416358402172728, guid: f97bd11c116fd64499e8b6e9f585fd62, type: 3}
+  m_Mesh: {fileID: -5708416358402172728, guid: 1e782b8ff048aa64ea94799bb28e8d7e, type: 3}
 --- !u!23 &922441941823376158
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -94,8 +94,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7065737511932657832, guid: f97bd11c116fd64499e8b6e9f585fd62, type: 3}
-  - {fileID: 2193685840329238216, guid: f97bd11c116fd64499e8b6e9f585fd62, type: 3}
+  - {fileID: 7065737511932657832, guid: 1e782b8ff048aa64ea94799bb28e8d7e, type: 3}
+  - {fileID: 2193685840329238216, guid: 1e782b8ff048aa64ea94799bb28e8d7e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 1541604398805314977}
   - component: {fileID: 5955815923893768453}
   - component: {fileID: 6537847730099177627}
+  - component: {fileID: 3490191567304043773}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -376,8 +377,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.8, y: 0.9, z: 2.2}
-  m_Center: {x: -0.29325867, y: 1.05, z: 0}
+  m_Size: {x: 5.8, y: 0.53, z: 2.2}
+  m_Center: {x: -0.29325867, y: 0.83, z: 0}
 --- !u!114 &8935888439742206131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,6 +447,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {x: 0, y: 0.35, z: 0}
+--- !u!136 &3490191567304043773
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3732995016671118244}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.57
+  m_Height: 3.15
+  m_Direction: 0
+  m_Center: {x: 0, y: 1.13, z: 0}
 --- !u!1 &4239704365308262670
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +617,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4553487831351113868}
   - component: {fileID: 806911749615354244}
-  - component: {fileID: 4505311407585108190}
   - component: {fileID: 9062307143560102856}
   m_Layer: 0
   m_Name: ShotShell
@@ -638,24 +652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bf5f1125c711044af403be30c67e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotSpeed: 500
+  shotSpeed: 600
   shotSound: {fileID: 8300000, guid: 8c571f4cc1c305a4d80ad5e0af532e76, type: 3}
   bulletPre: {fileID: -1824930133204536917, guid: 5aa8eaa520de8574f96f989b969b7f64, type: 3}
---- !u!114 &4505311407585108190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7789089194895690229}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8651e89908e4ed34aaa450a64a2df0b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shotSpeed: 1000
-  shellPrefab: {fileID: 5514375730990815353, guid: 31db37dd6dd1f664d8721999e348bfc6, type: 3}
-  shotSound: {fileID: 8300000, guid: 8c571f4cc1c305a4d80ad5e0af532e76, type: 3}
 --- !u!114 &9062307143560102856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -806,7 +805,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8471491085128791871}
-  m_Mesh: {fileID: -1249136819799773786, guid: f97bd11c116fd64499e8b6e9f585fd62, type: 3}
+  m_Mesh: {fileID: -1249136819799773786, guid: 1e782b8ff048aa64ea94799bb28e8d7e, type: 3}
 --- !u!23 &195980719965228277
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -827,10 +826,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7065737511932657832, guid: f97bd11c116fd64499e8b6e9f585fd62, type: 3}
-  - {fileID: 310712159653708412, guid: f97bd11c116fd64499e8b6e9f585fd62, type: 3}
-  - {fileID: 2193685840329238216, guid: f97bd11c116fd64499e8b6e9f585fd62, type: 3}
-  - {fileID: 8960577828540069301, guid: f97bd11c116fd64499e8b6e9f585fd62, type: 3}
+  - {fileID: 7065737511932657832, guid: 1e782b8ff048aa64ea94799bb28e8d7e, type: 3}
+  - {fileID: 310712159653708412, guid: 1e782b8ff048aa64ea94799bb28e8d7e, type: 3}
+  - {fileID: 2193685840329238216, guid: 1e782b8ff048aa64ea94799bb28e8d7e, type: 3}
+  - {fileID: 8960577828540069301, guid: 1e782b8ff048aa64ea94799bb28e8d7e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
