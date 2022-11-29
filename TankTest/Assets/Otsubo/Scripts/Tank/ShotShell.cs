@@ -63,7 +63,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
         // forward（青軸＝Z軸）の方向に力を加える。
         shellRb.AddForce(transform.forward * shotSpeed);
-        shellRb.AddForce(-transform.up * (shotSpeed * 0.5f));
+        //shellRb.AddForce(-transform.up * (shotSpeed * 0.5f));
 
         // 発射した砲弾を３秒後に破壊する。
         // （重要な考え方）不要になった砲弾はメモリー上から削除すること。
