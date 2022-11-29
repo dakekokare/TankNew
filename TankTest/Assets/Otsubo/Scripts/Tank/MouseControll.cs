@@ -21,7 +21,7 @@ public class MouseControll : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
 
-            float sensitiveRotate = 3.0f;
+            float sensitiveRotate = 1.0f;
 
             float rotateX = Input.GetAxis("Mouse X") * sensitiveRotate;
 
