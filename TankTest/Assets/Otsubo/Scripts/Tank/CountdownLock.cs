@@ -11,7 +11,7 @@ public class CountdownLock : MonoBehaviour
     private void Start()
     {
         tank = GameObject.Find("Tank(Clone)");
-        shotShell = tank.transform.GetChild(1).GetChild(4).GetChild(0).GetChild(1).GetChild(0).GetChild(2).GetComponent<ShotShell>();
+        shotShell = tank.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetComponent<ShotShell>();
     }
 
     private void ShotUnlock()

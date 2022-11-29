@@ -22,21 +22,23 @@ public class BoatTurret : MonoBehaviourPunCallbacks
 
             // 
             float rotateX = Input.GetAxis("Mouse X") * sensitiveRotate;
-            transform.Rotate(0.0f, rotateX, 0.0f);
+            //transform.Rotate(0.0f, rotateX, 0.0f);
 
-            angle.z = Input.GetAxis("Mouse Y") * sensitiveRotate;
+            angle.x += Input.GetAxis("Mouse X") * sensitiveRotate;
 
-            transform.parent.eulerAngles = new Vector3(0, transform.parent.parent.eulerAngles.y, angle.z);
+            angle.y -= Input.GetAxis("Mouse Y") * sensitiveRotate;
+
+            transform.parent.eulerAngles = new Vector3(angle.y, transform.parent.parent.parent.eulerAngles.y + angle.x, -transform.parent.parent.parent.eulerAngles.x);
 
             // ˆÚ“®‚Å‚«‚éŠp“x‚É§ŒÀ‚ğ‰Á‚¦‚éB
-            if (angle.z < 0)
+            if (angle.y < -30)
             {
-                angle.z = 0;
+                angle.y = -30;
             }
 
-            if (angle.z > 50)
+            if (angle.y > 10)
             {
-                angle.z = 50;
+                angle.y = 10;
             }
 
         }
