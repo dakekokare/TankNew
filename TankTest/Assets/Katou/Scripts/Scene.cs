@@ -48,7 +48,7 @@ public class Scene : MonoBehaviourPunCallbacks
 
         int r=Random.Range(0,5);
         position=array[r].gameObject.transform.position;
-        PhotonNetwork.Instantiate("Tank", position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Boat", position, Quaternion.identity);
 
 
 
