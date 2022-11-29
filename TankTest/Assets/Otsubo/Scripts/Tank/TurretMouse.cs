@@ -17,7 +17,7 @@ public class TurretMouse : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            float sensitiveRotate = 5.0f;
+            float sensitiveRotate = 1.0f;
 
             //float rotateY = Input.GetAxis("Mouse Y") * sensitiveRotate;
 
