@@ -13,7 +13,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
     [SerializeField]
     private AudioClip shotSound;
 
-    private float timeBetweenShot = 0.3f;
+    private float timeBetweenShot = 0.1f;
     private float timer;
     private int nextBulletId = 0;
     [SerializeField]
