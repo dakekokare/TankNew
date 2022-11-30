@@ -13,7 +13,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
     [SerializeField]
     private AudioClip shotSound;
 
-    private float timeBetweenShot = 0.75f;
+    private float timeBetweenShot = 0.3f;
     private float timer;
     private int nextBulletId = 0;
     [SerializeField]
@@ -31,7 +31,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
         {
             // もしもSpaceキーを押したならば（条件）
             // 「Space」の部分を変更することで他のキーにすることができる（ポイント）
-            if (Input.GetMouseButtonDown(0) && timer > timeBetweenShot && shotLock == false)
+            if (Input.GetMouseButton(0) && timer > timeBetweenShot && shotLock == false)
             {
                 // タイマーの時間を０に戻す。
                 timer = 0.0f;

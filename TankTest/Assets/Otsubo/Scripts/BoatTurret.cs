@@ -18,7 +18,7 @@ public class BoatTurret : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             // Ž‹“_ˆÚ“®Š´“x
-            float sensitiveRotate = 1.0f;
+            float sensitiveRotate = 1.5f;
 
             // 
             float rotateX = Input.GetAxis("Mouse X") * sensitiveRotate;
