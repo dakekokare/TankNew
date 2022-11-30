@@ -4,7 +4,13 @@ using UnityEngine;
 using Photon.Pun;
 public class PlayerListCount : MonoBehaviourPunCallbacks
 {
-    public GameObject countDown;
+    //カウントダウン
+    [SerializeField]
+    private GameObject countDown;
+
+    //hp
+    [SerializeField]
+    private GameObject enemyHp;
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +28,33 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
             //2人いたら
             if (count==2)
             {
-                //// （ネットワークオブジェクト）を生成する
-                //Instantiate("CountDownCanvas", position, Quaternion.identity);
+                //// カウントダウン生成する
                 Instantiate(countDown);
                 //アクティブ状態をオフにする
                 this.gameObject.SetActive(false);
+
+                // hpを生成
+                photonView.RPC(nameof(CreateHp), RpcTarget.All);
+
+            }
+        }
+    }
+
+    [PunRPC]
+    private void CreateHp()
+    {
+        // ルーム内のネットワークオブジェクト
+        foreach (var photonView in PhotonNetwork.PhotonViewCollection)
+        {
+            //boat かつ　自分じゃなかったら
+            if(photonView.gameObject.name == "Boat(Clone)")
+            {
+                if(!photonView.IsMine)
+                {
+                    Vector3 vec = photonView.gameObject.transform.position;
+                    Instantiate(enemyHp);
+                    enemyHp.transform.position = vec;
+                }
             }
         }
     }
