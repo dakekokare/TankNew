@@ -7,8 +7,6 @@ public class Scene : MonoBehaviourPunCallbacks
 {
     //プレイヤースポーン座標   
     public GameObject[] array;
-    //プレイヤー数監視
-    private SendVariable sendVariable;
     private void Start()
     {
         // プレイヤー自身の名前を"Player"に設定する
