@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 5955815923893768453}
   - component: {fileID: 6537847730099177627}
   - component: {fileID: 3490191567304043773}
+  - component: {fileID: 2678711774021898584}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -461,6 +462,20 @@ CapsuleCollider:
   m_Height: 3.15
   m_Direction: 0
   m_Center: {x: 0, y: 1.13, z: 0}
+--- !u!114 &2678711774021898584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3732995016671118244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc92fa975a0cbb448ff0bb73f0dd6f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab1: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
+  effectPrefab2: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
 --- !u!1 &4239704365308262670
 GameObject:
   m_ObjectHideFlags: 0

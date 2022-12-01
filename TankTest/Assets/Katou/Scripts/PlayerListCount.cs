@@ -12,6 +12,10 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject enemyHp;
 
+    //player
+    [SerializeField]
+    private TankHealth player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +39,8 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
 
                 // hp‚ğ¶¬
                 photonView.RPC(nameof(CreateHp), RpcTarget.All);
-
+                //hp‚Ì’l‚ğİ’è‚·‚é
+                player.SetEnemyHpUi();
             }
         }
     }

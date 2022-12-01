@@ -3,39 +3,33 @@ using UnityEngine.UI;
 
 public class HPController : MonoBehaviour
 {
-    private const float MaxHp = 100f;
-
     [SerializeField]
     private Image HpBar = default;
     [SerializeField]
     private Image DamageBar = default;
     //hp
-    private float greenHp = MaxHp;
+    private float greenHp;
     //redHp
-    private float redHp = MaxHp;
-
+    private float redHp;
+    //最大ho
+    private float MaxHp;
     //赤ダメージ減少フラグ
     private bool damageFlag = false;
 
     private void Update()
     {
-            if (Input.GetMouseButtonDown(0))
+        if (damageFlag)
+        {
+            //hpがダメージHPより小さい場合
+            if (greenHp < redHp)
+                redHp = Mathf.Max(0f, redHp - Time.deltaTime * 20.0f);
+            else
             {
-                //ダメージ処理
-                Damage(20);
+                damageFlag = false;
             }
-            if(damageFlag)
-            {
-                //hpがダメージHPより小さい場合
-                if(greenHp<redHp)
-                    redHp = Mathf.Max(0f, redHp - Time.deltaTime*20.0f);
-                else
-                {
-                    damageFlag = false;
-                }
-                // ゲージに反映する
-                DamageBar.fillAmount = redHp / MaxHp;
-            }
+            // ゲージに反映する
+            DamageBar.fillAmount = redHp / MaxHp;
+        }
 
     }
 
@@ -51,5 +45,12 @@ public class HPController : MonoBehaviour
     public void StartRedHP()
     {
         damageFlag = true;
+    }
+    //hp セッター
+    public void SetHp(float hp)
+    {
+        greenHp = hp;
+        redHp = hp;
+        MaxHp = hp;
     }
 }
