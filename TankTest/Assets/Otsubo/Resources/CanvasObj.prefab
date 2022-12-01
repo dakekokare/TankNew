@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1457465094321928362}
   - component: {fileID: -4866067832174980763}
+  - component: {fileID: 7909586514265936614}
   m_Layer: 0
   m_Name: CanvasObj
   m_TagString: Untagged
@@ -51,10 +52,26 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 7909586514265936614}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7909586514265936614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457465094321928363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b907493dbe00fe438edb6ba8336f754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HpBar: {fileID: 3592848378376674663}
+  DamageBar: {fileID: 4115180931892761928}
 --- !u!1 &6230239147268704115
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,8 +159,6 @@ GameObject:
   - component: {fileID: 9122648811349611102}
   - component: {fileID: 3068970541111360404}
   - component: {fileID: 6802495150591580220}
-  - component: {fileID: 3366767350004578698}
-  - component: {fileID: 5820340153501661750}
   m_Layer: 5
   m_Name: HpBarBackground
   m_TagString: Untagged
@@ -211,43 +226,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3366767350004578698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7389246902917376622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b907493dbe00fe438edb6ba8336f754, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HpBar: {fileID: 3592848378376674663}
-  DamageBar: {fileID: 4115180931892761928}
---- !u!114 &5820340153501661750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7389246902917376622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 3366767350004578698}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &8035081569294583945
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,9 +51,7 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
             {
                 if(!photonView.IsMine)
                 {
-                    Vector3 vec = photonView.gameObject.transform.position;
                     Instantiate(enemyHp);
-                    enemyHp.transform.position = vec;
                 }
             }
         }
