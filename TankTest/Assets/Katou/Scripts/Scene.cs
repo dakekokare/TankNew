@@ -7,6 +7,7 @@ public class Scene : MonoBehaviourPunCallbacks
 {
     //プレイヤースポーン座標   
     public GameObject[] array;
+
     private void Start()
     {
         // プレイヤー自身の名前を"Player"に設定する
@@ -42,9 +43,17 @@ public class Scene : MonoBehaviourPunCallbacks
         var position = Vector3.zero;
 
         // （ネットワークオブジェクト）を生成する
-        PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
+        //PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
+        
+        GameObject obj = (GameObject)Resources.Load("CanvasObj");
+        //生成する
+        Instantiate(obj);
 
-        int r=Random.Range(0,5);
+        obj = (GameObject)Resources.Load("HpPlayer");
+        //生成する
+        Instantiate(obj);
+
+        int r =Random.Range(0,5);
         position=array[r].gameObject.transform.position;
         PhotonNetwork.Instantiate("Boat", position, Quaternion.identity);
 

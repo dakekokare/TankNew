@@ -1,8 +1,7 @@
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HPController : MonoBehaviourPunCallbacks, IPunObservable
+public class HPController : MonoBehaviour
 {
     private const float MaxHp = 100f;
 
@@ -18,12 +17,8 @@ public class HPController : MonoBehaviourPunCallbacks, IPunObservable
     //赤ダメージ減少フラグ
     private bool damageFlag = false;
 
-    //通信用受け取るHP
-    private float reciveHp = 0;
     private void Update()
     {
-        if (photonView.IsMine)
-        {
             if (Input.GetMouseButtonDown(0))
             {
                 //ダメージ処理
@@ -41,23 +36,9 @@ public class HPController : MonoBehaviourPunCallbacks, IPunObservable
                 // ゲージに反映する
                 DamageBar.fillAmount = redHp / MaxHp;
             }
-        }
 
     }
 
-    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            // 自身のアバターのスタミナを送信する
-            stream.SendNext(greenHp);
-        }
-        else
-        {
-            // 他プレイヤーのアバターのスタミナを受信する
-            reciveHp = (float)stream.ReceiveNext();
-        }
-    }
     public void Damage(float damage)
     {
         // 入力があったら減少させる
