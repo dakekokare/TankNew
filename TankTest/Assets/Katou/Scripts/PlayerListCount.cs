@@ -8,13 +8,6 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject countDown;
 
-    //hp
-    [SerializeField]
-    private GameObject enemyHp;
-
-    //player
-    [SerializeField]
-    private TankHealth player;
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +32,6 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
 
                 // hpを生成
                 photonView.RPC(nameof(CreateHp), RpcTarget.All);
-                //hpの値を設定する
-                player.SetEnemyHpUi();
             }
         }
     }
@@ -48,15 +39,21 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
     [PunRPC]
     private void CreateHp()
     {
+        GameObject obj = (GameObject)Resources.Load("HpEnemy");
+        //生成する
+        Instantiate(obj);
+
         // ルーム内のネットワークオブジェクト
         foreach (var photonView in PhotonNetwork.PhotonViewCollection)
         {
-            //boat かつ　自分じゃなかったら
-            if(photonView.gameObject.name == "Boat(Clone)")
+            //boat かつ　自分
+            if (photonView.gameObject.name == "Boat(Clone)")
             {
-                if(!photonView.IsMine)
+                if (photonView.IsMine)
                 {
-                    Instantiate(enemyHp);
+                    obj = PhotonView.Find(photonView.ViewID).gameObject;
+                    obj.GetComponent<TankHealth>().SetEnemyHpUi();
+
                 }
             }
         }

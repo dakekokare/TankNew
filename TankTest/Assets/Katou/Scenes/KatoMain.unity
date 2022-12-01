@@ -3196,7 +3196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countDown: {fileID: 6520458544034234109, guid: fc1c87f58c9a9d7408892b5b6c02f7af, type: 3}
   enemyHp: {fileID: 3650588510363228304, guid: 5183681169744244089367edf5ad1ed1, type: 3}
-  player: {fileID: 2678711774021898584, guid: 1ebb9f588ebe976458705f3aebf10a1b, type: 3}
 --- !u!1001 &1958632430
 PrefabInstance:
   m_ObjectHideFlags: 0
