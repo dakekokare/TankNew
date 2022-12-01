@@ -3195,7 +3195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDown: {fileID: 6520458544034234109, guid: fc1c87f58c9a9d7408892b5b6c02f7af, type: 3}
-  enemyHp: {fileID: 1457465094321928363, guid: 4859f1c1d720f344c91785a7208f7897, type: 3}
+  enemyHp: {fileID: 3650588510363228304, guid: 5183681169744244089367edf5ad1ed1, type: 3}
 --- !u!1001 &1958632430
 PrefabInstance:
   m_ObjectHideFlags: 0
