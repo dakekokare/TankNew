@@ -19,7 +19,11 @@ public class BarrierItem : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            // 「Boat」オブジェクトを探してデータを取得する
             boat = GameObject.Find("Boat(Clone)");
+
+            // 砲弾のプレハブを実体化（インスタンス化）する。
+            GameObject barrier = Instantiate(barrierPrefab, boat.transform.GetChild(1).position, Quaternion.identity);
 
             //  ShotShellスクリプトの中に記載されている「AddShellメソッド」を呼び出す。
             // rewardで設定した数値分だけ弾数が回復する。
