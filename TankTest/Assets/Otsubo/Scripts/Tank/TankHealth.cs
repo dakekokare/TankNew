@@ -37,16 +37,16 @@ public class TankHealth : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
-        //敵の弾に当たったら
-        if (!photonView.IsMine)
-        {
+        ////敵の弾に当たったら
+        //if (!photonView.IsMine)
+        //{
            if (other.TryGetComponent<BulletNet>(out var shell))
            {
                if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
                {
                     photonView.RPC(nameof(HitBullet), RpcTarget.All, shell.Id, shell.OwnerId);
                }
-           }
+           //}
             // HPを減少させる。
             boatHP -= damage;
             //ダメージ
@@ -61,23 +61,23 @@ public class TankHealth : MonoBehaviourPunCallbacks
         // ぶつかってきた相手方（敵の砲弾）を破壊する。
         PhotonView.Destroy(other.gameObject);
 
-            if (boatHP > 0)
-            {
-                GameObject effect1 = Instantiate(effectPrefab1, transform.position, Quaternion.identity);
-                Destroy(effect1, 1.0f);
-            }
-            else
-            {
-                GameObject effect2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
-                Destroy(effect2, 1.0f);
+        if (boatHP > 0)
+        {
+            GameObject effect1 = Instantiate(effectPrefab1, transform.position, Quaternion.identity);
+            Destroy(effect1, 1.0f);
+        }
+        else
+        {
+            GameObject effect2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
+            Destroy(effect2, 1.0f);
 
-                //Lose UI 追加
-                GameObject lose = GameObject.Find("LOSECanvas").gameObject.transform.GetChild(0).gameObject;
-                lose.SetActive(true);
+            //Lose UI 追加
+            GameObject lose = GameObject.Find("LOSECanvas").gameObject.transform.GetChild(0).gameObject;
+            lose.SetActive(true);
 
             //win Uiをアクティブする
             photonView.RPC(nameof(WinActive), RpcTarget.All);
-            
+
 
             //// プレーヤーを破壊する。
             PhotonNetwork.Destroy(gameObject);
