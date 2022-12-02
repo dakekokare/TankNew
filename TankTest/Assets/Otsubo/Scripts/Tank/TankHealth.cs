@@ -34,14 +34,22 @@ public class TankHealth : MonoBehaviourPunCallbacks
         playerHpUi.SetHp(boatHP);
 
     }
-
+    private void Update()
+    {
+        if (enemyHpUi == null)
+            Debug.Log("Nullです");
+        else
+            Debug.Log("入ってます");
+    }
     private void OnTriggerEnter(Collider other)
     {
+        ////自分の生成した弾
+        //if (other.GetComponent<PhotonView>().IsMine)
+        //    return;
 
-        ////敵の弾に当たったら
         if (!photonView.IsMine)
             return;
-
+        ////敵の弾に当たったら
         if (other.TryGetComponent<BulletNet>(out var shell))
         {
             if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
@@ -54,6 +62,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 //他プレイヤーにダメージ処理
                 photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
 
+                Debug.Log("ダメージ処理");
             }
         }
 
@@ -125,7 +134,9 @@ public class TankHealth : MonoBehaviourPunCallbacks
         enemyHpUi = GameObject.Find("HpEnemy(Clone)").GetComponent<HPController>();
         //uiにＨＰをセット
         enemyHpUi.SetHp(boatHP);
-
-        Debug.Log("SetEnemyHpUI");
+        if(enemyHpUi==null)
+            Debug.Log("SetEnemyHpUIはNullです");
+        else
+            Debug.Log("SetEnemyHpUIは入ってます");
     }
 }
