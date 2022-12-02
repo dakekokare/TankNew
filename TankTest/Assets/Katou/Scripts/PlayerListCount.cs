@@ -8,11 +8,12 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject countDown;
 
+    private GameObject hpObj;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        hpObj = (GameObject)Resources.Load("HpEnemy");
     }
 
     // Update is called once per frame
@@ -30,18 +31,20 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
                 //アクティブ状態をオフにする
                 this.gameObject.SetActive(false);
 
-                // hpを生成
-                photonView.RPC(nameof(CreateHp), RpcTarget.All);
+
+                //hp生成する
+                Instantiate(hpObj);
+
+                // hpの情報をセットする
+                photonView.RPC(nameof(SetHp), RpcTarget.All);
+
             }
         }
     }
 
     [PunRPC]
-    private void CreateHp()
+    private void SetHp()
     {
-        GameObject obj = (GameObject)Resources.Load("HpEnemy");
-        //生成する
-        Instantiate(obj);
 
         // ルーム内のネットワークオブジェクト
         foreach (var photonView in PhotonNetwork.PhotonViewCollection)
@@ -52,9 +55,9 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
                 if (photonView.IsMine)
                 {
                     Debug.Log("CreateHP");
-                    obj = PhotonView.Find(photonView.ViewID).gameObject;
-                    obj.GetComponent<TankHealth>().SetEnemyHpUi();
-
+                    hpObj = PhotonView.Find(photonView.ViewID).gameObject;
+                    hpObj.GetComponent<TankHealth>().SetEnemyHpUi();
+                    break;
                 }
             }
         }
