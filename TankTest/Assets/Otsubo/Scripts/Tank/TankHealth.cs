@@ -37,25 +37,24 @@ public class TankHealth : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
+
         ////敵の弾に当たったら
-        //if (!photonView.IsMine)
-        //{
-           if (other.TryGetComponent<BulletNet>(out var shell))
-           {
-               if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
-               {
-                    photonView.RPC(nameof(HitBullet), RpcTarget.All, shell.Id, shell.OwnerId);
-               }
-           //}
-            // HPを減少させる。
-            boatHP -= damage;
-            //ダメージ
-            playerHpUi.Damage(damage);
-            //他プレイヤーにダメージ処理
-            photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
-        }
-        else
+        if (!photonView.IsMine)
+            return;
+
+        if (other.TryGetComponent<BulletNet>(out var shell))
         {
+            if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                photonView.RPC(nameof(HitBullet), RpcTarget.All, shell.Id, shell.OwnerId);
+                // HPを減少させる。
+                boatHP -= damage;
+                //ダメージ
+                playerHpUi.Damage(damage);
+                //他プレイヤーにダメージ処理
+                photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
+
+            }
         }
 
         // ぶつかってきた相手方（敵の砲弾）を破壊する。
