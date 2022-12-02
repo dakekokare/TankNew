@@ -36,30 +36,43 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
                 Instantiate(hpObj);
 
                 // hpの情報をセットする
-                photonView.RPC(nameof(SetHp), RpcTarget.All);
-
-            }
-        }
-    }
-
-    [PunRPC]
-    private void SetHp()
-    {
-
-        // ルーム内のネットワークオブジェクト
-        foreach (var photonView in PhotonNetwork.PhotonViewCollection)
-        {
-            //boat かつ　自分
-            if (photonView.gameObject.name == "Boat(Clone)")
-            {
-                if (photonView.IsMine)
+                // ルーム内のネットワークオブジェクト
+                foreach (var photonView in PhotonNetwork.PhotonViewCollection)
                 {
-                    Debug.Log("CreateHP");
-                    hpObj = PhotonView.Find(photonView.ViewID).gameObject;
-                    hpObj.GetComponent<TankHealth>().SetEnemyHpUi();
-                    break;
+                    //boat かつ　自分
+                    if (photonView.gameObject.name == "Boat(Clone)")
+                    {
+                        if (photonView.IsMine)
+                        {
+                            Debug.Log("CreateHP");
+                            hpObj = PhotonView.Find(photonView.ViewID).gameObject;
+                            hpObj.GetComponent<TankHealth>().SetEnemyHpUi();
+                            break;
+                        }
+                    }
                 }
             }
         }
     }
+
+    //[PunRPC]
+    //private void SetHp()
+    //{
+
+    //    // ルーム内のネットワークオブジェクト
+    //    foreach (var photonView in PhotonNetwork.PhotonViewCollection)
+    //    {
+    //        //boat かつ　自分
+    //        if (photonView.gameObject.name == "Boat(Clone)")
+    //        {
+    //            if (photonView.IsMine)
+    //            {
+    //                Debug.Log("CreateHP");
+    //                hpObj = PhotonView.Find(photonView.ViewID).gameObject;
+    //                hpObj.GetComponent<TankHealth>().SetEnemyHpUi();
+    //                break;
+    //            }
+    //        }
+    //    }
+    //}
 }
