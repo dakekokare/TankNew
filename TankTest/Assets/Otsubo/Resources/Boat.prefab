@@ -401,7 +401,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1541604398805314977}
-  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -449,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbc1d09e63cf784f941ff7246406e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: 0, y: 0.35, z: 0}
+  center: {x: 0, y: 0.2, z: 0}
 --- !u!136 &3490191567304043773
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -460,10 +459,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.57
-  m_Height: 3.15
+  m_Radius: 0.6
+  m_Height: 3
   m_Direction: 0
-  m_Center: {x: 0, y: 1.13, z: 0}
+  m_Center: {x: 0, y: 1.2, z: 0}
 --- !u!114 &2678711774021898584
 MonoBehaviour:
   m_ObjectHideFlags: 0
