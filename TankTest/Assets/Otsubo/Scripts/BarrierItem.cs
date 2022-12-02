@@ -27,7 +27,7 @@ public class BarrierItem : MonoBehaviour
             GameObject barrier = Instantiate(barrierPrefab, boat.transform.GetChild(1).position, Quaternion.identity);
 
             //  TankHealthスクリプトの中に記載されている「Barrierメソッド」を呼び出す。
-            //ss.AddShell(reward);
+            //th.Barrier();
 
             // アイテムを画面から削除する。
             Destroy(gameObject);
@@ -40,6 +40,9 @@ public class BarrierItem : MonoBehaviour
 
             // エフェクトを0.5秒後に消す。
             Destroy(effect, 0.5f);
+
+            // バリアを10秒後に破壊する。
+            Destroy(barrier, 10.0f);
         }
     }
 }
