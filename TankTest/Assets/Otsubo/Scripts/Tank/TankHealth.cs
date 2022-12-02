@@ -125,5 +125,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
         enemyHpUi = GameObject.Find("HpEnemy(Clone)").GetComponent<HPController>();
         //ui‚É‚g‚o‚ðƒZƒbƒg
         enemyHpUi.SetHp(boatHP);
+
+        Debug.Log("SetEnemyHpUI");
     }
 }

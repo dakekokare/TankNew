@@ -51,6 +51,7 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
             {
                 if (photonView.IsMine)
                 {
+                    Debug.Log("CreateHP");
                     obj = PhotonView.Find(photonView.ViewID).gameObject;
                     obj.GetComponent<TankHealth>().SetEnemyHpUi();
 
