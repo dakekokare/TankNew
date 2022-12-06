@@ -11,6 +11,23 @@ public class HpEnemyTransform : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (otherPlayer == null)
+        {
+            Debug.Log("otherPlayer Null Return");
+            return;
+        }
+        this.transform.position = otherPlayer.transform.position;
+        this.transform.rotation = otherPlayer.transform.rotation;
+
+    }
+
+    public void SearchPlayer()
+    {
         // ルーム内のネットワークオブジェクト
         foreach (var photonView in PhotonNetwork.PhotonViewCollection)
         {
@@ -19,19 +36,10 @@ public class HpEnemyTransform : MonoBehaviourPunCallbacks
             {
                 if (!photonView.IsMine)
                 {
-                    otherPlayer=PhotonView.Find(photonView.ViewID).gameObject;
+                    Debug.Log("otherPlayer Find");
+                    otherPlayer = PhotonView.Find(photonView.ViewID).gameObject;
                 }
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (otherPlayer == null)
-            return;
-        this.transform.position = otherPlayer.transform.position;
-        this.transform.rotation = otherPlayer.transform.rotation;
-
     }
 }

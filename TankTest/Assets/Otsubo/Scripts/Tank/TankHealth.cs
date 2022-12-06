@@ -20,7 +20,6 @@ public class TankHealth : MonoBehaviourPunCallbacks
     //PlayerHP UI
     private HPController playerHpUi;
     //EnemyHP UI
-    [SerializeField]
     private HPController enemyHpUi;
 
     void Start()
@@ -33,11 +32,14 @@ public class TankHealth : MonoBehaviourPunCallbacks
         playerHpUi= GameObject.Find("HpPlayer(Clone)").GetComponent<HPController>();
         //uiにＨＰをセット
         playerHpUi.SetHp(boatHP);
+        //enemyHpUi取得
+        enemyHpUi = GameObject.Find("HpEnemy(Clone)").GetComponent<HPController>();
+        //uiにＨＰをセット
+        enemyHpUi.SetHp(boatHP);
 
     }
     private void Update()
     {
-        string name = this.gameObject.name;
         //if (enemyHpUi == null)
         //    Debug.Log("[" + this.GetInstanceID() + "]" + "Nullです");
         //else
@@ -137,20 +139,24 @@ public class TankHealth : MonoBehaviourPunCallbacks
     {
         //nullならリターン
         if (enemyHpUi == null)
+        {
+            Debug.Log("Return");
             return;
+        }
+        Debug.Log("Enemyダメージ処理");
         //敵HpUIにダメージ処理
         enemyHpUi.Damage(damage);
     }
 
     public void SetEnemyHpUi()
     {
-        //EnemyHpUi取得
-        enemyHpUi = GameObject.Find("HpEnemy(Clone)").GetComponent<HPController>();
-        //uiにＨＰをセット
-        enemyHpUi.SetHp(boatHP);
-        if(enemyHpUi==null)
-            Debug.Log("SetEnemyHpUIはNullです");
-        else
-            Debug.Log("SetEnemyHpUIは入ってます");
+        ////EnemyHpUi取得
+        //enemyHpUi = GameObject.Find("HpEnemy(Clone)").GetComponent<HPController>();
+        ////uiにＨＰをセット
+        //enemyHpUi.SetHp(boatHP);
+        //if(enemyHpUi==null)
+        //    Debug.Log("SetEnemyHpUIはNullです");
+        //else
+        //    Debug.Log("SetEnemyHpUIは入ってます");
     }
 }

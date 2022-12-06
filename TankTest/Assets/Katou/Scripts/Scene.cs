@@ -48,8 +48,12 @@ public class Scene : MonoBehaviourPunCallbacks
         GameObject obj = (GameObject)Resources.Load("CanvasObj");
         //ê∂ê¨Ç∑ÇÈ
         Instantiate(obj);
-
+        //playerHpê∂ê¨
         obj = (GameObject)Resources.Load("HpPlayer");
+        //ê∂ê¨Ç∑ÇÈ
+        Instantiate(obj);
+        //EnemyHpê∂ê¨
+        obj = (GameObject)Resources.Load("HpEnemy");
         //ê∂ê¨Ç∑ÇÈ
         Instantiate(obj);
 

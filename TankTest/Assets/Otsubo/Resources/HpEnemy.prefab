@@ -88,6 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3448869915280187855}
   - component: {fileID: 8834421240371555907}
+  - component: {fileID: 1874439505155571368}
   m_Layer: 0
   m_Name: HpEnemy
   m_TagString: Untagged
@@ -125,6 +126,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HpBar: {fileID: 4667018899314146526}
   DamageBar: {fileID: 5905592373762078952}
+--- !u!114 &1874439505155571368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650588510363228304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc495bbfb528934a907501018f89400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6986247467219719224
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +226,6 @@ GameObject:
   - component: {fileID: 3220214030713374727}
   - component: {fileID: 2113871507998710251}
   - component: {fileID: 6987048017565819214}
-  - component: {fileID: 113379236402272410}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -303,18 +315,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &113379236402272410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7531809785127008697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfc495bbfb528934a907501018f89400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9046368005730469031
 GameObject:
   m_ObjectHideFlags: 0
