@@ -64,6 +64,8 @@ public class TankHealth : MonoBehaviourPunCallbacks
         {
             if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
             {
+                Debug.Log("[" + photonView.ViewID + "]" + "ダメージ処理");
+
                 photonView.RPC(nameof(HitBullet), RpcTarget.All, shell.Id, shell.OwnerId);
                 // HPを減少させる。
                 boatHP -= damage;
@@ -72,7 +74,6 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 //他プレイヤーにダメージ処理
                 photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
 
-                Debug.Log("[" + photonView.ViewID + "]" + "ダメージ処理");
             }
         }
 
@@ -134,6 +135,9 @@ public class TankHealth : MonoBehaviourPunCallbacks
     [PunRPC]
     private void DamageEnemyHpUi()
     {
+        //nullならリターン
+        if (enemyHpUi == null)
+            return;
         //敵HpUIにダメージ処理
         enemyHpUi.Damage(damage);
     }
