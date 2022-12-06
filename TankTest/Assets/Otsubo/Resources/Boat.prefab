@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 795398239505042721}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6596952811240790154}
   - component: {fileID: 6178680588777349574}
   - component: {fileID: 922441941823376158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 2012588311694126024}
   - component: {fileID: 6561772066516671646}
   - component: {fileID: 3168633808502009589}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8456699036366297647}
   - component: {fileID: 2195765304572157294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TPSCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 6537847730099177627}
   - component: {fileID: 3490191567304043773}
   - component: {fileID: 2678711774021898584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc92fa975a0cbb448ff0bb73f0dd6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab1: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
+  effectPrefab1: {fileID: 1500378020736912, guid: ef0b80e2dacd93b4eb985f5a69ba4ac4, type: 3}
   effectPrefab2: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
 --- !u!1 &4239704365308262670
 GameObject:
@@ -487,7 +487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5441993408192164883}
   - component: {fileID: 8373858731386842343}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FPSCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 454535083072249994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 5289966074046486847}
   - component: {fileID: 771901042085045393}
   - component: {fileID: 9144624616645959332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 6825651916510361218}
   - component: {fileID: 6536861089004935500}
   - component: {fileID: 5093525092778646564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CameraController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: 4553487831351113868}
   - component: {fileID: 806911749615354244}
   - component: {fileID: 9062307143560102856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShotShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 7942568605485523906}
   - component: {fileID: 1309113612826122920}
   - component: {fileID: 3772729442969461834}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: testCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +861,7 @@ GameObject:
   - component: {fileID: 3427514689447848599}
   - component: {fileID: 195980719965228277}
   - component: {fileID: 8065038236857525944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

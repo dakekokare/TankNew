@@ -19,13 +19,14 @@ public class BarrierItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.layer == 8)
         {
             // 「Boat」オブジェクトを探してデータを取得する
             boat = GameObject.Find("Boat(Clone)");
 
             // バリアのプレハブを実体化（インスタンス化）する。
             GameObject barrier = Instantiate(barrierPrefab, boat.transform.GetChild(1).position, Quaternion.identity);
+            barrier.transform.parent = boat.transform;
 
             //  TankHealthスクリプトの中に記載されている「Barrierメソッド」を呼び出す。
             //th.Barrier();
@@ -40,10 +41,10 @@ public class BarrierItem : MonoBehaviour
             GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
 
             // エフェクトを0.5秒後に消す。
-            Destroy(effect, 1.5f);
-
+            Destroy(effect, 0.5f);
+          
             // バリアを10秒後に破壊する。
-            //Destroy(barrier, 10.0f);
+            Destroy(barrier, 10.0f);
         }
     }
 }
