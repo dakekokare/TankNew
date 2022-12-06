@@ -477,7 +477,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectPrefab1: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
   effectPrefab2: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
-  enemyHpUi: {fileID: 0}
 --- !u!1 &4239704365308262670
 GameObject:
   m_ObjectHideFlags: 0
