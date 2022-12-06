@@ -20,6 +20,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     //PlayerHP UI
     private HPController playerHpUi;
     //EnemyHP UI
+    [SerializeField]
     private HPController enemyHpUi;
 
     void Start()
@@ -36,10 +37,19 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
+        string name = this.gameObject.name;
+        //if (enemyHpUi == null)
+        //    Debug.Log("[" + this.GetInstanceID() + "]" + "Nullです");
+        //else
+        //    Debug.Log("[" + this.GetInstanceID() + "]" + "入ってます");
+
+
+
         if (enemyHpUi == null)
-            Debug.Log("Nullです");
+            Debug.Log("[" + photonView.ViewID + "]" + "Nullです");
         else
-            Debug.Log("入ってます");
+            Debug.Log("[" + photonView.ViewID + "]" + "入ってます");
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -62,7 +72,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 //他プレイヤーにダメージ処理
                 photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
 
-                Debug.Log("ダメージ処理");
+                Debug.Log("[" + photonView.ViewID + "]" + "ダメージ処理");
             }
         }
 
