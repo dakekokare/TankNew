@@ -8,6 +8,7 @@ public class BarrierItem : MonoBehaviour
     //private AudioClip getSound;
     [SerializeField]
     private GameObject effectPrefab;
+
     private GameObject boat;
     private TankHealth th;
 
@@ -39,10 +40,10 @@ public class BarrierItem : MonoBehaviour
             GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
 
             // エフェクトを0.5秒後に消す。
-            Destroy(effect, 0.5f);
+            Destroy(effect, 1.5f);
 
             // バリアを10秒後に破壊する。
-            Destroy(barrier, 10.0f);
+            //Destroy(barrier, 10.0f);
         }
     }
 }
