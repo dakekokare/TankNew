@@ -42,9 +42,11 @@ public class Scene : MonoBehaviourPunCallbacks
         //スポーン座標代入
         var position = Vector3.zero;
 
-        // （ネットワークオブジェクト）を生成する
-        //PhotonNetwork.Instantiate("CanvasObj", position, Quaternion.identity);
-        
+        int r =Random.Range(0,5);
+        position=array[r].gameObject.transform.position;
+        PhotonNetwork.Instantiate("Boat", position, Quaternion.identity);
+
+        position = Vector3.zero;
         GameObject obj = (GameObject)Resources.Load("CanvasObj");
         //生成する
         Instantiate(obj);
@@ -56,12 +58,6 @@ public class Scene : MonoBehaviourPunCallbacks
         obj = (GameObject)Resources.Load("HpEnemy");
         //生成する
         Instantiate(obj);
-
-        int r =Random.Range(0,5);
-        position=array[r].gameObject.transform.position;
-        PhotonNetwork.Instantiate("Boat", position, Quaternion.identity);
-
-
 
     }
 }

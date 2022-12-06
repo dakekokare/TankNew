@@ -5,24 +5,31 @@ using Photon.Pun;
 
 public class HpEnemyTransform : MonoBehaviourPunCallbacks
 {
+    private GameObject player;
     //他のプレイヤ―
     private GameObject otherPlayer;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
     {
         if (otherPlayer == null)
         {
-            Debug.Log("otherPlayer Null Return");
+            Debug.Log("[" + GetInstanceID() + "]" + "otherPlayer Null Return");
             return;
         }
-        this.transform.position = otherPlayer.transform.position;
-        this.transform.rotation = otherPlayer.transform.rotation;
+        else
+            Debug.Log("[" + GetInstanceID() + "]" + "otherPlayer 入ってます");
+        transform.position = otherPlayer.transform.position;
+
+        ////ビルボード
+        //Vector3 p = Camera.main.transform.position;
+        //p.y = transform.position.y;
+        //transform.LookAt(p);
+
+        Vector3 p = player.transform.position;
+        p.y = transform.position.y;
+        //　カメラと同じ向きに設定
+        transform.LookAt(p);
 
     }
 
@@ -36,9 +43,15 @@ public class HpEnemyTransform : MonoBehaviourPunCallbacks
             {
                 if (!photonView.IsMine)
                 {
-                    Debug.Log("otherPlayer Find");
+                    Debug.Log("[" + GetInstanceID() + "]" + "otherPlayer Find");
                     otherPlayer = PhotonView.Find(photonView.ViewID).gameObject;
                 }
+                else
+                {
+                    Debug.Log("[" + GetInstanceID() + "]" + "Player Find");
+                    player = PhotonView.Find(photonView.ViewID).gameObject;
+                }
+
             }
         }
     }
