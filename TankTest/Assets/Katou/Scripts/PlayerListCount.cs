@@ -10,12 +10,6 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
 
     private GameObject hpObj;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //hpObj = (GameObject)Resources.Load("HpEnemy");
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -31,30 +25,7 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
                 //アクティブ状態をオフにする
                 this.gameObject.SetActive(false);
 
-
-                ////hp生成する
-                //Instantiate(hpObj);
-
-                // hpの情報をセットする
-                // ルーム内のネットワークオブジェクト
-                //foreach (var photonView in PhotonNetwork.PhotonViewCollection)
-                //{
-                //    //boat かつ　自分
-                //    if (photonView.gameObject.name == "Boat(Clone)")
-                //    {
-                //        if (photonView.IsMine)
-                //        {
-                //            Debug.Log("CreateHP");
-                //            hpObj = PhotonView.Find(photonView.ViewID).gameObject;
-                //            hpObj.GetComponent<TankHealth>().SetEnemyHpUi();
-                //            break;
-                //        }
-                //    }
-                //}
-
-                //hp Enemyにコンポーネントを追加
-                SearchHpEnemyTransform();
-
+                Invoke("SearchHpEnemyTransform", 2);
             }
         }
     }
