@@ -79,6 +79,9 @@ public class TankHealth : MonoBehaviourPunCallbacks
             }
         }
 
+        if (other.gameObject.layer == 9)
+            return;
+
         // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
         PhotonView.Destroy(other.gameObject);
 
