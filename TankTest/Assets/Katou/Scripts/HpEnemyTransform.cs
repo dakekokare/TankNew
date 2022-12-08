@@ -14,11 +14,11 @@ public class HpEnemyTransform : MonoBehaviourPunCallbacks
     {
         if (otherPlayer == null)
         {
-            Debug.Log("[" + GetInstanceID() + "]" + "otherPlayer Null Return");
+            //Debug.Log("[" + GetInstanceID() + "]" + "otherPlayer Null Return");
             return;
         }
-        else
-            Debug.Log("[" + GetInstanceID() + "]" + "otherPlayer “ü‚Á‚Ä‚Ü‚·");
+        //else
+            //Debug.Log("[" + GetInstanceID() + "]" + "otherPlayer “ü‚Á‚Ä‚Ü‚·");
         transform.position = otherPlayer.transform.position;
 
 

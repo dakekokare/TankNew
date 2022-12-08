@@ -40,17 +40,17 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        if (enemyHpUi == null)
-            Debug.Log("[" + photonView.ViewID + "]" + "Null‚Å‚·");
-        else
-            Debug.Log("[" + photonView.ViewID + "]" + "“ü‚Á‚Ä‚Ü‚·");
+        //if (enemyHpUi == null)
+        //    Debug.Log("[" + photonView.ViewID + "]" + "Null‚Å‚·");
+        //else
+        //    Debug.Log("[" + photonView.ViewID + "]" + "“ü‚Á‚Ä‚Ü‚·");
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        ////©•ª‚Ì¶¬‚µ‚½’e
-        //if (other.GetComponent<PhotonView>().IsMine)
-        //    return;
+        ////ƒAƒCƒeƒ€‚ÆÚG‚µ‚½‚ç
+        if (other.gameObject.layer==9)
+            return;
 
         if (!photonView.IsMine)
             return;
