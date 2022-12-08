@@ -21,10 +21,6 @@ public class HpEnemyTransform : MonoBehaviourPunCallbacks
             Debug.Log("[" + GetInstanceID() + "]" + "otherPlayer 入ってます");
         transform.position = otherPlayer.transform.position;
 
-        ////ビルボード
-        //Vector3 p = Camera.main.transform.position;
-        //p.y = transform.position.y;
-        //transform.LookAt(p);
 
         Vector3 p = player.transform.position;
         p.y = transform.position.y;

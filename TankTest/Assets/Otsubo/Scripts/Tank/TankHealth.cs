@@ -40,13 +40,6 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        //if (enemyHpUi == null)
-        //    Debug.Log("[" + this.GetInstanceID() + "]" + "Nullです");
-        //else
-        //    Debug.Log("[" + this.GetInstanceID() + "]" + "入ってます");
-
-
-
         if (enemyHpUi == null)
             Debug.Log("[" + photonView.ViewID + "]" + "Nullです");
         else
@@ -151,15 +144,30 @@ public class TankHealth : MonoBehaviourPunCallbacks
         enemyHpUi.Damage(damage);
     }
 
-    public void SetEnemyHpUi()
+    public void HealHP(float heal)
     {
-        ////EnemyHpUi取得
-        //enemyHpUi = GameObject.Find("HpEnemy(Clone)").GetComponent<HPController>();
-        ////uiにＨＰをセット
-        //enemyHpUi.SetHp(boatHP);
-        //if(enemyHpUi==null)
-        //    Debug.Log("SetEnemyHpUIはNullです");
-        //else
-        //    Debug.Log("SetEnemyHpUIは入ってます");
+        //回復
+        Debug.Log("回復");
+        boatHP += heal;
+        //hp bar に　反映
+        playerHpUi.HealHp(heal);
+        //他プレイヤーのho barに回復処理
+        photonView.RPC(nameof(HealEnemyHpUi), RpcTarget.Others,heal);
+    }    
+    [PunRPC]
+    private void HealEnemyHpUi(float heal)
+    {
+        //敵プレイヤーの回復ui処理
+        Debug.Log("Heal Enemy Hp Ui");
+        //nullならリターン
+        if (enemyHpUi == null)
+        {
+            Debug.Log("Return");
+            return;
+        }
+        Debug.Log("Enemy回復処理");
+        //敵HpUIにダメージ処理
+        enemyHpUi.HealHp(heal);
     }
+
 }

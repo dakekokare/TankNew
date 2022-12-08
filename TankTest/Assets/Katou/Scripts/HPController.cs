@@ -53,4 +53,21 @@ public class HPController : MonoBehaviour
         redHp = hp;
         MaxHp = hp;
     }
+    public void HealHp(float heal)
+    {
+        //âÒïú
+        greenHp += heal;
+        redHp += heal;
+        //ç≈ëÂhpÇÊÇËëÂÇ´Ç≠Ç»Ç¡ÇΩÇÁ
+        if(greenHp>=MaxHp)
+        {
+            greenHp = MaxHp;
+            redHp = MaxHp;
+        }
+        // ÉQÅ[ÉWÇ…îΩâfÇ∑ÇÈ
+        HpBar.fillAmount = greenHp / MaxHp;
+        // ÉQÅ[ÉWÇ…îΩâfÇ∑ÇÈ
+        DamageBar.fillAmount = redHp / MaxHp;
+
+    }
 }
