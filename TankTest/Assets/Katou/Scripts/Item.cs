@@ -27,10 +27,14 @@ public class Item : MonoBehaviour
     }
     void OnTriggerEnter(Collider t)
     {
-        //ÚG‚µ‚½‚ç‰ñ•œ
-        HealPlayer();
-        //íœ
-        PhotonNetwork.Destroy(this.gameObject);
+        //ƒvƒŒƒCƒ„[‚ÆÚG‚µ‚½‚ç
+        if (t.gameObject.layer == 8)
+        {
+            //ÚG‚µ‚½‚ç‰ñ•œ
+            HealPlayer();
+            //íœ
+            PhotonNetwork.Destroy(this.gameObject);
+        }
     }
 
     // ‰ñ•œ‚·‚é

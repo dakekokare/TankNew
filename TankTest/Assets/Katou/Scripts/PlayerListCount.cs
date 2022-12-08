@@ -21,7 +21,7 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
         {
             count++;
             //2人いたら
-            if (count==1)
+            if (count==2)
             {
                 //// カウントダウン生成する
                 Instantiate(countDown);
