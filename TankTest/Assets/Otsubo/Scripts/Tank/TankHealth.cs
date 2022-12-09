@@ -49,11 +49,11 @@ public class TankHealth : MonoBehaviourPunCallbacks
     private void OnTriggerEnter(Collider other)
     {
         ////ƒAƒCƒeƒ€‚ÆÚG‚µ‚½‚ç
-        if (other.gameObject.layer==9)
+        if (other.gameObject.tag != "Shell")
             return;
 
-        if (!photonView.IsMine)
-            return;
+        //if (!photonView.IsMine)
+            //return;
         ////“G‚Ì’e‚É“–‚½‚Á‚½‚ç
         if (other.TryGetComponent<BulletNet>(out var shell))
         {
@@ -72,8 +72,6 @@ public class TankHealth : MonoBehaviourPunCallbacks
             }
         }
 
-        if (other.gameObject.layer == 9)
-            return;
 
         // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
         PhotonView.Destroy(other.gameObject);
