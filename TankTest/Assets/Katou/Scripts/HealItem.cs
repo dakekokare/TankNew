@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class Item : MonoBehaviour
+public class HealItem : MonoBehaviour
 {
     //ÉvÉåÉCÉÑÅ[
     private GameObject player;
