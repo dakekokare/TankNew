@@ -59,14 +59,13 @@ public class HomingSpawn : MonoBehaviour
             //弾発射
             homing = PhotonNetwork.Instantiate("HomingBullet", pos , Quaternion.identity).GetComponent<Homing>();
             homing.Target = target;
-            //指定した秒数待つ 
-            yield return intervalWait;
 
         }
         //タレット非アクティブ化
         this.gameObject.SetActive(false);
 
-        yield break;
+        //指定した秒数待つ 
+        yield return intervalWait;
     }
     public void SearchPlayer()
     {
