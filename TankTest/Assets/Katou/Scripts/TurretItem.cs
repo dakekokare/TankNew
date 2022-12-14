@@ -21,10 +21,10 @@ public class TurretItem : MonoBehaviour
         if (t.gameObject.layer == 8)
         {
             //誘導弾タレットアクティブ
-            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(1)
+            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(3)
                 .gameObject.SetActive(true);
             //デフォルトタレットfalse
-            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(0)
+            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(2)
                 .gameObject.SetActive(false);
 
             //アイテム削除
