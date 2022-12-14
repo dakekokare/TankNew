@@ -4,21 +4,14 @@ using UnityEngine;
 
 public class TurretItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        //プレイヤー探索
-        SearchPlayer();
-    }
-
     // Update is called once per frame
     void Update()
     {
-        float sin = Mathf.Sin(Time.time) + transform.position.y;
-        this.transform.position = new Vector3(
-            transform.position.x,
-            sin * 0.5f,
-            transform.position.z);
+        //float sin = Mathf.Sin(Time.time) + transform.position.y;
+        //this.transform.position = new Vector3(
+        //    transform.position.x,
+        //    sin * 0.5f,
+        //    transform.position.z);
     }
 
     void OnTriggerEnter(Collider t)
@@ -26,26 +19,16 @@ public class TurretItem : MonoBehaviour
         //プレイヤーと接触したら
         if (t.gameObject.layer == 8)
         {
+            //誘導弾タレットアクティブ
+            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(1)
+                .gameObject.SetActive(true);
+            //デフォルトタレットfalse
+            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(0)
+                .gameObject.SetActive(false);
 
             //削除
             //PhotonNetwork.Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
-    public void SearchPlayer()
-    {
-        //// ルーム内のネットワークオブジェクト
-        //foreach (var photonView in PhotonNetwork.PhotonViewCollection)
-        //{
-        //    //boat かつ　自分
-        //    if (photonView.gameObject.name == "Boat(Clone)")
-        //    {
-        //        if (photonView.IsMine)
-        //        {
-        //            Debug.Log("[" + GetInstanceID() + "]" + "Player Find");
-        //            player = PhotonView.Find(photonView.ViewID).gameObject;
-        //        }
-        //    }
-        //}
-    }
-
 }
