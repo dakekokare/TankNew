@@ -11,8 +11,15 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
     //hp
     private GameObject hpObj;
     //Item Spawn 場所
+    //体力回復
     [SerializeField]
-    private GameObject firstAidKitPosition; 
+    private GameObject firstAidKitPosition;
+
+    //Item Spawn 場所
+    //誘導弾
+    [SerializeField]
+    private GameObject missileTurretPosition;
+
     // Update is called once per frame
     void Update()
     {
@@ -29,12 +36,12 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
                 this.gameObject.SetActive(false);
 
                 //プレイヤー探索
-                Invoke("SearchHpEnemyTransform", 2);
+                Invoke("SearchHpEnemyTransform", 3);
 
                 //マスタークライアントならなら　アイテム生成
                 if(PhotonNetwork.IsMasterClient)
                     //アイテム生成
-                    Invoke("GenerationItem", 2);
+                    Invoke("GenerationItem",3);
 
              
             }
@@ -52,5 +59,10 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
         Debug.Log("firstaidkit 生成");
         //アイテム生成
         PhotonNetwork.Instantiate("FirstAidKit", firstAidKitPosition.transform.position, Quaternion.identity);
+
+        Debug.Log("MissileTurret 生成");
+        //アイテム生成
+        PhotonNetwork.Instantiate("MissileTurret", missileTurretPosition.transform.position, Quaternion.identity);
+
     }
 }
