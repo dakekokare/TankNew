@@ -4,8 +4,6 @@ using Photon.Pun;
 public class HomingSpawn : MonoBehaviour
 {
     private GameObject target;
-    //弾
-    private GameObject bullet;
     //発射座標
     [SerializeField]
     private GameObject rPos;
@@ -25,22 +23,23 @@ public class HomingSpawn : MonoBehaviour
     void Start()
     {
         intervalWait = new WaitForSeconds(interval);
+        //プレイヤー探索
+        SearchPlayer();
+
     }
     void Update()
     {
         //発射
         if (Input.GetMouseButton(0))
         {
-            //プレイヤー探索
-            SearchPlayer();
+            isSpawning = true;
         }
         //ターゲットがいなかったら
         if (target == null)
             return;
         if (!isSpawning)
-        {
             return;
-        }
+        //追尾弾生成
         StartCoroutine(nameof(SpawnMissile));
     }
     IEnumerator SpawnMissile()
@@ -48,7 +47,6 @@ public class HomingSpawn : MonoBehaviour
         isSpawning = false;
         Homing homing;
 
-        bullet = (GameObject)Resources.Load("HomingBullet");
         //弾の数
         for (int i = 0; i < iterationCount; i++)
         {
@@ -59,13 +57,16 @@ public class HomingSpawn : MonoBehaviour
             else
                 pos = rPos.transform.position;
             //弾発射
-            homing = Instantiate(bullet,pos , Quaternion.identity).GetComponent<Homing>();
+            homing = PhotonNetwork.Instantiate("HomingBullet", pos , Quaternion.identity).GetComponent<Homing>();
             homing.Target = target;
+            //指定した秒数待つ 
+            yield return intervalWait;
+
         }
         //タレット非アクティブ化
         this.gameObject.SetActive(false);
 
-        yield return intervalWait;
+        yield break;
     }
     public void SearchPlayer()
     {
@@ -79,10 +80,8 @@ public class HomingSpawn : MonoBehaviour
                 {
                     Debug.Log("[" + GetInstanceID() + "]" + "Enemy Find");
                     target = PhotonView.Find(photonView.ViewID).gameObject;
-                    isSpawning = true;
                 }
             }
         }
     }
-
 }

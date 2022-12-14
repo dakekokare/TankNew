@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class TurretItem : MonoBehaviour
 {
@@ -26,9 +27,8 @@ public class TurretItem : MonoBehaviour
             t.gameObject.transform.GetChild(0).GetChild(0).GetChild(0)
                 .gameObject.SetActive(false);
 
-            //çÌèú
-            //PhotonNetwork.Destroy(this.gameObject);
-            Destroy(this.gameObject);
+            //ÉAÉCÉeÉÄçÌèú
+            PhotonNetwork.Destroy(this.gameObject);
         }
     }
 }
