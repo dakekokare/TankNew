@@ -20,6 +20,8 @@ public class BoatTurret : MonoBehaviourPunCallbacks
             // Ž‹“_ˆÚ“®Š´“x
             float sensitiveRotate = 1.5f;
 
+            //transform.parent.GetChild(2).rotation = transform.rotation;
+
             // 
             float rotateX = Input.GetAxis("Mouse X") * sensitiveRotate;
             //transform.Rotate(0.0f, rotateX, 0.0f);
