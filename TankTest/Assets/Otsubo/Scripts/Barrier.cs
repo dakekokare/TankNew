@@ -5,6 +5,9 @@ using Photon.Pun;
 
 public class Barrier : MonoBehaviourPunCallbacks
 {
+    // プレイヤー
+    private GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +17,7 @@ public class Barrier : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-
+        transform.position = player.transform.GetChild(1).position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +32,23 @@ public class Barrier : MonoBehaviourPunCallbacks
             {
                 // ぶつかってきた相手方（敵の砲弾）を破壊する。
                 PhotonView.Destroy(other.gameObject);
+            }
+        }
+    }
+
+    public void SearchPlayer()
+    {
+        // ルーム内のネットワークオブジェクト
+        foreach (var photonView in PhotonNetwork.PhotonViewCollection)
+        {
+            //boat かつ　自分
+            if (photonView.gameObject.name == "Boat(Clone)")
+            {
+                if (photonView.IsMine)
+                {
+                    Debug.Log("[" + GetInstanceID() + "]" + "Player Find");
+                    player = PhotonView.Find(photonView.ViewID).gameObject;
+                }
             }
         }
     }
