@@ -86,8 +86,10 @@ public sealed class Homing : MonoBehaviourPunCallbacks
     }
     void OnTriggerEnter(Collider t)
     {
-        //削除
-        PhotonNetwork.Destroy(this.gameObject);
+        //自分のオブジェクトと接触してなかったら
+        if(!t.GetComponent<PhotonView>().IsMine)
+            //削除
+            PhotonNetwork.Destroy(gameObject);
     }
 
 }
