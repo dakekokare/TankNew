@@ -28,7 +28,7 @@ public class TurretItem : MonoBehaviour
                 .gameObject.SetActive(false);
 
             //ƒAƒCƒeƒ€íœ
-            PhotonNetwork.Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
