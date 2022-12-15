@@ -48,32 +48,28 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
-        //if (!photonView.IsMine)
-        //    return;
-        
-        ////ƒAƒCƒeƒ€‚ÆÚG‚µ‚½‚ç
-        //if (other.gameObject.tag != "Shell"|| other.gameObject.tag != "Missile")
-        //    return;
-
-        //shell ‚ÉÚG‚µ‚½ê‡
-        if (other.gameObject.tag == "Shell")
+        if (photonView.IsMine)
         {
-            //shell ‚ÆÚG
-            ContactShell(other);
-            // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-            Destroy(other.gameObject);
-        }
+            //shell ‚ÉÚG‚µ‚½ê‡
+            if (other.gameObject.tag == "Shell")
+            {
+                //shell ‚ÆÚG
+                ContactShell(other);
+                // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
+                Destroy(other.gameObject);
+            }
 
-        ////ƒAƒCƒeƒ€‚ÆÚG‚µ‚½‚ç
-        if (other.gameObject.tag == "Missile")
-        {
-            //missile ‚ÆÚG
-            ContactMissile(other);
-            // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-            photonView.RPC(nameof(DeleteMissile), RpcTarget.Others,other.GetComponent<PhotonView>().ViewID);
+            ////ƒAƒCƒeƒ€‚ÆÚG‚µ‚½‚ç
+            if (other.gameObject.tag == "Missile")
+            {
+                //missile ‚ÆÚG
+                ContactMissile(other);
+                // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
+                photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
+            }
+            //Ÿ”s”»’è
+            VictoryJudgment();
         }
-        //Ÿ”s”»’è
-        VictoryJudgment();
     }
 
     private void ContactShell(Collider other)
@@ -208,7 +204,8 @@ public class TankHealth : MonoBehaviourPunCallbacks
     [PunRPC]
     private void DeleteMissile(int obj)
     {
+        GameObject boat= PhotonView.Find(obj).gameObject;
         //missile ‚ğíœ
-        PhotonNetwork.Destroy(PhotonView.Find(obj).gameObject);
+        PhotonNetwork.Destroy(boat);
     }
 }
