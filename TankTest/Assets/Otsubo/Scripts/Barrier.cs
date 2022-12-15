@@ -36,6 +36,11 @@ public class Barrier : MonoBehaviourPunCallbacks
         }
     }
 
+    public void GetPlayer(GameObject getPlayer)
+    {
+        player = getPlayer;
+    }
+
     public void SearchPlayer()
     {
         // ルーム内のネットワークオブジェクト
