@@ -57,13 +57,18 @@ public class HomingSpawn : MonoBehaviour
             else
                 pos = rPos.transform.position;
             //弾発射
-            homing = PhotonNetwork.Instantiate("HomingBullet", pos , Quaternion.identity).GetComponent<Homing>();
+            homing = PhotonNetwork.Instantiate("HomingMissile", pos , Quaternion.identity).GetComponent<Homing>();
+            
+            
+
+            //ターゲットが設定されていないバグ
             homing.Target = target;
 
         }
         //タレット非アクティブ化
         this.gameObject.SetActive(false);
-
+        //デフォルトタレットアクティブ
+        ActiveDefaultTurret();
         //指定した秒数待つ 
         yield return intervalWait;
     }
@@ -82,5 +87,11 @@ public class HomingSpawn : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ActiveDefaultTurret()
+    {
+        //デフォルトタレットアクティブ
+        gameObject.transform.parent.GetChild(2).gameObject.SetActive(true);
     }
 }

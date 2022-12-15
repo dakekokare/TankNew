@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
-public sealed class Homing : MonoBehaviour
+using Photon.Pun;
+public sealed class Homing : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    GameObject target;
+    private GameObject target;
     [SerializeField, Min(0)]
     float time = 1;
     //íeê∂ë∂éûä‘
@@ -80,6 +80,6 @@ public sealed class Homing : MonoBehaviour
     IEnumerator Timer()
     {
         yield return new WaitForSeconds(lifeTime);
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }
