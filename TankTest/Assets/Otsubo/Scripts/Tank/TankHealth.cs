@@ -50,8 +50,8 @@ public class TankHealth : MonoBehaviourPunCallbacks
     {
         //if (!photonView.IsMine)
         //    return;
-
-        //////ƒAƒCƒeƒ€‚ÆÚG‚µ‚½‚ç
+        
+        ////ƒAƒCƒeƒ€‚ÆÚG‚µ‚½‚ç
         //if (other.gameObject.tag != "Shell"|| other.gameObject.tag != "Missile")
         //    return;
 
@@ -70,7 +70,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
             //missile ‚ÆÚG
             ContactMissile(other);
             // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-            photonView.RPC(nameof(DeleteMissile), RpcTarget.Others,other.gameObject);
+            photonView.RPC(nameof(DeleteMissile), RpcTarget.Others,other.GetComponent<PhotonView>().ViewID);
         }
         //Ÿ”s”»’è
         VictoryJudgment();
@@ -206,9 +206,9 @@ public class TankHealth : MonoBehaviourPunCallbacks
         enemyHpUi.HealHp(heal);
     }
     [PunRPC]
-    private void DeleteMissile(GameObject obj)
+    private void DeleteMissile(int obj)
     {
         //missile ‚ğíœ
-        PhotonNetwork.Destroy(obj);
+        PhotonNetwork.Destroy(PhotonView.Find(obj).gameObject);
     }
 }
