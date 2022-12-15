@@ -46,9 +46,10 @@ public class BarrierItem : MonoBehaviour
             //barrier.transform.parent = boat.transform;
 
             // バリアのプレハブを実体化（インスタンス化）する。
-            GameObject barrier = Instantiate(barrierPrefab, player.transform.GetChild(1).position, Quaternion.identity);
-            //GameObject barrier = Instantiate(barrierPrefab, other.transform.GetChild(1).position, Quaternion.identity);
-            
+            //GameObject barrier = Instantiate(barrierPrefab, player.transform.GetChild(1).position, Quaternion.identity);
+            GameObject barrier = Instantiate(barrierPrefab, other.transform.GetChild(1).position, Quaternion.identity);
+            barrier.gameObject.GetComponents<Barrier>();
+
             // アイテムを画面から削除する。
             Destroy(gameObject);
 
@@ -57,9 +58,12 @@ public class BarrierItem : MonoBehaviour
 
             // アイテムゲット時にエフェクトを発生させる。
             GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+            
 
             // エフェクトを0.5秒後に消す。
             Destroy(effect, 0.5f);
+
+            barrier.transform.position = other.transform.GetChild(1).position;
           
             // バリアを10秒後に破壊する。
             Destroy(barrier, 10.0f);
