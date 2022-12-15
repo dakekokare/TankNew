@@ -18,6 +18,9 @@ public class BarrierItem : MonoBehaviour
     [SerializeField]
     private GameObject barrierPrefab;
 
+    //[SerializeField]
+    //private Barrier barriercomponent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +51,8 @@ public class BarrierItem : MonoBehaviour
             // バリアのプレハブを実体化（インスタンス化）する。
             //GameObject barrier = Instantiate(barrierPrefab, player.transform.GetChild(1).position, Quaternion.identity);
             GameObject barrier = Instantiate(barrierPrefab, other.transform.GetChild(1).position, Quaternion.identity);
-            barrier.gameObject.GetComponents<Barrier>();
+            Barrier[] barriercomponent = barrier.gameObject.GetComponents<Barrier>();
+            //barriercomponent.GetPlayer();
 
             // アイテムを画面から削除する。
             Destroy(gameObject);
