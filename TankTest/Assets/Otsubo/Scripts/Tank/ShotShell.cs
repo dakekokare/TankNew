@@ -33,6 +33,10 @@ public class ShotShell : MonoBehaviourPunCallbacks
             // 「Space」の部分を変更することで他のキーにすることができる（ポイント）
             if (Input.GetMouseButton(0) && timer > timeBetweenShot && shotLock == false)
             {
+                //タレットが非表示なら打たない
+                if (gameObject.transform.parent.gameObject == false)
+                    return;
+                
                 // タイマーの時間を０に戻す。
                 timer = 0.0f;
 

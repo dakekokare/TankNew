@@ -58,19 +58,18 @@ public class HomingSpawn : MonoBehaviour
                 pos = rPos.transform.position;
             //弾発射
             homing = PhotonNetwork.Instantiate("HomingMissile", pos , Quaternion.identity).GetComponent<Homing>();
-            
-            
-
             //ターゲットが設定されていないバグ
             homing.Target = target;
 
         }
+        //指定した秒数待つ 
+        yield return intervalWait;
+
         //タレット非アクティブ化
         this.gameObject.SetActive(false);
         //デフォルトタレットアクティブ
         ActiveDefaultTurret();
-        //指定した秒数待つ 
-        yield return intervalWait;
+
     }
     public void SearchPlayer()
     {
