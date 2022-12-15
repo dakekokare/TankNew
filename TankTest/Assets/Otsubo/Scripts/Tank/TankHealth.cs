@@ -67,7 +67,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
             //missile ‚ÆÚG
             ContactMissile(other);
             // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-            PhotonNetwork.Destroy(other.gameObject);
+            photonView.RPC(nameof(DeleteMissile), RpcTarget.Others,other.gameObject);
         }
         //Ÿ”s”»’è
         VictoryJudgment();
@@ -202,5 +202,10 @@ public class TankHealth : MonoBehaviourPunCallbacks
         //“GHpUI‚Éƒ_ƒ[ƒWˆ—
         enemyHpUi.HealHp(heal);
     }
-
+    [PunRPC]
+    private void DeleteMissile(GameObject obj)
+    {
+        //missile ‚ğíœ
+        PhotonNetwork.Destroy(obj);
+    }
 }
