@@ -48,9 +48,12 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
-        ////アイテムと接触したら
-        if (other.gameObject.tag != "Shell"|| other.gameObject.tag != "Missile")
-            return;
+        //if (!photonView.IsMine)
+        //    return;
+
+        //////アイテムと接触したら
+        //if (other.gameObject.tag != "Shell"|| other.gameObject.tag != "Missile")
+        //    return;
 
         //shell に接触した場合
         if (other.gameObject.tag == "Shell")
