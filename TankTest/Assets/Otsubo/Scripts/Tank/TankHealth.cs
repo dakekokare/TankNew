@@ -49,11 +49,33 @@ public class TankHealth : MonoBehaviourPunCallbacks
     private void OnTriggerEnter(Collider other)
     {
         ////アイテムと接触したら
-        if (other.gameObject.tag != "Shell")
+        if (other.gameObject.tag != "Shell"|| other.gameObject.tag != "Missile")
             return;
 
-        //if (!photonView.IsMine)
-            //return;
+        //shell に接触した場合
+        if (other.gameObject.tag == "Shell")
+        {
+            //shell と接触
+            ContactShell(other);
+            // ぶつかってきた相手方（敵の砲弾）を破壊する。
+            Destroy(other.gameObject);
+        }
+
+        ////アイテムと接触したら
+        if (other.gameObject.tag == "Missile")
+        {
+            //missile と接触
+            ContactMissile(other);
+            // ぶつかってきた相手方（敵の砲弾）を破壊する。
+            PhotonNetwork.Destroy(other.gameObject);
+        }
+        //勝敗判定
+        VictoryJudgment();
+    }
+
+    private void ContactShell(Collider other)
+    {
+        //shellと接触した場合
         ////敵の弾に当たったら
         if (other.TryGetComponent<BulletNet>(out var shell))
         {
@@ -61,7 +83,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
             {
                 Debug.Log("[" + photonView.ViewID + "]" + "ダメージ処理");
 
-                photonView.RPC(nameof(HitBullet), RpcTarget.All, shell.Id, shell.OwnerId);
+                photonView.RPC(nameof(HitShell), RpcTarget.All, shell.Id, shell.OwnerId);
                 // HPを減少させる。
                 boatHP -= damage;
                 //ダメージ
@@ -71,11 +93,24 @@ public class TankHealth : MonoBehaviourPunCallbacks
 
             }
         }
-
-
-        // ぶつかってきた相手方（敵の砲弾）を破壊する。
-        PhotonView.Destroy(other.gameObject);
-
+    }
+    private void ContactMissile(Collider other)
+    {
+        //////missile と接触
+        if(!photonView.IsMine)
+        { 
+            Debug.Log("[" + photonView.ViewID + "]" + "ダメージ処理");
+            // HPを減少させる。
+            boatHP -= damage;
+            //ダメージ
+            playerHpUi.Damage(damage);
+            //他プレイヤーにダメージ処理
+            photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
+        }
+    }
+    private void VictoryJudgment()
+    {
+        //勝敗判定
         if (boatHP > 0)
         {
             GameObject effect1 = Instantiate(effectPrefab1, transform.position, Quaternion.identity);
@@ -100,7 +135,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void HitBullet(int id, int ownerId)
+    private void HitShell(int id, int ownerId)
     {
         //弾削除
         Debug.Log("弾削除");

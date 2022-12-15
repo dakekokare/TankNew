@@ -7,7 +7,8 @@ public class BulletNet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //3•bŒã‚É”j‰ó
+        Destroy(this.gameObject, 3.0f);
     }
     // ’e‚ÌID‚ğ•Ô‚·ƒvƒƒpƒeƒB
     public int Id { get; private set; }

@@ -4881,7 +4881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5f6283d227153044d9e2a98959e35c49, type: 3}
       propertyPath: m_TagString
-      value: Shell
+      value: Missile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f6283d227153044d9e2a98959e35c49, type: 3}
@@ -4898,7 +4898,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8335376010981608620}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 10, z: 74.5}
@@ -4915,9 +4915,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b03151009a2d046abb8ed154b26ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   time: 1
-  lifeTime: 2
+  lifeTime: 10
   limitAcceleration: 1
   maxAcceleration: 100
   minInitVelocity: {x: 1, y: 1, z: 1}

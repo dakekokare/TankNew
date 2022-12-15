@@ -5,14 +5,16 @@ public sealed class Homing : MonoBehaviourPunCallbacks
 {
     private GameObject target;
     [SerializeField, Min(0)]
-    float time = 1;
+    float time;
     //íeê∂ë∂éûä‘
     [SerializeField]
-    float lifeTime = 2;
+    float lifeTime;
+    //â¡ë¨êßå¿
     [SerializeField]
-    bool limitAcceleration = false;
+    bool limitAcceleration;
+    //ç≈ëÂâ¡ë¨
     [SerializeField, Min(0)]
-    float maxAcceleration = 100;
+    float maxAcceleration;
     //ç≈è¨ë¨ìxÅ@
     [SerializeField]
     Vector3 minInitVelocity;
@@ -82,4 +84,10 @@ public sealed class Homing : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(lifeTime);
         PhotonNetwork.Destroy(gameObject);
     }
+    void OnTriggerEnter(Collider t)
+    {
+        //çÌèú
+        PhotonNetwork.Destroy(this.gameObject);
+    }
+
 }
