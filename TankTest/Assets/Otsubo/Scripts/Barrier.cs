@@ -30,7 +30,7 @@ public class Barrier : MonoBehaviourPunCallbacks
             timer = 0.0f;
 
             // ƒoƒŠƒA‚ğÁ‚·B
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

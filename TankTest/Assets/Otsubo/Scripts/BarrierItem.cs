@@ -45,7 +45,7 @@ public class BarrierItem : MonoBehaviour
             other.gameObject.transform.GetChild(1).gameObject.SetActive(true);
 
             // アイテムを画面から削除する。
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
 
             // アイテムゲット音を出す。
             //AudioSource.PlayClipAtPoint(getSound, transform.position);
