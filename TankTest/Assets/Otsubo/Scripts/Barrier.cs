@@ -36,11 +36,11 @@ public class Barrier : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag != "Shell")
-        return;
-
-        if (!photonView.IsMine)
+        if (photonView.IsMine)
         {
+            //©•ª‚Ì’e
+            if (other.GetComponent<PhotonView>().IsMine)
+                return;
             //shell ‚ÉÚG‚µ‚½ê‡
             if (other.gameObject.tag == "Shell")
             {

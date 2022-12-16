@@ -48,7 +48,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!photonView.IsMine)
+        if (photonView.IsMine)
         {
             //shell Ç…ê⁄êGÇµÇΩèÍçá
             if (other.gameObject.tag == "Shell")
