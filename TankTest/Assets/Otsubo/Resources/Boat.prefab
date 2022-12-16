@@ -1161,9 +1161,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4072823740114409758}
     m_Modifications:
+    - target: {fileID: -2647230058339525192, guid: 67d6a74c6c74ce04992fddbc9b6a5c14, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1373779706284641335, guid: 67d6a74c6c74ce04992fddbc9b6a5c14, type: 3}
       propertyPath: m_Name
       value: Barrier
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373779706284641335, guid: 67d6a74c6c74ce04992fddbc9b6a5c14, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1373779706284641335, guid: 67d6a74c6c74ce04992fddbc9b6a5c14, type: 3}
       propertyPath: m_IsActive
