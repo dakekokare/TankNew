@@ -19,6 +19,9 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
     //誘導弾
     [SerializeField]
     private GameObject missileTurretPosition;
+    //barrier
+    [SerializeField]
+    private GameObject barrierPosition;
 
     // Update is called once per frame
     void Update()
@@ -63,6 +66,11 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
         Debug.Log("MissileTurret 生成");
         //アイテム生成
         PhotonNetwork.Instantiate("MissileTurret", missileTurretPosition.transform.position, Quaternion.identity);
+        
+        Debug.Log("Barrier 生成");
+        //アイテム生成
+        PhotonNetwork.Instantiate("BarrierItem", barrierPosition.transform.position, Quaternion.identity);
 
     }
+    
 }

@@ -41,18 +41,8 @@ public class BarrierItem : MonoBehaviour
     {
         if (other.gameObject.layer == 8)
         {
-            // 「Boat」オブジェクトを探してデータを取得する
-            //boat = GameObject.Find("Boat(Clone)");
-
-            // バリアのプレハブを実体化（インスタンス化）する。
-            //GameObject barrier = Instantiate(barrierPrefab, boat.transform.GetChild(1).position, Quaternion.identity);
-            //barrier.transform.parent = boat.transform;
-
-            // バリアのプレハブを実体化（インスタンス化）する。
-            //GameObject barrier = Instantiate(barrierPrefab, player.transform.GetChild(1).position, Quaternion.identity);
-            GameObject barrier = Instantiate(barrierPrefab, other.transform.GetChild(1).position, Quaternion.identity);
-            Barrier[] barriercomponent = barrier.gameObject.GetComponents<Barrier>();
-            //barriercomponent.GetPlayer();
+            //バリアアクティブ
+            other.gameObject.transform.GetChild(1).gameObject.SetActive(true);
 
             // アイテムを画面から削除する。
             Destroy(gameObject);
@@ -61,16 +51,10 @@ public class BarrierItem : MonoBehaviour
             //AudioSource.PlayClipAtPoint(getSound, transform.position);
 
             // アイテムゲット時にエフェクトを発生させる。
-            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-            
+            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);    
 
             // エフェクトを0.5秒後に消す。
             Destroy(effect, 0.5f);
-
-            barrier.transform.position = other.transform.GetChild(1).position;
-          
-            // バリアを10秒後に破壊する。
-            Destroy(barrier, 10.0f);
         }
     }
 

@@ -48,7 +48,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (photonView.IsMine)
+        if (!photonView.IsMine)
         {
             //shell ‚ÉÚG‚µ‚½ê‡
             if (other.gameObject.tag == "Shell")
@@ -57,6 +57,8 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 ContactShell(other);
                 // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
                 Destroy(other.gameObject);
+                //Ÿ”s”»’è
+                VictoryJudgment();
             }
 
             ////ƒAƒCƒeƒ€‚ÆÚG‚µ‚½‚ç
@@ -66,9 +68,9 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 ContactMissile(other);
                 // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
                 photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
+                //Ÿ”s”»’è
+                VictoryJudgment();
             }
-            //Ÿ”s”»’è
-            VictoryJudgment();
         }
     }
 
