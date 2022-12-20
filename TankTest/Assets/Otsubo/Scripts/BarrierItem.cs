@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class BarrierItem : MonoBehaviour
+public class BarrierItem : MonoBehaviourPunCallbacks
 {
     //[SerializeField]
     //private AudioClip getSound;
@@ -39,23 +39,19 @@ public class BarrierItem : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 8)
-        {
-            //バリアアクティブ
-            other.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        photonView.RPC(nameof(ActiveBarrier), RpcTarget.All,other.GetComponent<PhotonView>().ViewID);
 
-            // アイテムを画面から削除する。
-            PhotonNetwork.Destroy(gameObject);
+        // アイテムを画面から削除する。
+        PhotonNetwork.Destroy(gameObject);
 
-            // アイテムゲット音を出す。
-            //AudioSource.PlayClipAtPoint(getSound, transform.position);
+        // アイテムゲット音を出す。
+        //AudioSource.PlayClipAtPoint(getSound, transform.position);
 
-            // アイテムゲット時にエフェクトを発生させる。
-            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);    
+        // アイテムゲット時にエフェクトを発生させる。
+        GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);    
 
-            // エフェクトを0.5秒後に消す。
-            Destroy(effect, 0.5f);
-        }
+        // エフェクトを0.5秒後に消す。
+        Destroy(effect, 0.5f);
     }
 
     public void SearchPlayer()
@@ -73,5 +69,12 @@ public class BarrierItem : MonoBehaviour
                 }
             }
         }
+    }
+    [PunRPC]
+    private void ActiveBarrier(int id)
+    {
+        GameObject obj = PhotonView.Find(id).gameObject;
+        //バリアアクティブ
+        obj.gameObject.transform.GetChild(1).gameObject.SetActive(true);
     }
 }
