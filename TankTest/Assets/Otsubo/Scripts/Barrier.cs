@@ -41,19 +41,27 @@ public class Barrier : MonoBehaviourPunCallbacks
             // Bullet layer ˆÓŠO‚È‚çreturn
             if (other.gameObject.layer != 10)
                 return;
-            //©•ª‚Ì’e
-            if (other.GetComponent<PhotonView>().IsMine)
-                return;
             //shell ‚ÉÚG‚µ‚½ê‡
             if (other.gameObject.tag == "Shell")
             {
-                // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-                Destroy(other.gameObject);
+                //shell‚ÆÚG‚µ‚½ê‡
+                ////“G‚Ì’e‚É“–‚½‚Á‚½‚ç
+                if (other.TryGetComponent<BulletNet>(out var shell))
+                {
+                    if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
+                    {
+                        // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
+                        Destroy(other.gameObject);
+                    }
+                }
             }
 
             ////ƒ~ƒTƒCƒ‹‚ÆÚG‚µ‚½‚ç
             if (other.gameObject.tag == "Missile")
             {
+                //©•ª‚Ì’e
+                if (other.GetComponent<PhotonView>().IsMine)
+                    return;
                 // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
                 photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
             }
