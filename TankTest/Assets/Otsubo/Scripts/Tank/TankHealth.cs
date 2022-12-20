@@ -97,10 +97,12 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void ContactMissile(Collider other)
     {
-        //////missile と接触
-        if(photonView.IsMine)
-        { 
-            Debug.Log("[" + photonView.ViewID + "]" + "ダメージ処理");
+        if (other.gameObject.TryGetComponent<PhotonView>(out var missile))
+        {
+            //自分の発射したミサイルだったら
+            if (missile.IsMine)
+                return;
+            Debug.Log("[" + missile.ViewID + "]" + "Missile ダメージ処理");
             // HPを減少させる。
             boatHP -= damage;
             //ダメージ
