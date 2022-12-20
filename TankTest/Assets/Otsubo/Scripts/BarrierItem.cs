@@ -39,10 +39,15 @@ public class BarrierItem : MonoBehaviourPunCallbacks
 
     void OnTriggerEnter(Collider other)
     {
+        //バリアをアクティブにする
         photonView.RPC(nameof(ActiveBarrier), RpcTarget.All,other.GetComponent<PhotonView>().ViewID);
+        //バリアアイテムが自分のオブジェクトなら
+        if(gameObject.GetComponent<PhotonView>().IsMine)
+            // アイテムを画面から削除する。
+            PhotonNetwork.Destroy(gameObject);
+        else
+            photonView.RPC(nameof(DestroyBarrier), RpcTarget.Others, this.gameObject.GetComponent<PhotonView>().ViewID);
 
-        // アイテムを画面から削除する。
-        PhotonNetwork.Destroy(gameObject);
 
         // アイテムゲット音を出す。
         //AudioSource.PlayClipAtPoint(getSound, transform.position);
@@ -76,5 +81,12 @@ public class BarrierItem : MonoBehaviourPunCallbacks
         GameObject obj = PhotonView.Find(id).gameObject;
         //バリアアクティブ
         obj.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    [PunRPC]
+    private void DestroyBarrier(int id)
+    {
+        GameObject obj = PhotonView.Find(id).gameObject;
+        PhotonNetwork.Destroy(obj);
     }
 }
