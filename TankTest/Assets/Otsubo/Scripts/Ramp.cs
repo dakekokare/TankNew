@@ -20,8 +20,10 @@ public class Ramp : MonoBehaviour
         {
             if (other.gameObject.layer == 8)
             {
+                Vector3 dir = Quaternion.Euler(0, 0, 1) * other.transform.forward;
+
                 Rigidbody rb = other.GetComponent<Rigidbody>();
-                rb.AddForce(angle);
+                rb.AddForce(dir, ForceMode.Impulse);
             }
         }
     }
