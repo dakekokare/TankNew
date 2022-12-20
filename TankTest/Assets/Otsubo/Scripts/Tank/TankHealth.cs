@@ -206,8 +206,8 @@ public class TankHealth : MonoBehaviourPunCallbacks
     [PunRPC]
     private void DeleteMissile(int obj)
     {
-        GameObject boat= PhotonView.Find(obj).gameObject;
+        GameObject missile= PhotonView.Find(obj).gameObject;
         //missile ÇçÌèú
-        PhotonNetwork.Destroy(boat);
+        PhotonNetwork.Destroy(missile);
     }
 }

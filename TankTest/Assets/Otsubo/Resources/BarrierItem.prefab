@@ -55,32 +55,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: BarrierItem
       objectReference: {fileID: 0}
+    - target: {fileID: 7807270992842666813, guid: 0ce0ce523b34054478ba73106a599ba7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ce0ce523b34054478ba73106a599ba7, type: 3}
---- !u!1 &3426489557744091876 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7807270992842666813, guid: 0ce0ce523b34054478ba73106a599ba7, type: 3}
-  m_PrefabInstance: {fileID: 4887999351801328089}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1558284002997666342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3426489557744091876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0

@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MissileTurret
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6f10324386c59ce4e85c08caeed87246, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f10324386c59ce4e85c08caeed87246, type: 3}
 --- !u!1 &7184700599699329044 stripped

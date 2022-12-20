@@ -38,6 +38,9 @@ public class Barrier : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
+            // Bullet layer ˆÓŠO‚È‚çreturn
+            if (other.gameObject.layer != 10)
+                return;
             //Ž©•ª‚Ì’e
             if (other.GetComponent<PhotonView>().IsMine)
                 return;

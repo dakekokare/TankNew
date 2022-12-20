@@ -37,7 +37,7 @@ public class BarrierItem : MonoBehaviour
             transform.position.z);
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 8)
         {

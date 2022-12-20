@@ -4880,6 +4880,10 @@ PrefabInstance:
       value: HomingMissile
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5f6283d227153044d9e2a98959e35c49, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5f6283d227153044d9e2a98959e35c49, type: 3}
       propertyPath: m_TagString
       value: Missile
       objectReference: {fileID: 0}
