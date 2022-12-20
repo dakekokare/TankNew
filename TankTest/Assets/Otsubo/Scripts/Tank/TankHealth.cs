@@ -67,7 +67,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 //missile ‚ÆÚG
                 ContactMissile(other);
                 // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-                photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
+                //photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
                 //Ÿ”s”»’è
                 VictoryJudgment();
             }
@@ -98,7 +98,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     private void ContactMissile(Collider other)
     {
         //////missile ‚ÆÚG
-        if(!photonView.IsMine)
+        if(photonView.IsMine)
         { 
             Debug.Log("[" + photonView.ViewID + "]" + "ƒ_ƒ[ƒWˆ—");
             // HP‚ğŒ¸­‚³‚¹‚éB

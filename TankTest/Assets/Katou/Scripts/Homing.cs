@@ -57,9 +57,7 @@ public sealed class Homing : MonoBehaviourPunCallbacks
     {
         //敵がいなかったら return 
         if (target == null)
-        {
             return;
-        }
         //加速度計算
         acceleration = 2f / (time * time) * (target.transform.position - position - time * velocity);
         //加速度制限がtrue の場合
@@ -88,11 +86,16 @@ public sealed class Homing : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            //自分のオブジェクトと接触してなかったら
-            if (!t.gameObject.GetComponent<PhotonView>().IsMine)
-                //削除
-                PhotonNetwork.Destroy(gameObject);
+            //自分にミサイルが当たらないようにする処理
+            //player かつ　自分だったら
+            if (t.gameObject.layer == 8)
+            {
+                if (t.gameObject.TryGetComponent<PhotonView>(out var other))
+                    if(other.gameObject.GetComponent<PhotonView>().IsMine)
+                        return;
+            }
+            PhotonNetwork.Destroy(gameObject);
+
         }
     }
-
 }
