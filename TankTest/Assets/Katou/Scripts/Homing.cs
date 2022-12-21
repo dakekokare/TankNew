@@ -106,6 +106,7 @@ public sealed class Homing : MonoBehaviourPunCallbacks
                     if(other.gameObject.GetComponent<PhotonView>().IsMine)
                         return;
             }
+            Debug.Log("Missile çÌèú");
             PhotonNetwork.Destroy(gameObject);
 
         }
