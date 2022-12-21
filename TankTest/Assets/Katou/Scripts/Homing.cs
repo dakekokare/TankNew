@@ -50,6 +50,10 @@ public sealed class Homing : MonoBehaviourPunCallbacks
             Random.Range(minInitVelocity.y, maxInitVelocity.y), 
             Random.Range(minInitVelocity.z, maxInitVelocity.z)
             );
+
+        //加速度計算
+        acceleration = 2f / (time * time) * (target.transform.position - position - time * velocity);
+
         // lifeTime 後に消す
         StartCoroutine(nameof(Timer));
     }
@@ -58,8 +62,8 @@ public sealed class Homing : MonoBehaviourPunCallbacks
         //敵がいなかったら return 
         if (target == null)
             return;
-        //加速度計算
-        acceleration = 2f / (time * time) * (target.transform.position - position - time * velocity);
+
+
         //加速度制限がtrue の場合
         //加速度のベクトルの大きさ取得
         if (limitAcceleration && acceleration.sqrMagnitude > maxAcceleration * maxAcceleration)

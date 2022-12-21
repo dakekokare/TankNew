@@ -101,7 +101,10 @@ public class TankHealth : MonoBehaviourPunCallbacks
         {
             //自分の発射したミサイルだったら
             if (missile.IsMine)
+            {
+                Debug.Log("[" + missile.ViewID + "]" + "Return Missile ダメージ処理");
                 return;
+            }
             Debug.Log("[" + missile.ViewID + "]" + "Missile ダメージ処理");
             // HPを減少させる。
             boatHP -= damage;
