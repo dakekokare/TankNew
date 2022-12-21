@@ -50,33 +50,35 @@ public class HomingSpawn : MonoBehaviourPunCallbacks
     }
     IEnumerator SpawnMissile()
     {
-        isSpawning = false;
-        Homing homing;
-
-        //弾の数
-        for (int i = 0; i < iterationCount; i++)
+        if (photonView.IsMine)
         {
-            //交互に弾を発射する
-            Vector3 pos;
-            if (i % 2 == 0)
-                pos = lPos.transform.position;
-            else
-                pos = rPos.transform.position;
-            //弾発射
-            homing = PhotonNetwork.Instantiate("HomingMissile", pos , Quaternion.identity).GetComponent<Homing>();
-            //ターゲット設定
-            homing.Target = target;
+            isSpawning = false;
+            GameObject homing;
 
-        }        
-        
-        //タレット非アクティブ化
-        this.gameObject.SetActive(false);
-        //デフォルトタレットアクティブ
-        ActiveDefaultTurret();
+            //弾の数
+            for (int i = 0; i < iterationCount; i++)
+            {
+                //交互に弾を発射する
+                Vector3 pos;
+                if (i % 2 == 0)
+                    pos = lPos.transform.position;
+                else
+                    pos = rPos.transform.position;
+                //弾発射
+                homing = PhotonNetwork.Instantiate("HomingMissile", pos, Quaternion.identity);
+                //ターゲット設定
+                homing.GetComponent<Homing>().Target = target;
+            }
 
-        //指定した秒数待つ 
-        yield return intervalWait;
+            //タレット非アクティブ化
+            this.gameObject.SetActive(false);
+            //デフォルトタレットアクティブ
+            ActiveDefaultTurret();
 
+            //指定した秒数待つ 
+            yield return intervalWait;
+
+        }
 
     }
     public void SearchPlayer()
