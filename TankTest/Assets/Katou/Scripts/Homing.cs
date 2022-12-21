@@ -41,45 +41,53 @@ public sealed class Homing : MonoBehaviourPunCallbacks
     }
     void Start()
     {
-        //現在の座標を格納
-        thisTransform = transform;
-        position = thisTransform.position;
-        //最小速度～最大速度の間でランダムで速度を決める
-        velocity = new Vector3(
-            Random.Range(minInitVelocity.x, maxInitVelocity.x), 
-            Random.Range(minInitVelocity.y, maxInitVelocity.y), 
-            Random.Range(minInitVelocity.z, maxInitVelocity.z)
-            );
+        if (photonView.IsMine)
+        {
 
-        //加速度計算
-        acceleration = 2f / (time * time) * (target.transform.position - position - time * velocity);
+            //現在の座標を格納
+            thisTransform = transform;
+            position = thisTransform.position;
+            //最小速度～最大速度の間でランダムで速度を決める
+            velocity = new Vector3(
+                Random.Range(minInitVelocity.x, maxInitVelocity.x),
+                Random.Range(minInitVelocity.y, maxInitVelocity.y),
+                Random.Range(minInitVelocity.z, maxInitVelocity.z)
+                );
 
-        // lifeTime 後に消す
-        StartCoroutine(nameof(Timer));
+            //加速度計算
+            acceleration = 2f / (time * time) * (target.transform.position - position - time * velocity);
+
+            // lifeTime 後に消す
+            StartCoroutine(nameof(Timer));
+        }
     }
     public void Update()
     {
-        //敵がいなかったら return 
-        if (target == null)
-            return;
+        if (photonView.IsMine)
+        {
+
+            //敵がいなかったら return 
+            if (target == null)
+                return;
 
 
-        //加速度制限がtrue の場合
-        //加速度のベクトルの大きさ取得
-        if (limitAcceleration && acceleration.sqrMagnitude > maxAcceleration * maxAcceleration)
-        {
-            //加速度を制限
-            acceleration = acceleration.normalized * maxAcceleration;
+            //加速度制限がtrue の場合
+            //加速度のベクトルの大きさ取得
+            if (limitAcceleration && acceleration.sqrMagnitude > maxAcceleration * maxAcceleration)
+            {
+                //加速度を制限
+                acceleration = acceleration.normalized * maxAcceleration;
+            }
+            time -= Time.deltaTime;
+            if (time < 0f)
+            {
+                return;
+            }
+            velocity += acceleration * Time.deltaTime;
+            position += velocity * Time.deltaTime;
+            thisTransform.position = position;
+            thisTransform.rotation = Quaternion.LookRotation(velocity);
         }
-        time -= Time.deltaTime;
-        if (time < 0f)
-        {
-            return;
-        }
-        velocity += acceleration * Time.deltaTime;
-        position += velocity * Time.deltaTime;
-        thisTransform.position = position;
-        thisTransform.rotation = Quaternion.LookRotation(velocity);
     }
     IEnumerator Timer()
     {

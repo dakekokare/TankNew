@@ -4919,7 +4919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b03151009a2d046abb8ed154b26ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 5
+  time: 1
   lifeTime: 50
   limitAcceleration: 1
   maxAcceleration: 100
