@@ -92,6 +92,7 @@ public sealed class Homing : MonoBehaviourPunCallbacks
     IEnumerator Timer()
     {
         yield return new WaitForSeconds(lifeTime);
+        Debug.Log("Missile LifeLimit");
         PhotonNetwork.Destroy(gameObject);
     }
     void OnTriggerEnter(Collider t)
@@ -103,7 +104,7 @@ public sealed class Homing : MonoBehaviourPunCallbacks
             if (t.gameObject.layer == 8)
             {
                 if (t.gameObject.TryGetComponent<PhotonView>(out var other))
-                    if(other.gameObject.GetComponent<PhotonView>().IsMine)
+                    if(other.IsMine)
                         return;
             }
             Debug.Log("Missile çÌèú");

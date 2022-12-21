@@ -48,6 +48,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("[ Hit" + other.gameObject.layer + "&" + other.gameObject.tag +"]");
         if (photonView.IsMine)
         {
             //shell Ç…ê⁄êGÇµÇΩèÍçá
