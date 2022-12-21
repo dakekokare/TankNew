@@ -107,7 +107,7 @@ public sealed class Homing : MonoBehaviourPunCallbacks
                     if(other.IsMine)
                         return;
             }
-            Debug.Log("Missile íœ");
+            Debug.Log("[ Missileíœ" + t.gameObject.layer + "&" + t.gameObject.tag + "]");
             PhotonNetwork.Destroy(gameObject);
 
         }

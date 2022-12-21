@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
-public class HomingSpawn : MonoBehaviour
+public class HomingSpawn : MonoBehaviourPunCallbacks
 {
     private GameObject target;
     //発射座標
@@ -22,25 +22,31 @@ public class HomingSpawn : MonoBehaviour
     WaitForSeconds intervalWait;
     void Start()
     {
+        if (photonView.IsMine) 
+        { 
         intervalWait = new WaitForSeconds(interval);
         //プレイヤー探索
         SearchPlayer();
-
+        }
     }
     void Update()
     {
-        //発射
-        if (Input.GetMouseButton(0))
+        if (photonView.IsMine)
         {
-            isSpawning = true;
+
+            //発射
+            if (Input.GetMouseButton(0))
+            {
+                isSpawning = true;
+            }
+            //ターゲットがいなかったら
+            if (target == null)
+                return;
+            if (!isSpawning)
+                return;
+            //追尾弾生成
+            StartCoroutine(nameof(SpawnMissile));
         }
-        //ターゲットがいなかったら
-        if (target == null)
-            return;
-        if (!isSpawning)
-            return;
-        //追尾弾生成
-        StartCoroutine(nameof(SpawnMissile));
     }
     IEnumerator SpawnMissile()
     {
