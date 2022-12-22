@@ -68,6 +68,13 @@ public class ShotShell : MonoBehaviourPunCallbacks
         // 砲弾の発射音を出す。
         AudioSource.PlayClipAtPoint(shotSound, transform.position);
 
+        //敵の弾だったらtagを変える
+        if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
+        {
+            shell.tag = "EnemyShell";
+            //マテリアル色変え
+            shell.ChengeMaterial();
+        }
     }
 
     public void ShotUnlock()

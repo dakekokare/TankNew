@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class BulletNet : MonoBehaviour
 {
+    [SerializeField]
+    Material mat;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +23,40 @@ public class BulletNet : MonoBehaviour
     {
         Id = id;
         OwnerId = ownerId;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag=="Barrier")
+        {
+            //©•ª‚ÌƒoƒŠƒA
+            if (other.GetComponent<PhotonView>().IsMine)
+            {
+                //©•ª‚Ì’e‚Ì
+                if (this.gameObject.tag == "Shell")
+                {
+                    return;
+                }
+                //“G‚Ì’e‚Ì
+                else if (this.gameObject.tag == "EnemyShell")
+                    Destroy(this.gameObject);
+            }
+            //“G‚ÌƒoƒŠƒA‚É“–‚½‚Á‚½
+            else 
+            {
+                //“G ‚Ì’e‚Ì
+                if (this.gameObject.tag == "EnemyShell")
+                {
+                    return;
+                }
+                //’e‚Ì
+                else if (this.gameObject.tag == "Shell")
+                    Destroy(this.gameObject);
+            }
+        }
+    }
+    public void ChengeMaterial()
+    {
+        // ¶¬‚µ‚½ƒvƒŒƒnƒu‚Ìƒ}ƒeƒŠƒAƒ‹‚ğİ’è
+        this.gameObject.GetComponent<MeshRenderer>().material = mat;
     }
 }

@@ -34,39 +34,39 @@ public class Barrier : MonoBehaviourPunCallbacks
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (photonView.IsMine)
-        {
-            // Bullet layer ˆÓŠO‚È‚çreturn
-            if (other.gameObject.layer != 10)
-                return;
-            //shell ‚ÉÚG‚µ‚½ê‡
-            if (other.gameObject.tag == "Shell")
-            {
-                //shell‚ÆÚG‚µ‚½ê‡
-                ////“G‚Ì’e‚É“–‚½‚Á‚½‚ç
-                if (other.TryGetComponent<BulletNet>(out var shell))
-                {
-                    if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
-                    {
-                        // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-                        photonView.RPC(nameof(DestroyShell), RpcTarget.All, shell.Id, shell.OwnerId);
-                    }
-                }
-            }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (photonView.IsMine)
+    //    {
+    //        // Bullet layer ˆÓŠO‚È‚çreturn
+    //        if (other.gameObject.layer != 10)
+    //            return;
+    //        //shell ‚ÉÚG‚µ‚½ê‡
+    //        if (other.gameObject.tag == "Shell")
+    //        {
+    //            //shell‚ÆÚG‚µ‚½ê‡
+    //            ////“G‚Ì’e‚É“–‚½‚Á‚½‚ç
+    //            if (other.TryGetComponent<BulletNet>(out var shell))
+    //            {
+    //                if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
+    //                {
+    //                    // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
+    //                    photonView.RPC(nameof(DestroyShell), RpcTarget.All, shell.Id, shell.OwnerId);
+    //                }
+    //            }
+    //        }
 
-            //////ƒ~ƒTƒCƒ‹‚ÆÚG‚µ‚½‚ç
-            //if (other.gameObject.tag == "Missile")
-            //{
-            //    //©•ª‚Ì’e
-            //    if (other.GetComponent<PhotonView>().IsMine)
-            //        return;
-            //    // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-            //    photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
-            //}
-        }
-    }
+    //        //////ƒ~ƒTƒCƒ‹‚ÆÚG‚µ‚½‚ç
+    //        //if (other.gameObject.tag == "Missile")
+    //        //{
+    //        //    //©•ª‚Ì’e
+    //        //    if (other.GetComponent<PhotonView>().IsMine)
+    //        //        return;
+    //        //    // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
+    //        //    photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
+    //        //}
+    //    }
+    //}
 
     //public void SearchPlayer()
     //{
@@ -96,22 +96,22 @@ public class Barrier : MonoBehaviourPunCallbacks
 
 
 
-    [PunRPC]
-    private void DestroyShell(int id, int ownerId)
-    {
-        //’eíœ
-        Debug.Log("Destroy ’eíœ");
+    //[PunRPC]
+    //private void DestroyShell(int id, int ownerId)
+    //{
+    //    //’eíœ
+    //    Debug.Log("Destroy ’eíœ");
 
-        //’e‚ğíœ‚·‚é
-        var bullets = FindObjectsOfType<BulletNet>();
-        foreach (var bullet in bullets)
-        {
-            if (bullet.Equals(id, ownerId))
-            {
-                Destroy(bullet.gameObject);
-                break;
-            }
-        }
-    }
+    //    //’e‚ğíœ‚·‚é
+    //    var bullets = FindObjectsOfType<BulletNet>();
+    //    foreach (var bullet in bullets)
+    //    {
+    //        if (bullet.Equals(id, ownerId))
+    //        {
+    //            Destroy(bullet.gameObject);
+    //            break;
+    //        }
+    //    }
+    //}
 
 }
