@@ -8,6 +8,7 @@ TagManager:
   - EnemyShell
   - Enemy
   - Missile
+  - Barrier
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Player
   - Item
   - Bullet
-  - 
+  - Barrier
   - 
   - 
   - 

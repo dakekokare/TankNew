@@ -50,14 +50,17 @@ public class TankHealth : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            Debug.Log("[ Hit " + other.gameObject.layer + "&" + other.gameObject.tag + "]");
             //shell ‚ÉÚG‚µ‚½ê‡
             if (other.gameObject.tag == "Shell")
-            {
+            {            
+                Debug.Log("[ Hit " + other.gameObject.layer + "&" + other.gameObject.tag + "]");
+
                 //shell ‚ÆÚG
                 ContactShell(other);
+                
                 // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
+                
                 //Ÿ”s”»’è
                 VictoryJudgment();
             }
