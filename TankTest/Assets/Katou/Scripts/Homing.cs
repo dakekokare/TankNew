@@ -100,12 +100,12 @@ public sealed class Homing : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             //自分にミサイルが当たらないようにする処理
-            //player かつ　自分だったら
+            //playerだったら
             if (t.gameObject.layer == 8)
             {
-                if (t.gameObject.TryGetComponent<PhotonView>(out var other))
-                    if(other.IsMine)
-                        return;
+                //if (t.gameObject.TryGetComponent<PhotonView>(out var other))
+                //    if(other.IsMine)
+                return;
             }
             Debug.Log("[ Missile削除" + t.gameObject.layer + "&" + t.gameObject.tag + "]");
             PhotonNetwork.Destroy(gameObject);

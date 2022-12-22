@@ -38,19 +38,19 @@ public class TankHealth : MonoBehaviourPunCallbacks
         enemyHpUi.SetHp(boatHP);
 
     }
-    private void Update()
-    {
-        //if (enemyHpUi == null)
-        //    Debug.Log("[" + photonView.ViewID + "]" + "Null‚Å‚·");
-        //else
-        //    Debug.Log("[" + photonView.ViewID + "]" + "“ü‚Á‚Ä‚Ü‚·");
+    //private void Update()
+    //{
+    //    //if (enemyHpUi == null)
+    //    //    Debug.Log("[" + photonView.ViewID + "]" + "Null‚Å‚·");
+    //    //else
+    //    //    Debug.Log("[" + photonView.ViewID + "]" + "“ü‚Á‚Ä‚Ü‚·");
 
-    }
+    //}
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("[ Hit" + other.gameObject.layer + "&" + other.gameObject.tag +"]");
         if (photonView.IsMine)
         {
+            Debug.Log("[ Hit " + other.gameObject.layer + "&" + other.gameObject.tag + "]");
             //shell ‚ÉÚG‚µ‚½ê‡
             if (other.gameObject.tag == "Shell")
             {
@@ -68,7 +68,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 //missile ‚ÆÚG
                 ContactMissile(other);
                 // ‚Ô‚Â‚©‚Á‚Ä‚«‚½‘Šè•ûi“G‚Ì–C’ej‚ğ”j‰ó‚·‚éB
-                //photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
+                photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
                 //Ÿ”s”»’è
                 VictoryJudgment();
             }
