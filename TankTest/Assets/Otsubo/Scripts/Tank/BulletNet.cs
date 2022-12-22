@@ -44,24 +44,25 @@ public class BulletNet : MonoBehaviour
                     Destroy(this.gameObject);
                 }
             }
-            //“G‚ÌƒoƒŠƒA‚É“–‚½‚Á‚½
-            else 
-            {
-                //“G ‚Ì’e‚Ì
-                if (this.gameObject.tag == "EnemyShell")
-                {
-                    return;
-                }
-                //’e‚Ì
-                else if (this.gameObject.tag == "Shell")
-                {
-                    //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
-                    DestroyShellOtherPlayer(other.gameObject);
-                    Destroy(this.gameObject);
-                }
-            }
+            ////“G‚ÌƒoƒŠƒA‚É“–‚½‚Á‚½
+            //else 
+            //{
+            //    //“G ‚Ì’e‚Ì
+            //    if (this.gameObject.tag == "EnemyShell")
+            //    {
+            //        return;
+            //    }
+            //    //’e‚Ì
+            //    else if (this.gameObject.tag == "Shell")
+            //    {
+            //        //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
+            //        DestroyShellOtherPlayer(other.gameObject);
+            //        Destroy(this.gameObject);
+            //    }
+            //}
         }
 
+        
         //ƒvƒŒƒCƒ„[‚¾‚Á‚½‚ç
         if(other.gameObject.layer==8)
         {
@@ -84,22 +85,22 @@ public class BulletNet : MonoBehaviour
                     Destroy(this.gameObject);
                 }
             }
-            else if (gameObject.tag == "Shell")
-            {
-                //©•ª‚É‚ ‚½‚Á‚½‚ç
-                if (other.GetComponent<PhotonView>().IsMine)
-                    return;
-                else
-                {
-                    //‘D‚ÆÚG‚µ‚½‚ç,ƒ_ƒ[ƒWˆ—
-                    other.gameObject.GetComponent<TankHealth>().HitBullet();
-                    //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
-                    DestroyShellOtherPlayer(other.gameObject);
-                    Destroy(this.gameObject);
-                }
-            }
-        }
-
+        //    else if (gameObject.tag == "Shell")
+        //    {
+        //        //©•ª‚É‚ ‚½‚Á‚½‚ç
+        //        if (other.GetComponent<PhotonView>().IsMine)
+        //            return;
+        //        else
+        //        {
+        //            //‘D‚ÆÚG‚µ‚½‚ç,ƒ_ƒ[ƒWˆ—
+        //            other.gameObject.GetComponent<TankHealth>().HitBullet();
+        //            //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
+        //            DestroyShellOtherPlayer(other.gameObject);
+        //            Destroy(this.gameObject);
+        //        }
+        //    }
+        //}
+        
     }
     public void ChengeMaterial()
     {
