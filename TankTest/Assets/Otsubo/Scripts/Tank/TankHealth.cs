@@ -62,16 +62,6 @@ public class TankHealth : MonoBehaviourPunCallbacks
                 VictoryJudgment();
             }
 
-            ////アイテムと接触したら
-            if (other.gameObject.tag == "Missile")
-            {
-                //missile と接触
-                ContactMissile(other);
-                // ぶつかってきた相手方（敵の砲弾）を破壊する。
-                photonView.RPC(nameof(DeleteMissile), RpcTarget.Others, other.GetComponent<PhotonView>().ViewID);
-                //勝敗判定
-                VictoryJudgment();
-            }
         }
     }
 
@@ -96,24 +86,15 @@ public class TankHealth : MonoBehaviourPunCallbacks
             }
         }
     }
-    private void ContactMissile(Collider other)
+    private void ContactMissile()
     {
-        if (other.gameObject.TryGetComponent<PhotonView>(out var missile))
-        {
-            //自分の発射したミサイルだったら
-            if (missile.IsMine)
-            {
-                Debug.Log("[" + missile.ViewID + "]" + "Return Missile ダメージ処理");
-                return;
-            }
-            Debug.Log("[" + missile.ViewID + "]" + "Missile ダメージ処理");
-            // HPを減少させる。
-            boatHP -= damage;
-            //ダメージ
-            playerHpUi.Damage(damage);
-            //他プレイヤーにダメージ処理
-            photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
-        }
+        Debug.Log("Missile ダメージ処理");
+        // HPを減少させる。
+        boatHP -= damage;
+        //ダメージ
+        playerHpUi.Damage(damage);
+        //他プレイヤーにダメージ処理
+        photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
     }
     private void VictoryJudgment()
     {
@@ -209,11 +190,19 @@ public class TankHealth : MonoBehaviourPunCallbacks
         //敵HpUIにダメージ処理
         enemyHpUi.HealHp(heal);
     }
-    [PunRPC]
-    private void DeleteMissile(int obj)
+    //[PunRPC]
+    //private void DeleteMissile(int obj)
+    //{
+    //    GameObject missile= PhotonView.Find(obj).gameObject;
+    //    //missile を削除
+    //    PhotonNetwork.Destroy(missile);
+    //}
+
+    public void HitMissile()
     {
-        GameObject missile= PhotonView.Find(obj).gameObject;
-        //missile を削除
-        PhotonNetwork.Destroy(missile);
+        //missile と接触
+        ContactMissile();
+        //勝敗判定
+        VictoryJudgment();
     }
 }

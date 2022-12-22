@@ -103,13 +103,28 @@ public sealed class Homing : MonoBehaviourPunCallbacks
             //player‚¾‚Á‚½‚ç
             if (t.gameObject.layer == 8)
             {
-                //if (t.gameObject.TryGetComponent<PhotonView>(out var other))
-                //    if(other.IsMine)
-                return;
+                if (t.gameObject.TryGetComponent<PhotonView>(out var other))
+                    //©•ª‚Ì‘D‚¾‚Á‚½‚ç
+                    if (other.IsMine)
+                        return;
+                    else
+                    {
+                        //“G‚¾‚Á‚½‚çƒqƒbƒgˆ—
+                        photonView.RPC(nameof(HitBoatMissile), RpcTarget.Others,other.ViewID);
+                    }
             }
             Debug.Log("[ Missileíœ" + t.gameObject.layer + "&" + t.gameObject.tag + "]");
             PhotonNetwork.Destroy(gameObject);
 
         }
     }
+    [PunRPC]
+    private void HitBoatMissile(int id)
+    {
+        //“G‚É“–‚½‚Á‚½‚çƒqƒbƒgˆ—‚ğ‚³‚¹‚é
+        GameObject boat = PhotonView.Find(id).gameObject;
+        boat.gameObject.GetComponent<TankHealth>().HitMissile();
+    }
+
+
 }
