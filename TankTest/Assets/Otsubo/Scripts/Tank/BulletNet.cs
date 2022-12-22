@@ -99,7 +99,7 @@ public class BulletNet : MonoBehaviour
         //            Destroy(this.gameObject);
         //        }
         //    }
-        //}
+        }
         
     }
     public void ChengeMaterial()
