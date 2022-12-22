@@ -68,12 +68,30 @@ public class BulletNet : MonoBehaviour
             //enemyShellだったら
             if (gameObject.tag == "EnemyShell")
             {
-                //自分のだったら
+
+                /////////////////////////////////////////////
+                // 
+                ///////////////////////////////////////////
+                //自分じゃなかったら
+                if (!other.GetComponent<PhotonView>().IsMine)
+                    return;
+                else
+                {
+                    //船と接触したら,ダメージ処理
+                    other.gameObject.GetComponent<TankHealth>().HitBullet();
+                    //自分と相手の弾を消す
+                    DestroyShellOtherPlayer(other.gameObject);
+                    Destroy(this.gameObject);
+                }
+            }
+            else if (gameObject.tag == "Shell")
+            {
+                //自分にあたったら
                 if (other.GetComponent<PhotonView>().IsMine)
                     return;
                 else
                 {
-                    //敵の船と接触したら,ダメージ処理
+                    //船と接触したら,ダメージ処理
                     other.gameObject.GetComponent<TankHealth>().HitBullet();
                     //自分と相手の弾を消す
                     DestroyShellOtherPlayer(other.gameObject);
