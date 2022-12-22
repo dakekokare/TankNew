@@ -48,50 +48,62 @@ public class TankHealth : MonoBehaviourPunCallbacks
     //}
     private void OnTriggerEnter(Collider other)
     {
-        if (photonView.IsMine)
-        {
-            //shell に接触した場合
-            if (other.gameObject.tag == "Shell")
-            {            
-                Debug.Log("[ Hit " + other.gameObject.layer + "&" + other.gameObject.tag + "]");
+        //if (photonView.IsMine)
+        //{
+        //    //shell に接触した場合
+        //    if (other.gameObject.tag == "EnemyShell")
+        //    {            
+        //        Debug.Log("[ Hit " + other.gameObject.layer + "&" + other.gameObject.tag + "]");
 
-                //shell と接触
-                ContactShell(other);
+        //        //shell と接触
+        //        ContactShell(other);
                 
-                // ぶつかってきた相手方（敵の砲弾）を破壊する。
-                //Destroy(other.gameObject);
+        //        // ぶつかってきた相手方（敵の砲弾）を破壊する。
+        //        //Destroy(other.gameObject);
                 
-                //勝敗判定
-                VictoryJudgment();
-            }
+        //        //勝敗判定
+        //        VictoryJudgment();
+        //    }
 
-        }
+        //}
     }
 
-    private void ContactShell(Collider other)
-    {
-        //shellと接触した場合
-        ////敵の弾に当たったら
-        if (other.TryGetComponent<BulletNet>(out var shell))
-        {
-            if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
-            {
-                Debug.Log("[" + photonView.ViewID + "]" + "ダメージ処理");
+    //private void ContactShell(Collider other)
+    //{
+    //    //shellと接触した場合
+    //    ////敵の弾に当たったら
+    //    if (other.TryGetComponent<BulletNet>(out var shell))
+    //    {
+    //        if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
+    //        {
+    //            Debug.Log("[" + photonView.ViewID + "]" + "ダメージ処理");
 
-                photonView.RPC(nameof(HitShell), RpcTarget.All, shell.Id, shell.OwnerId);
-                // HPを減少させる。
-                boatHP -= damage;
-                //ダメージ
-                playerHpUi.Damage(damage);
-                //他プレイヤーにダメージ処理
-                photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
+    //            photonView.RPC(nameof(HitShell), RpcTarget.All, shell.Id, shell.OwnerId);
+    //            // HPを減少させる。
+    //            boatHP -= damage;
+    //            //ダメージ
+    //            playerHpUi.Damage(damage);
+    //            //他プレイヤーにダメージ処理
+    //            photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
 
-            }
-        }
-    }
-    private void ContactMissile()
+    //        }
+    //    }
+    //}
+
+    //private void ContactMissile()
+    //{
+    //    Debug.Log("Missile ダメージ処理");
+    //    // HPを減少させる。
+    //    boatHP -= damage;
+    //    //ダメージ
+    //    playerHpUi.Damage(damage);
+    //    //他プレイヤーにダメージ処理
+    //    photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
+    //}
+
+    private void DamageBullet()
     {
-        Debug.Log("Missile ダメージ処理");
+        Debug.Log("ダメージ処理");
         // HPを減少させる。
         boatHP -= damage;
         //ダメージ
@@ -99,6 +111,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
         //他プレイヤーにダメージ処理
         photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
     }
+
     private void VictoryJudgment()
     {
         //勝敗判定
@@ -125,23 +138,23 @@ public class TankHealth : MonoBehaviourPunCallbacks
         }
     }
 
-    [PunRPC]
-    private void HitShell(int id, int ownerId)
-    {
-        //弾削除
-        Debug.Log("弾削除");
+    //[PunRPC]
+    //private void HitShell(int id, int ownerId)
+    //{
+    //    //弾削除
+    //    Debug.Log("弾削除");
 
-        //弾を削除する
-        var bullets = FindObjectsOfType<BulletNet>();
-        foreach (var bullet in bullets)
-        {
-            if (bullet.Equals(id, ownerId))
-            {
-                Destroy(bullet.gameObject);
-                break;
-            }
-        }
-    }
+    //    //弾を削除する
+    //    var bullets = FindObjectsOfType<BulletNet>();
+    //    foreach (var bullet in bullets)
+    //    {
+    //        if (bullet.Equals(id, ownerId))
+    //        {
+    //            Destroy(bullet.gameObject);
+    //            break;
+    //        }
+    //    }
+    //}
 
     [PunRPC]
     private void WinActive()
@@ -193,19 +206,14 @@ public class TankHealth : MonoBehaviourPunCallbacks
         //敵HpUIにダメージ処理
         enemyHpUi.HealHp(heal);
     }
-    //[PunRPC]
-    //private void DeleteMissile(int obj)
-    //{
-    //    GameObject missile= PhotonView.Find(obj).gameObject;
-    //    //missile を削除
-    //    PhotonNetwork.Destroy(missile);
-    //}
 
-    public void HitMissile()
+
+    public void HitBullet()
     {
-        //missile と接触
-        ContactMissile();
+        //bullet と接触
+        DamageBullet();
         //勝敗判定
         VictoryJudgment();
     }
+
 }
