@@ -25,8 +25,8 @@ public class Ramp : MonoBehaviour
         {
             Vector3 dir = Quaternion.Euler(0, 0, 100) * transform.parent.forward;
 
-            Rigidbody rb = other.GetComponent<Rigidbody>();
-            rb.AddForce(dir, ForceMode.Impulse);
+            if(other.gameObject.TryGetComponent<Rigidbody>(out var r))
+                r.AddForce(dir, ForceMode.Impulse);
         }
     }
 }
