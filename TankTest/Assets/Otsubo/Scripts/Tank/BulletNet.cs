@@ -38,7 +38,11 @@ public class BulletNet : MonoBehaviour
                 }
                 //敵の弾の時
                 else if (this.gameObject.tag == "EnemyShell")
+                {
+                    //自分と相手の弾を消す
+                    DestroyShellOtherPlayer(other.gameObject);
                     Destroy(this.gameObject);
+                }
             }
             //敵のバリアに当たった時
             else 
@@ -50,13 +54,43 @@ public class BulletNet : MonoBehaviour
                 }
                 //弾の時
                 else if (this.gameObject.tag == "Shell")
+                {
+                    //自分と相手の弾を消す
+                    DestroyShellOtherPlayer(other.gameObject);
                     Destroy(this.gameObject);
+                }
             }
         }
+
+        //プレイヤーだったら
+        if(other.gameObject.layer==8)
+        {
+            //enemyShellだったら
+            if (gameObject.tag == "EnemyShell")
+            {
+                //自分のだったら
+                if (other.GetComponent<PhotonView>().IsMine)
+                    return;
+                else
+                {
+                    //敵の船と接触したら,ダメージ処理
+                    other.gameObject.GetComponent<TankHealth>().HitBullet();
+                    //自分と相手の弾を消す
+                    DestroyShellOtherPlayer(other.gameObject);
+                    Destroy(this.gameObject);
+                }
+            }
+        }
+
     }
     public void ChengeMaterial()
     {
         // 生成したプレハブのマテリアルを設定
         this.gameObject.GetComponent<MeshRenderer>().material = mat;
+    }
+    private void DestroyShellOtherPlayer(GameObject obj)
+    {
+        //相手の弾を削除する
+        obj.transform.parent.GetChild(0).GetChild(2).GetChild(0).GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
     }
 }
