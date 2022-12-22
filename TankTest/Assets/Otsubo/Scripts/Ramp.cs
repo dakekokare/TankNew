@@ -23,9 +23,11 @@ public class Ramp : MonoBehaviour
     {
         if (other.gameObject.layer == 8)
         {
-            Vector3 dir = Quaternion.Euler(0, 0, 100) * transform.parent.forward;
+            Debug.Log("chack");
 
-            if(other.gameObject.TryGetComponent<Rigidbody>(out var r))
+            Vector3 dir = Quaternion.Euler(0, 0, 1) * transform.parent.forward;
+
+            if (other.gameObject.TryGetComponent<Rigidbody>(out var r))
                 r.AddForce(dir, ForceMode.Impulse);
         }
     }
