@@ -26,7 +26,7 @@ public class BulletNet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag=="Barrier")
+        if (other.gameObject.tag == "Barrier")
         {
             //自分のバリア
             if (other.GetComponent<PhotonView>().IsMine)
@@ -62,9 +62,9 @@ public class BulletNet : MonoBehaviour
             //}
         }
 
-        
+
         //プレイヤーだったら
-        if(other.gameObject.layer==8)
+        if (other.gameObject.layer == 8)
         {
             //enemyShellだったら
             if (gameObject.tag == "EnemyShell")
@@ -85,22 +85,21 @@ public class BulletNet : MonoBehaviour
                     Destroy(this.gameObject);
                 }
             }
-        //    else if (gameObject.tag == "Shell")
-        //    {
-        //        //自分にあたったら
-        //        if (other.GetComponent<PhotonView>().IsMine)
-        //            return;
-        //        else
-        //        {
-        //            //船と接触したら,ダメージ処理
-        //            other.gameObject.GetComponent<TankHealth>().HitBullet();
-        //            //自分と相手の弾を消す
-        //            DestroyShellOtherPlayer(other.gameObject);
-        //            Destroy(this.gameObject);
-        //        }
-        //    }
+            //    else if (gameObject.tag == "Shell")
+            //    {
+            //        //自分にあたったら
+            //        if (other.GetComponent<PhotonView>().IsMine)
+            //            return;
+            //        else
+            //        {
+            //            //船と接触したら,ダメージ処理
+            //            other.gameObject.GetComponent<TankHealth>().HitBullet();
+            //            //自分と相手の弾を消す
+            //            DestroyShellOtherPlayer(other.gameObject);
+            //            Destroy(this.gameObject);
+            //        }
+            //    }
         }
-        
     }
     public void ChengeMaterial()
     {
