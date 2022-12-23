@@ -75,6 +75,8 @@ public class ShotShell : MonoBehaviourPunCallbacks
             //マテリアル色変え
             shell.ChengeMaterial();
         }
+
+        shell.SetPlayer(gameObject);
     }
 
     public void ShotUnlock()
