@@ -40,7 +40,7 @@ public class BulletNet : MonoBehaviour
                 else if (this.gameObject.tag == "EnemyShell")
                 {
                     //自分と相手の弾を消す
-                    DestroyShellOtherPlayer(other.gameObject);
+                    DestroyShellOtherPlayer(other);
                     Destroy(this.gameObject);
                 }
             }
@@ -81,7 +81,7 @@ public class BulletNet : MonoBehaviour
                     //船と接触したら,ダメージ処理
                     other.gameObject.GetComponent<TankHealth>().HitBullet();
                     //自分と相手の弾を消す
-                    DestroyShellOtherPlayer(other.gameObject);
+                    DestroyShellOtherPlayer(other);
                     Destroy(this.gameObject);
                 }
             }
@@ -107,9 +107,13 @@ public class BulletNet : MonoBehaviour
         // 生成したプレハブのマテリアルを設定
         this.gameObject.GetComponent<MeshRenderer>().material = mat;
     }
-    private void DestroyShellOtherPlayer(GameObject obj)
+    private void DestroyShellOtherPlayer(Collider obj)
     {
         //相手の弾を削除する
-        obj.transform.parent.GetChild(0).GetChild(2).GetChild(0).GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
+        obj.gameObject.transform.parent.
+            GetChild(0).
+            GetChild(2).
+            GetChild(0).
+            GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
     }
 }
