@@ -6,6 +6,7 @@ public class BulletNet : MonoBehaviour
 {
     [SerializeField]
     Material mat;
+    private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +43,7 @@ public class BulletNet : MonoBehaviour
                 {
                     Debug.Log("Barrier enemyShell Hit");
                     //自分と相手の弾を消す
-                    DestroyShellOtherPlayer(other.gameObject);
+                    DestroyShellOtherPlayer();
                     Destroy(this.gameObject);
                 }
             }
@@ -87,7 +88,7 @@ public class BulletNet : MonoBehaviour
                     //船と接触したら,ダメージ処理
                     other.gameObject.GetComponent<TankHealth>().HitBullet();
                     //自分と相手の弾を消す
-                    DestroyShellOtherPlayer(other.gameObject);
+                    DestroyShellOtherPlayer();
                     Destroy(this.gameObject);
                 }
             }
@@ -112,9 +113,29 @@ public class BulletNet : MonoBehaviour
         // 生成したプレハブのマテリアルを設定
         this.gameObject.GetComponent<MeshRenderer>().material = mat;
     }
-    private void DestroyShellOtherPlayer(GameObject obj)
+    private void DestroyShellOtherPlayer()
     {
-        //相手の弾を削除する
-        obj.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
+        player.transform.
+        GetChild(0).
+        GetChild(0).
+        GetChild(2).
+        GetChild(0).
+        GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
+
+        //if (obj.gameObject.layer == 8)
+        //{
+        //    //相手の弾を削除する
+        //    obj.transform.
+        //        GetChild(0).
+        //        GetChild(0).
+        //        GetChild(2).
+        //        GetChild(0).
+        //        GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
+        //}
+    }
+
+    public void SetPlayer(GameObject obj)
+    {
+        player = obj;
     }
 }
