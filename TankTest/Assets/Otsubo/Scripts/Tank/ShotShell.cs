@@ -85,12 +85,14 @@ public class ShotShell : MonoBehaviourPunCallbacks
     //相手方shell削除
     public void DeleteShellOther(int id,int ownerId)
     {
+        Debug.Log("DeleteShellOther");
         //他プレイヤーにダメージ処理
         photonView.RPC(nameof(FindAndDeleteShell), RpcTarget.Others,id,ownerId);
     }
     [PunRPC]
     private void FindAndDeleteShell(int id,int ownerId)
     {
+        Debug.Log("DeleteShell");
         //弾を削除する
         var bullets = FindObjectsOfType<BulletNet>();
         foreach (var bullet in bullets)

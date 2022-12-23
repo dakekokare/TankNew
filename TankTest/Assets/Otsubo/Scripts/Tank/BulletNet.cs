@@ -34,11 +34,13 @@ public class BulletNet : MonoBehaviour
                 //©•ª‚Ì’e‚Ì
                 if (this.gameObject.tag == "Shell")
                 {
+                    Debug.Log("Barrier shell Hit return");
                     return;
                 }
                 //“G‚Ì’e‚Ì
                 else if (this.gameObject.tag == "EnemyShell")
                 {
+                    Debug.Log("Barrier enemyShell Hit");
                     //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
                     DestroyShellOtherPlayer(other.gameObject);
                     Destroy(this.gameObject);
@@ -75,9 +77,13 @@ public class BulletNet : MonoBehaviour
                 ///////////////////////////////////////////
                 //©•ª‚¶‚á‚È‚©‚Á‚½‚ç
                 if (!other.GetComponent<PhotonView>().IsMine)
+                {
+                    Debug.Log("Boat EnemyShell Hit return");
                     return;
+                }
                 else
                 {
+                    Debug.Log("Boat EnemyShell Hit");
                     //‘D‚ÆÚG‚µ‚½‚ç,ƒ_ƒ[ƒWˆ—
                     other.gameObject.GetComponent<TankHealth>().HitBullet();
                     //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
@@ -109,6 +115,6 @@ public class BulletNet : MonoBehaviour
     private void DestroyShellOtherPlayer(GameObject obj)
     {
         //‘Šè‚Ì’e‚ğíœ‚·‚é
-        obj.transform.parent.GetChild(0).GetChild(2).GetChild(0).GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
+        obj.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
     }
 }
