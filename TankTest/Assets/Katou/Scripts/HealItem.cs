@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class HealItem : MonoBehaviour
+public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
 {
     //プレイヤー
     private GameObject player;
@@ -30,12 +30,14 @@ public class HealItem : MonoBehaviour
         //プレイヤーと接触したら
         if (t.gameObject.layer == 8)
         {
-            //接触したら回復
-            HealPlayer();
+            //プレイヤー ismine
+            if(t.gameObject.GetComponent<PhotonView>().IsMine)
+              //接触したら回復
+                HealPlayer();
 
             //アイテム非表示
             gameObject.SetActive(false);
-            //3秒後にアイテム生成
+            //3秒後にアイテムアクティブ
             Invoke("ActiveHealItem", 3);
 
             //削除
