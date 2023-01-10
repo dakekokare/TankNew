@@ -32,8 +32,14 @@ public class HealItem : MonoBehaviour
         {
             //接触したら回復
             HealPlayer();
+
+            //アイテム非表示
+            gameObject.SetActive(false);
+            //3秒後にアイテム生成
+            Invoke("ActiveHealItem", 3);
+
             //削除
-            PhotonNetwork.Destroy(this.gameObject);
+            //PhotonNetwork.Destroy(this.gameObject);
         }
     }
 
@@ -60,4 +66,9 @@ public class HealItem : MonoBehaviour
         }
     }
 
+    private void ActiveHealItem()
+    {
+        //アイテムアクティブ
+        gameObject.SetActive(true);
+    }
 }
