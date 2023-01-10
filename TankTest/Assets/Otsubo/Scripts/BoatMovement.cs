@@ -17,8 +17,6 @@ public class BoatMovement : MonoBehaviour
 
     void Update()
     {
-        BoatMove();
-        BoatTurn();
     }
 
     // 前進・後退のメソッド
@@ -36,5 +34,18 @@ public class BoatMovement : MonoBehaviour
         float turn = turnInputValue * turnSpeed * Time.deltaTime;
         Quaternion turnRotation = Quaternion.Euler(0, turn, 0);
         rb.MoveRotation(rb.rotation * turnRotation);
+    }
+
+
+    private void OnCollisionStay(Collision collision)
+    {
+        Debug.Log(collision.gameObject.layer);
+        if (collision.gameObject.layer == 7 ||
+            collision.gameObject.layer == 12)
+        {
+            BoatMove();
+            BoatTurn();
+        }
+
     }
 }
