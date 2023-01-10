@@ -772,7 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbc1d09e63cf784f941ff7246406e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: 0, y: 0.2, z: 0}
+  center: {x: -2, y: 0.2, z: 0}
 --- !u!136 &3490191567304043773
 CapsuleCollider:
   m_ObjectHideFlags: 0
