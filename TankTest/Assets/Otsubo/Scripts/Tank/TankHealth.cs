@@ -46,140 +46,9 @@ public class TankHealth : MonoBehaviourPunCallbacks
     //    //    Debug.Log("[" + photonView.ViewID + "]" + "入ってます");
 
     //}
-    private void OnTriggerEnter(Collider other)
-    {
-        //if (photonView.IsMine)
-        //{
-        //    //shell に接触した場合
-        //    if (other.gameObject.tag == "EnemyShell")
-        //    {            
-        //        Debug.Log("[ Hit " + other.gameObject.layer + "&" + other.gameObject.tag + "]");
-
-        //        //shell と接触
-        //        ContactShell(other);
-                
-        //        // ぶつかってきた相手方（敵の砲弾）を破壊する。
-        //        //Destroy(other.gameObject);
-                
-        //        //勝敗判定
-        //        VictoryJudgment();
-        //    }
-
-        //}
-    }
-
-    //private void ContactShell(Collider other)
-    //{
-    //    //shellと接触した場合
-    //    ////敵の弾に当たったら
-    //    if (other.TryGetComponent<BulletNet>(out var shell))
-    //    {
-    //        if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
-    //        {
-    //            Debug.Log("[" + photonView.ViewID + "]" + "ダメージ処理");
-
-    //            photonView.RPC(nameof(HitShell), RpcTarget.All, shell.Id, shell.OwnerId);
-    //            // HPを減少させる。
-    //            boatHP -= damage;
-    //            //ダメージ
-    //            playerHpUi.Damage(damage);
-    //            //他プレイヤーにダメージ処理
-    //            photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
-
-    //        }
-    //    }
-    //}
-
-    //private void ContactMissile()
-    //{
-    //    Debug.Log("Missile ダメージ処理");
-    //    // HPを減少させる。
-    //    boatHP -= damage;
-    //    //ダメージ
-    //    playerHpUi.Damage(damage);
-    //    //他プレイヤーにダメージ処理
-    //    photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
-    //}
-
-    private void DamageBullet()
-    {
-        Debug.Log("ダメージ処理");
-        // HPを減少させる。
-        boatHP -= damage;
-        //ダメージ
-        playerHpUi.Damage(damage);
-        //他プレイヤーにダメージ処理
-        photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
-    }
-
-    private void VictoryJudgment()
-    {
-        //勝敗判定
-        if (boatHP > 0)
-        {
-            GameObject effect1 = Instantiate(effectPrefab1, transform.position, Quaternion.identity);
-            Destroy(effect1, 1.0f);
-        }
-        else
-        {
-            GameObject effect2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
-            Destroy(effect2, 1.0f);
-
-            //Lose UI 追加
-            GameObject lose = GameObject.Find("LOSECanvas").gameObject.transform.GetChild(0).gameObject;
-            lose.SetActive(true);
-
-            //win Uiをアクティブする
-            photonView.RPC(nameof(WinActive), RpcTarget.All);
 
 
-            //// プレーヤーを破壊する。
-            PhotonNetwork.Destroy(gameObject);
-        }
-    }
 
-    //[PunRPC]
-    //private void HitShell(int id, int ownerId)
-    //{
-    //    //弾削除
-    //    Debug.Log("弾削除");
-
-    //    //弾を削除する
-    //    var bullets = FindObjectsOfType<BulletNet>();
-    //    foreach (var bullet in bullets)
-    //    {
-    //        if (bullet.Equals(id, ownerId))
-    //        {
-    //            Destroy(bullet.gameObject);
-    //            break;
-    //        }
-    //    }
-    //}
-
-    [PunRPC]
-    private void WinActive()
-    {
-        Debug.Log("勝利");
-        //win をアクティブする
-        GameObject win = GameObject.Find("WINCanvas").gameObject.transform.GetChild(0).gameObject;
-        win.SetActive(true);
-        if (boatHP < 0)
-            win.SetActive(false);
-    }
-
-    [PunRPC]
-    private void DamageEnemyHpUi()
-    {
-        //nullならリターン
-        if (enemyHpUi == null)
-        {
-            Debug.Log("Return");
-            return;
-        }
-        Debug.Log("Enemyダメージ処理");
-        //敵HpUIにダメージ処理
-        enemyHpUi.Damage(damage);
-    }
 
     public void HealHP(float heal)
     {
@@ -214,6 +83,66 @@ public class TankHealth : MonoBehaviourPunCallbacks
         DamageBullet();
         //勝敗判定
         VictoryJudgment();
+    }
+    private void DamageBullet()
+    {
+        Debug.Log("ダメージ処理");
+        // HPを減少させる。
+        boatHP -= damage;
+        //ダメージ
+        playerHpUi.Damage(damage);
+        //他プレイヤーにダメージ処理
+        photonView.RPC(nameof(DamageEnemyHpUi), RpcTarget.Others);
+    }
+    [PunRPC]
+    private void DamageEnemyHpUi()
+    {
+        //nullならリターン
+        if (enemyHpUi == null)
+        {
+            Debug.Log("Return");
+            return;
+        }
+        Debug.Log("Enemyダメージ処理");
+        //敵HpUIにダメージ処理
+        enemyHpUi.Damage(damage);
+    }
+    private void VictoryJudgment()
+    {
+        //勝敗判定
+        if (boatHP > 0)
+        {
+            GameObject effect1 = Instantiate(effectPrefab1, transform.position, Quaternion.identity);
+            Destroy(effect1, 1.0f);
+        }
+        else
+        {
+            GameObject effect2 = Instantiate(effectPrefab2, transform.position, Quaternion.identity);
+            Destroy(effect2, 1.0f);
+
+            //Lose UI 追加
+            GameObject lose = GameObject.Find("LOSECanvas").gameObject.transform.GetChild(0).gameObject;
+            lose.SetActive(true);
+
+            //win Uiをアクティブする
+            photonView.RPC(nameof(WinActive), RpcTarget.All);
+
+
+            //// プレーヤーを破壊する。
+            PhotonNetwork.Destroy(gameObject);
+        }
+    }
+
+
+    [PunRPC]
+    private void WinActive()
+    {
+        Debug.Log("勝利");
+        //win をアクティブする
+        GameObject win = GameObject.Find("WINCanvas").gameObject.transform.GetChild(0).gameObject;
+        win.SetActive(true);
+        if (boatHP < 0)
+            win.SetActive(false);
     }
 
 }
