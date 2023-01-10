@@ -113,6 +113,12 @@ public sealed class Homing : MonoBehaviourPunCallbacks
                         photonView.RPC(nameof(HitBoatMissile), RpcTarget.Others,other.ViewID);
                     }
             }
+            //ÉoÉäÉAÇ…ìñÇΩÇ¡ÇΩéû
+            //if(t.gameObject.tag== "Barrier")
+            //{
+
+            //}
+
             Debug.Log("[ MissileçÌèú" + t.gameObject.layer + "&" + t.gameObject.tag + "]");
             PhotonNetwork.Destroy(gameObject);
 

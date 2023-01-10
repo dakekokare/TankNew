@@ -76,7 +76,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
             shell.ChengeMaterial();
         }
 
-        shell.SetPlayer(gameObject);
+        shell.SetPlayer(gameObject.transform.parent.parent.parent.parent.gameObject);
     }
 
     public void ShotUnlock()
