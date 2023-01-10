@@ -39,24 +39,35 @@ public class BarrierItem : MonoBehaviourPunCallbacks
 
     void OnTriggerEnter(Collider other)
     {
-        //バリアをアクティブにする
-        photonView.RPC(nameof(ActiveBarrier), RpcTarget.All,other.GetComponent<PhotonView>().ViewID);
-        //バリアアイテムが自分のオブジェクトなら
-        if(gameObject.GetComponent<PhotonView>().IsMine)
-            // アイテムを画面から削除する。
-            PhotonNetwork.Destroy(gameObject);
-        else
-            photonView.RPC(nameof(DestroyBarrier), RpcTarget.Others, this.gameObject.GetComponent<PhotonView>().ViewID);
+        //プレイヤーと接触したら
+        if (other.gameObject.layer == 8)
+        {
+
+            //バリアをアクティブにする
+            photonView.RPC(nameof(ActiveBarrier), RpcTarget.All, other.GetComponent<PhotonView>().ViewID);
+
+            ////バリアアイテムが自分のオブジェクトなら
+            //if (gameObject.GetComponent<PhotonView>().IsMine)
+            //    // アイテムを画面から削除する。
+            //    PhotonNetwork.Destroy(gameObject);
+            //else
+            //    photonView.RPC(nameof(DestroyBarrier), RpcTarget.Others, this.gameObject.GetComponent<PhotonView>().ViewID);
 
 
-        // アイテムゲット音を出す。
-        //AudioSource.PlayClipAtPoint(getSound, transform.position);
+            //アイテム非表示
+            gameObject.SetActive(false);
+            //アイテム表示する
+            Invoke("ActiveBarrierItem", 3);
 
-        // アイテムゲット時にエフェクトを発生させる。
-        GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);    
+            // アイテムゲット音を出す。
+            //AudioSource.PlayClipAtPoint(getSound, transform.position);
 
-        // エフェクトを0.5秒後に消す。
-        Destroy(effect, 0.5f);
+            // アイテムゲット時にエフェクトを発生させる。
+            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+
+            // エフェクトを0.5秒後に消す。
+            Destroy(effect, 0.5f);
+        }
     }
 
     public void SearchPlayer()
@@ -88,5 +99,11 @@ public class BarrierItem : MonoBehaviourPunCallbacks
     {
         GameObject obj = PhotonView.Find(id).gameObject;
         PhotonNetwork.Destroy(obj);
+    }
+
+    private void ActiveBarrierItem()
+    {
+        //アイテム表示
+        gameObject.SetActive(true);
     }
 }
