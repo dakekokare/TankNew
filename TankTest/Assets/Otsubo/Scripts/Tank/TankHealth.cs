@@ -125,7 +125,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
             lose.SetActive(true);
 
             //win Uiをアクティブする
-            photonView.RPC(nameof(WinActive), RpcTarget.All);
+            photonView.RPC(nameof(WinActive), RpcTarget.Others);
 
 
             //// プレーヤーを破壊する。
@@ -141,8 +141,6 @@ public class TankHealth : MonoBehaviourPunCallbacks
         //win をアクティブする
         GameObject win = GameObject.Find("WINCanvas").gameObject.transform.GetChild(0).gameObject;
         win.SetActive(true);
-        if (boatHP < 0)
-            win.SetActive(false);
     }
 
 }

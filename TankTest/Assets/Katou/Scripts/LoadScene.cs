@@ -8,6 +8,6 @@ public class LoadScene : MonoBehaviour
     public void OnClick()
     {
         Debug.Log("‰Ÿ‚³‚ê‚½!");  // ƒƒO‚ğo—Í
-        SceneManager.LoadScene("OtsuboMain");
+        SceneManager.LoadScene("KatoMain");
     }
 }
