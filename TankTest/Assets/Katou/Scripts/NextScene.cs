@@ -14,10 +14,6 @@ public class NextScene : MonoBehaviourPunCallbacks
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
     public void Next()
     {
         if(PhotonNetwork.IsMasterClient)
