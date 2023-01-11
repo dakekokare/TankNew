@@ -12,7 +12,7 @@ public class HpEnemyTransform : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (otherPlayer == null)
+        if (otherPlayer == null||player==null)
         {
             //Debug.Log("[" + GetInstanceID() + "]" + "otherPlayer Null Return");
             return;
