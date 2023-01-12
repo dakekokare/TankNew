@@ -3,9 +3,39 @@ guid: 55e23de551e22564984bf8c0d90b8b2c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_StylShip_Decks
+    second: {fileID: 2100000, guid: b61e6f3b31bf11c4599bc6c98a248378, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_StylShip_Elements
+    second: {fileID: 2100000, guid: 47499dd5f6e7dc44d835bd6926f7fa6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_StylShip_Masts
+    second: {fileID: 2100000, guid: e18b302de7d78e843b05a6617f7b2751, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_StylShip_Props
+    second: {fileID: 2100000, guid: c2a1a0b270174da428bcf8c18edef442, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_StylShip_SailsRope
+    second: {fileID: 2100000, guid: 852dbe5a97e87554e8403a6783469168, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_StylShip_ShipHull
+    second: {fileID: 2100000, guid: 1348078a932e45c4ca4aa75de5c60e83, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

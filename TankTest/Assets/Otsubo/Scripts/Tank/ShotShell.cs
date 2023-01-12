@@ -21,6 +21,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
     private bool shotLock = false;
 
+
     void Update()
     {
 
@@ -74,6 +75,12 @@ public class ShotShell : MonoBehaviourPunCallbacks
             shell.tag = "EnemyShell";
             //マテリアル色変え
             shell.ChengeMaterial();
+
+            //軌跡の色を変える
+            TrailRenderer tr = shell.GetComponent<TrailRenderer>();
+            Color color = new Color(255, 0, 0);
+            tr.startColor = color;
+            tr.endColor = color;
         }
 
         shell.SetPlayer(gameObject.transform.parent.parent.parent.parent.gameObject);
