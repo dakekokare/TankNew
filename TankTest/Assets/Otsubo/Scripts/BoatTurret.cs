@@ -30,7 +30,9 @@ public class BoatTurret : MonoBehaviourPunCallbacks
 
             angle.y -= Input.GetAxis("Mouse Y") * sensitiveRotate;
 
-            transform.eulerAngles = new Vector3(transform.parent.parent.eulerAngles.z + angle.y, transform.parent.parent.eulerAngles.y + angle.x, -transform.parent.parent.eulerAngles.x);
+            transform.eulerAngles = new Vector3(transform.parent.parent.eulerAngles.z + angle.y,
+                                                transform.parent.parent.eulerAngles.y + angle.x,
+                                                transform.parent.parent.eulerAngles.x);
 
             // ˆÚ“®‚Å‚«‚éŠp“x‚É§ŒÀ‚ğ‰Á‚¦‚éB
             if (angle.y < -30)
