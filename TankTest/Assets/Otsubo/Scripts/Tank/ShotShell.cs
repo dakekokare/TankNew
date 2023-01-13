@@ -21,7 +21,6 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
     private bool shotLock = false;
 
-
     void Update()
     {
 
@@ -90,7 +89,10 @@ public class ShotShell : MonoBehaviourPunCallbacks
     {
         shotLock = false;
     }
-
+    public void ShotLock()
+    {
+        shotLock = true;
+    }
     //‘Šè•ûshellíœ
     public void DeleteShellOther(int id,int ownerId)
     {

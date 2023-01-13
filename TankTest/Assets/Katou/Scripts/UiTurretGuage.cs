@@ -9,21 +9,43 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
     //タレットゲージ
     [SerializeField]
     private Image TurretBar = default;
-    //射撃可能フラグ
-    public bool TurretShotFlag = true;
+    //プレイヤー
+    private ShotShell player;
 
-    private GameObject player;
+    //ゲージ増加スピード
+    private float GuageIncSpeed = 0.01f;
+    //ゲージ減少スピード
+    private float GuageDecSpeed = 0.01f;
+
+    //射撃停止時間
+    private int GuageStop = 5;
+    //状態
+    enum ShotState
+    {
+        //射撃状態
+        Shot,
+        //射撃停止状態
+        Stop,
+        //ゲージ回復状態
+        Recovary
+    }
+
+    ShotState state; 
     void Start()
     {
+        //初期化
+        Invoke("Initialize", 1);
+
+        //射撃状態
+        state = ShotState.Shot;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (photonView.IsMine)
+        switch (state)
         {
-            if (TurretShotFlag == true)
-            {
+            case ShotState.Shot:
                 //左クリックされていたら
                 if (Input.GetMouseButton(0))
                 {
@@ -31,10 +53,10 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
 
                     if (TurretBar.fillAmount < 1.0f)
                         // ゲージに反映する
-                        TurretBar.fillAmount += 0.01f;
+                        TurretBar.fillAmount += GuageIncSpeed;
                     else
-                        //射撃不可能
-                        TurretShotFlag = false;
+                        //射撃停止状態
+                        state = ShotState.Stop;
                 }
                 //左クリックが離されていたら
                 else
@@ -43,15 +65,36 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                     //0より大きかったら
                     if (TurretBar.fillAmount > 0.0f)
                         // ゲージに反映する
-                        TurretBar.fillAmount -= 0.01f;
+                        TurretBar.fillAmount -= GuageDecSpeed;
                 }
-            }
-            //射撃不可能な時
-            if (TurretShotFlag == false)
-            {
+                break;
+            case ShotState.Stop:
+                //射撃不可能にする
+                player.ShotLock();
+                //3秒停止 射撃ゲージ回復状態にする
+                Invoke("RecovaryShotGuage", GuageStop);
+                break;
+            case ShotState.Recovary:
+                //0より大きかったら
+                if (TurretBar.fillAmount > 0.0f)
+                    // ゲージに反映する
+                    TurretBar.fillAmount -= GuageDecSpeed;
+                else
+                {
+                    //射撃状態へ
+                    state = ShotState.Shot;
+                    //射撃可能にする
+                    player.ShotUnlock();
+                }
 
-            }
+                break;
         }
+    }
+
+    private void Initialize()
+    {
+        //プレイヤー探索
+        SearchPlayer();
     }
 
     private void SearchPlayer()
@@ -66,11 +109,21 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                 {
 
                     Debug.Log("[" + GetInstanceID() + "]" + "Player Find");
-                    player = PhotonView.Find(photonView.ViewID).gameObject;
+                    GameObject obj = PhotonView.Find(photonView.ViewID).gameObject;
+                    player= obj.transform.
+                        GetChild(0).
+                        GetChild(0).
+                        GetChild(2).
+                        GetChild(0).GetComponent<ShotShell>();
                 }
 
             }
         }
     }
 
+    private void RecovaryShotGuage()
+    {
+        //射撃ゲージ回復状態へ
+        state = ShotState.Recovary;
+    }
 }
