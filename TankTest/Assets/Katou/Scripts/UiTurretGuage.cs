@@ -9,6 +9,15 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
     //タレットゲージ
     [SerializeField]
     private Image TurretBar = default;
+
+    //keepout
+    [SerializeField]
+    private Image Keepout1 = default;
+    [SerializeField]
+    private Image Keepout2 = default;
+    [SerializeField]
+    private Image Keepout3 = default;
+
     //プレイヤー
     private ShotShell player;
 
@@ -55,18 +64,23 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                         // ゲージに反映する
                         TurretBar.fillAmount += GuageIncSpeed;
                     else
+                    {
+                        //keep out アクティブ
+                        Keepout1.gameObject.SetActive(true);
+                        Keepout2.gameObject.SetActive(true);
+                        Keepout3.gameObject.SetActive(true);
+
                         //射撃停止状態
                         state = ShotState.Stop;
+                    }
                 }
                 //左クリックが離されていたら
                 else
-                {
                     //Debug.Log("[" + TurretBar.fillAmount + "]");
                     //0より大きかったら
                     if (TurretBar.fillAmount > 0.0f)
                         // ゲージに反映する
                         TurretBar.fillAmount -= GuageDecSpeed;
-                }
                 break;
             case ShotState.Stop:
                 //射撃不可能にする
@@ -85,6 +99,11 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                     state = ShotState.Shot;
                     //射撃可能にする
                     player.ShotUnlock();
+                    //keep out 非アクティブ
+                    Keepout1.gameObject.SetActive(false);
+                    Keepout2.gameObject.SetActive(false);
+                    Keepout3.gameObject.SetActive(false);
+
                 }
 
                 break;
