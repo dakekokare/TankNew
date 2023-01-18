@@ -5252,7 +5252,6 @@ GameObject:
   - component: {fileID: 1956896850}
   - component: {fileID: 1956896851}
   - component: {fileID: 1956896853}
-  - component: {fileID: 1956896855}
   - component: {fileID: 1956896856}
   m_Layer: 0
   m_Name: Scene
@@ -5339,26 +5338,10 @@ MonoBehaviour:
   OwnershipTransfer: 2
   observableSearch: 1
   ObservedComponents:
-  - {fileID: 1956896855}
+  - {fileID: 1956896848}
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1956896855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956896847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!114 &1956896856
 MonoBehaviour:
   m_ObjectHideFlags: 0

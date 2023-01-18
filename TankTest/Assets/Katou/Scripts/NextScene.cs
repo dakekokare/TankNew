@@ -20,6 +20,6 @@ public class NextScene : MonoBehaviourPunCallbacks
               PhotonNetwork.DestroyAll();
         //PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Stage");
     }
 }
