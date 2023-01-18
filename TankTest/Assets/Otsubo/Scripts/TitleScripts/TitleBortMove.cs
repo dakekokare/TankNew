@@ -42,7 +42,7 @@ public class TitleBortMove : MonoBehaviour
             rb.MovePosition(rb.position + movement);
 
             time++;
-            if(time == 100)
+            if(time == 150)
             {
                 
                 move = false;
