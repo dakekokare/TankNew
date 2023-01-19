@@ -1,18 +1,14 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+//using ExitGames.Client.Photon;
 
 // MonoBehaviourPunCallbacksを継承して、PUNのコールバックを受け取れるようにする
-public class Scene : MonoBehaviourPunCallbacks, IPunObservable
+public class Scene : MonoBehaviourPunCallbacks
 {
     //プレイヤースポーン座標   
     public GameObject[] array;
-
-    //スポーン座標番号
-    private int spawnNum=100;
-    //他プレイヤースポーン座標番号
-    private int otherSpawnNum=100;
-
+    
     private void Start()
     {
         // プレイヤー自身の名前を"Player"に設定する
@@ -40,6 +36,8 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnJoinedRoom()
     {
+
+
         //他プレイヤーのスポーン座標確認
         CheckOtherPlayerSpawnNum();
     }
@@ -48,11 +46,13 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
         //マスタークライアントではないとき
         if (!PhotonNetwork.IsMasterClient)
         {
+            int num = PhotonNetwork.CurrentRoom.GetSpawn();
             //他プレイヤーのスポーン座標確認
-            if (otherSpawnNum == 100)
+            // num ==0 -> 初期値、マスタークライアントがスポーンしていない
+            if (num == 0)
             {
                 //3秒後に再起処理
-                Invoke("CheckOtherPlayerSpawnNum", 3);
+                Invoke("CheckOtherPlayerSpawnNum", 1);
                 return;
             }
         }
@@ -62,15 +62,29 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
 
     private void CreateObject()
     {
+
         //オブジェクト生成
         //スポーン座標代入
         var position = Vector3.zero;
-        //スポーン座標取得
-        spawnNum = GetRandomNum();
-        position = array[spawnNum].gameObject.transform.position;
+        int r;
+        //マスタークライアント
+        if (PhotonNetwork.IsMasterClient)
+        {
+            //スポーン座標取得
+            r = Random.Range(1, array.Length);
+            PhotonNetwork.CurrentRoom.SetSpawn(r);
+        }
+        else
+        {
+            //他プレイヤーのスポーン座標
+            int num = PhotonNetwork.CurrentRoom.GetSpawn();
+            r = GetRandomNum(num);
+        }
+        position = array[r].gameObject.transform.position;
         PhotonNetwork.Instantiate("Boat", position, Quaternion.identity);
 
-        position = Vector3.zero;
+
+
         GameObject obj = (GameObject)Resources.Load("CanvasObj");
         //生成する
         Instantiate(obj);
@@ -84,29 +98,16 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
         Instantiate(obj);
     }
 
-    private int GetRandomNum()
+    private int GetRandomNum(int num)
     {
+        
         //乱数取得
-        int r = Random.Range(0, 5);
+        int r = Random.Range(1, array.Length);
         //他プレイヤーのスポーン座標だったら
-        if (r == otherSpawnNum)
+        if (r == num)
             //再起
-            GetRandomNum();
+            GetRandomNum(num);
         return r;
     }
 
-
-    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            // 送信する
-            stream.SendNext(spawnNum);
-        }
-        else
-        {
-            // 受信する
-            otherSpawnNum = (int)stream.ReceiveNext();
-        }
-    }
 }
