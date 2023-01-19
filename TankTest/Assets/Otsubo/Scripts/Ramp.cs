@@ -60,6 +60,8 @@ public class Ramp : MonoBehaviour
 
             // éÀèo
             Rigidbody rid = ThrowingObject.GetComponent<Rigidbody>();
+            rid.velocity = Vector3.zero;
+            
             rid.AddForce(velocity * rid.mass, ForceMode.Impulse);
         }
         else
