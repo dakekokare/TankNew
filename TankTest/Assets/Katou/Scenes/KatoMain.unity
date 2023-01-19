@@ -5253,6 +5253,7 @@ GameObject:
   - component: {fileID: 1956896851}
   - component: {fileID: 1956896853}
   - component: {fileID: 1956896856}
+  - component: {fileID: 1956896858}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -5337,8 +5338,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 2
   observableSearch: 1
-  ObservedComponents:
-  - {fileID: 1956896848}
+  ObservedComponents: []
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -5358,6 +5358,18 @@ MonoBehaviour:
   firstAidKitPosition: {fileID: 1924934415}
   missileTurretPosition: {fileID: 178819716}
   barrierPosition: {fileID: 1063296213}
+--- !u!114 &1956896858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956896847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ecc54d4c15c3d4db31f42d2decce86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1958632430
 PrefabInstance:
   m_ObjectHideFlags: 0
