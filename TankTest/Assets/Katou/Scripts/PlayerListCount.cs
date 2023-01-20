@@ -10,45 +10,35 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
     private GameObject countDown;
     //hp
     private GameObject hpObj;
-    //Item Spawn 場所
-    //体力回復
-    [SerializeField]
-    private GameObject firstAidKitPosition;
+    
 
-    //Item Spawn 場所
-    //誘導弾
-    [SerializeField]
-    private GameObject missileTurretPosition;
-    //barrier
-    [SerializeField]
-    private GameObject barrierPosition;
-
+    //待ち時間
+    private int waitSecond=3;
     // Update is called once per frame
     void Update()
     {
-        int count = 0;
-        foreach (var p in PhotonNetwork.PlayerList)
-        {
-            count++;
-            //2人いたら
-            if (count==2)
-            {
-                //// カウントダウン生成する
-                Instantiate(countDown);
-                //アクティブ状態をオフにする
-                this.gameObject.SetActive(false);
+        //プレイヤーが2人じゃなければ
+        if (PhotonNetwork.PlayerList.Length != 2)
+            return;
+        //ゲーム開始前カウントダウン時処理
+        InitializeGame();
+    }
 
-                //プレイヤー探索
-                Invoke("SearchHpEnemyTransform", 3);
+    private void InitializeGame()
+    {
+        //// カウントダウン生成する
+        Instantiate(countDown);
 
-                //マスタークライアントならなら　アイテム生成
-                if(PhotonNetwork.IsMasterClient)
-                    //アイテム生成
-                    Invoke("GenerationItem",3);
+        //プレイヤー探索
+        Invoke("SearchHpEnemyTransform", waitSecond);
 
-             
-            }
-        }
+        //マスタークライアントならなら　アイテム生成
+        if (PhotonNetwork.IsMasterClient)
+            //アイテム生成
+            Invoke("CreateItem", waitSecond);
+
+        //アクティブ状態をオフにする
+        this.gameObject.GetComponent<PlayerListCount>().enabled=false;
     }
 
     private void SearchHpEnemyTransform()
@@ -57,20 +47,12 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
         //playerを見つける
         hpObj.GetComponent<HpEnemyTransform>().SearchPlayer();
     }
-    private void GenerationItem()
+    private void CreateItem()
     {
-        Debug.Log("firstaidkit 生成");
+        // scene object
+        Scene scene = GameObject.Find("Scene").GetComponent<Scene>();
         //アイテム生成
-        PhotonNetwork.Instantiate("FirstAidKit", firstAidKitPosition.transform.position, Quaternion.identity);
-
-        Debug.Log("MissileTurret 生成");
-        //アイテム生成
-        PhotonNetwork.Instantiate("MissileTurret", missileTurretPosition.transform.position, Quaternion.identity);
-        
-        Debug.Log("Barrier 生成");
-        //アイテム生成
-        PhotonNetwork.Instantiate("BarrierItem", barrierPosition.transform.position, Quaternion.identity);
-
+        scene.GenerationItem();
     }
-    
+
 }

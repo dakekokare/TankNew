@@ -70,7 +70,22 @@ public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
 
     private void ActiveHealItem()
     {
-        //アイテムアクティブ
+        // scene object
+        Scene scene = GameObject.Find("Scene").GetComponent<Scene>();
+        //スポーン用文字配列
+        string[] s = scene.GetItemString();
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (s[i] == "FirstAidKit")
+            {
+                ////アイテムがスポーンしていない座標の乱数に座標を貰う
+                Vector3 vec = scene.MoveItem(i);
+                //移動
+                this.gameObject.transform.position = vec;
+            }
+
+        }
+        //アイテム表示
         gameObject.SetActive(true);
     }
 }
