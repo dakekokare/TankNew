@@ -79,7 +79,7 @@ public class BarrierItem : /*Item*/MonoBehaviourPunCallbacks
     {
         GameObject obj = PhotonView.Find(id).gameObject;
         //バリアアクティブ
-        obj.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        obj.gameObject.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
     }
 
     [PunRPC]
