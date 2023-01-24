@@ -28,6 +28,21 @@ public class TurretItem : MonoBehaviour
 
     private void ActiveTurretItem()
     {
+        // scene object
+        Scene scene = GameObject.Find("Scene").GetComponent<Scene>();
+        //スポーン用文字配列
+        string[] s = scene.GetItemString();
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (s[i] == "MissileTurret")
+            {
+                ////アイテムがスポーンしていない座標の乱数に座標を貰う
+                Vector3 vec = scene.MoveItem(i);
+                //移動
+                this.gameObject.transform.position = vec;
+            }
+
+        }
         //アイテム表示
         gameObject.SetActive(true);
     }

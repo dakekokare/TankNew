@@ -2,25 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+////追加↓
+//using UnityEditor;
 
-public class BarrierItem : MonoBehaviourPunCallbacks
+////これでEnemyのpublicがインスペクタに表示される
+//#if UNITY_EDITOR
+//[CustomEditor(typeof(Item))]
+//#endif
+
+public class BarrierItem : /*Item*/MonoBehaviourPunCallbacks
 {
-    //[SerializeField]
-    //private AudioClip getSound;
     [SerializeField]
     private GameObject effectPrefab;
-
-    //private GameObject boat;
-
     //プレイヤー
     private GameObject player;
-
+    //バリアオーブ
     [SerializeField]
     private GameObject barrierPrefab;
-
-    //[SerializeField]
-    //private Barrier barriercomponent;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -46,21 +44,11 @@ public class BarrierItem : MonoBehaviourPunCallbacks
             //バリアをアクティブにする
             photonView.RPC(nameof(ActiveBarrier), RpcTarget.All, other.GetComponent<PhotonView>().ViewID);
 
-            ////バリアアイテムが自分のオブジェクトなら
-            //if (gameObject.GetComponent<PhotonView>().IsMine)
-            //    // アイテムを画面から削除する。
-            //    PhotonNetwork.Destroy(gameObject);
-            //else
-            //    photonView.RPC(nameof(DestroyBarrier), RpcTarget.Others, this.gameObject.GetComponent<PhotonView>().ViewID);
-
-
             //アイテム非表示
             gameObject.SetActive(false);
             //アイテム表示する
             Invoke("ActiveBarrierItem", 3);
 
-            // アイテムゲット音を出す。
-            //AudioSource.PlayClipAtPoint(getSound, transform.position);
 
             // アイテムゲット時にエフェクトを発生させる。
             GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
@@ -103,7 +91,23 @@ public class BarrierItem : MonoBehaviourPunCallbacks
 
     private void ActiveBarrierItem()
     {
+        // scene object
+        Scene scene = GameObject.Find("Scene").GetComponent<Scene>();
+        //スポーン用文字配列
+        string[] s=scene.GetItemString();
+        for(int i=0;i<s.Length;i++)
+        {
+            if(s[i]=="BarrierItem")
+            {
+                ////アイテムがスポーンしていない座標の乱数に座標を貰う
+                Vector3 vec = scene.MoveItem(i);
+                //移動
+                this.gameObject.transform.position = vec;
+            }
+
+        }
         //アイテム表示
         gameObject.SetActive(true);
     }
+
 }

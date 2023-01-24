@@ -6,9 +6,18 @@ using UnityEngine;
 // MonoBehaviourPunCallbacksを継承して、PUNのコールバックを受け取れるようにする
 public class Scene : MonoBehaviourPunCallbacks
 {
-    //プレイヤースポーン座標   
-    public GameObject[] array;
-    
+    //プレイヤースポーン座標
+    [SerializeField]
+    private GameObject[] array;
+
+    //アイテム座標
+    [SerializeField]
+    private GameObject itemPos;
+
+    //アイテム生成用文字配列
+    [SerializeField]
+    private string[] itemString;
+
     private void Start()
     {
         // プレイヤー自身の名前を"Player"に設定する
@@ -51,7 +60,7 @@ public class Scene : MonoBehaviourPunCallbacks
             // num ==0 -> 初期値、マスタークライアントがスポーンしていない
             if (num == 0)
             {
-                //3秒後に再起処理
+                //秒後に再起処理
                 Invoke("CheckOtherPlayerSpawnNum", 1);
                 return;
             }
@@ -78,7 +87,7 @@ public class Scene : MonoBehaviourPunCallbacks
         {
             //他プレイヤーのスポーン座標
             int num = PhotonNetwork.CurrentRoom.GetSpawn();
-            r = GetRandomNum(num);
+            r = GetRandomNum(num,array);
         }
         position = array[r].gameObject.transform.position;
         PhotonNetwork.Instantiate("Boat", position, Quaternion.identity);
@@ -98,16 +107,84 @@ public class Scene : MonoBehaviourPunCallbacks
         Instantiate(obj);
     }
 
-    private int GetRandomNum(int num)
+    private int GetRandomNum(int num,GameObject[] obj)
     {
         
         //乱数取得
-        int r = Random.Range(1, array.Length);
+        int r = Random.Range(1, obj.Length);
         //他プレイヤーのスポーン座標だったら
         if (r == num)
             //再起
-            GetRandomNum(num);
+            GetRandomNum(num,obj);
+        return r;
+    }
+    private int GetItemRandomNum(int num, int[] itemNumber)
+    {
+        //生成場所が重ならない用に乱数取得
+        int r = Random.Range(1, num);
+
+        //乱数の座標に他アイテムがスポーンしていないかチェックする
+        for (int i = 0; i < itemNumber.Length; i++)
+        {
+            //他アイテムのスポーン座標だったら
+            if (r == itemNumber[i])
+                //再起
+                GetItemRandomNum(num, itemNumber);
+        }
         return r;
     }
 
+    public void GenerationItem()
+    {
+        ////アイテム座標番号配列
+        int[] itemSpawnNumber = new int[itemString.Length];
+
+        //アイテムの数　
+        for (int i = 0; i < itemString.Length; i++)
+        {
+            //乱数でアイテムスポーン座標を決める
+            itemSpawnNumber[i] = GetItemRandomNum(itemPos.transform.childCount, itemSpawnNumber);
+        }
+        //アイテム生成
+        ItemCreate(itemSpawnNumber, itemPos);
+
+        //カスタムプロパティに使用中の座標番号をセットする
+        PhotonNetwork.CurrentRoom.SetItemSpawn(itemSpawnNumber);
+
+
+
+    }
+    public Vector3 MoveItem(int index)
+    {
+        ////使用されているアイテム座標を貰う
+        int[] item = PhotonNetwork.CurrentRoom.GetItemSpawn();
+        //使用されていない座標番号　
+        int r = GetItemRandomNum(itemPos.transform.childCount, item);
+        //要素番号の中身を書き換える
+        item[index] = r;
+        //カスタムプロパティに使用中の座標番号をセットする
+        PhotonNetwork.CurrentRoom.SetItemSpawn(item);
+        
+        Debug.Log("[" + itemString[index] + r + "]生成");
+        return itemPos.transform.GetChild(r).transform.position;
+    }
+
+    private void ItemCreate(int[] itemPosNum, GameObject spawnPos)
+    {
+        for (int i = 0; i < itemString.Length; i++)
+        {
+            Debug.Log("[" + itemString[i] + "]生成");
+            //item生成
+            PhotonNetwork.Instantiate(
+                itemString[i],
+                spawnPos.transform.GetChild(itemPosNum[i]).transform.position,
+                Quaternion.identity
+                );
+        }
+    }
+
+    public string[] GetItemString()
+    {
+        return itemString;
+    }
 }
