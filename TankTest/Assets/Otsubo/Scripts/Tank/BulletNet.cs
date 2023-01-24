@@ -70,7 +70,8 @@ public class BulletNet : MonoBehaviour
                 {
                     Debug.Log("Boat EnemyShell Hit");
                     //船と接触したら,ダメージ処理
-                    other.gameObject.GetComponent<TankHealth>().HitBullet();
+                    other.gameObject.transform.Find("BoatBody").
+                        gameObject.GetComponent<TankHealth>().HitBullet();
                     //自分と相手の弾を消す
                     DestroyShellOtherPlayer();
                     Destroy(this.gameObject);
