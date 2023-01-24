@@ -88,7 +88,7 @@ public class BulletNet : MonoBehaviour
     }
     private void DestroyShellOtherPlayer()
     {
-        /*
+        
         player.transform.
         GetChild(0).
         GetChild(0).
@@ -96,11 +96,12 @@ public class BulletNet : MonoBehaviour
         GetChild(1).
         GetChild(0).
         GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
-        */
+        
 
         //íeÇÃçÌèú
-        player.transform.Find("ShotShell").gameObject.
-            GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
+        //player.transform.Find("ShotShell").gameObject.
+        //    GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
+        //Debug.Log("delete shot shell");
     }
 
     public void SetPlayer(GameObject obj)
