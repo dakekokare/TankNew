@@ -6,7 +6,7 @@ using Photon.Pun;
 public class Barrier : MonoBehaviourPunCallbacks
 {
     // ƒvƒŒƒCƒ„[
-    private GameObject player;
+    //private GameObject player;
 
     private float Barriertime = 10.0f;
     private float timer;
