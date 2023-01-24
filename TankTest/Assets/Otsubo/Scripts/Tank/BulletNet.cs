@@ -70,8 +70,8 @@ public class BulletNet : MonoBehaviour
                 {
                     Debug.Log("Boat EnemyShell Hit");
                     //‘D‚ÆÚG‚µ‚½‚ç,ƒ_ƒ[ƒWˆ—
-                    other.gameObject.transform.Find("BoatBody").
-                        gameObject.GetComponent<TankHealth>().HitBullet();
+                    other.gameObject.transform.Find("Boat(Clone)").
+                        GetChild(0).gameObject.GetComponent<TankHealth>().HitBullet();
                     //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
                     DestroyShellOtherPlayer();
                     Destroy(this.gameObject);
@@ -88,7 +88,6 @@ public class BulletNet : MonoBehaviour
     }
     private void DestroyShellOtherPlayer()
     {
-        
         player.transform.
         GetChild(0).
         GetChild(0).
@@ -96,12 +95,10 @@ public class BulletNet : MonoBehaviour
         GetChild(1).
         GetChild(0).
         GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
-        
 
-        //’e‚Ìíœ
+        ////’e‚Ìíœ
         //player.transform.Find("ShotShell").gameObject.
         //    GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
-        //Debug.Log("delete shot shell");
     }
 
     public void SetPlayer(GameObject obj)
