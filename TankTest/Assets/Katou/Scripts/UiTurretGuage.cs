@@ -132,6 +132,7 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                     player= obj.transform.
                         GetChild(0).
                         GetChild(0).
+                        GetChild(0).
                         GetChild(2).
                         GetChild(0).GetComponent<ShotShell>();
                 }

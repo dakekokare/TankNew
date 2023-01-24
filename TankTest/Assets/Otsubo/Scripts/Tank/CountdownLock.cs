@@ -10,8 +10,10 @@ public class CountdownLock : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        tank = GameObject.Find("Boat(Clone)");
-        shotShell = tank.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<ShotShell>();
+        //tank = GameObject.Find("Boat(Clone)");
+        //shotShell = tank.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<ShotShell>();
+        tank = GameObject.Find("ShotShell");
+        shotShell = tank.transform.GetComponent<ShotShell>();
     }
 
     private void ShotUnlock()
