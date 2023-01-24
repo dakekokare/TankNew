@@ -35,7 +35,7 @@ public class HpEnemyTransform : MonoBehaviourPunCallbacks
         foreach (var photonView in PhotonNetwork.PhotonViewCollection)
         {
             //boat Ç©Ç¬Å@é©ï™Ç∂Ç·Ç»Ç©Ç¡ÇΩÇÁ
-            if (photonView.gameObject.name == "Boat(Clone)")
+            if (photonView.gameObject.name == "BoatBody")
             {
                 if (!photonView.IsMine)
                 {

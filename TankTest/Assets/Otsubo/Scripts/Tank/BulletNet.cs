@@ -91,7 +91,7 @@ public class BulletNet : MonoBehaviour
         GetChild(0).
         GetChild(0).
         GetChild(0).
-        GetChild(2).
+        GetChild(1).
         GetChild(0).
         GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
     }
