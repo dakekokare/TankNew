@@ -49,7 +49,7 @@ public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
     private void HealPlayer()
     {
         //ƒvƒŒƒCƒ„[‚É‰ñ•œ
-        player.GetComponent<TankHealth>().HealHP(heal);
+        player.transform.GetChild(0).GetComponent<TankHealth>().HealHP(heal);
     }
     public void SearchPlayer()
     {
