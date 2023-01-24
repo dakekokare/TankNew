@@ -82,7 +82,8 @@ public class ShotShell : MonoBehaviourPunCallbacks
             tr.endColor = color;
         }
 
-        shell.SetPlayer(gameObject.transform.parent.parent.parent.parent.gameObject);
+        shell.SetPlayer(gameObject.transform.
+            parent.parent.parent.parent.parent.gameObject);
     }
 
     public void ShotUnlock()
