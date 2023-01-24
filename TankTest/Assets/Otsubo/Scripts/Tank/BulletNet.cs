@@ -99,7 +99,7 @@ public class BulletNet : MonoBehaviour
         */
 
         //’e‚Ìíœ
-        player.transform.Find("ShotShell").
+        player.transform.Find("ShotShell").gameObject.
             GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
     }
 

@@ -129,12 +129,16 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
 
                     Debug.Log("[" + GetInstanceID() + "]" + "Player Find");
                     GameObject obj = PhotonView.Find(photonView.ViewID).gameObject;
-                    player= obj.transform.
-                        GetChild(0).
-                        GetChild(0).
-                        GetChild(0).
-                        GetChild(2).
-                        GetChild(0).GetComponent<ShotShell>();
+                    //player= obj.transform.
+                    //    GetChild(0).
+                    //    GetChild(0).
+                    //    GetChild(0).
+                    //    GetChild(2).
+                    //    GetChild(0).GetComponent<ShotShell>();
+
+                    player = obj
+                        .transform.Find("BoatBody").gameObject.GetComponent<ShotShell>();
+
                 }
 
             }
