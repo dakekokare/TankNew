@@ -115,7 +115,7 @@ public class Scene : MonoBehaviourPunCallbacks
         //他プレイヤーのスポーン座標だったら
         if (r == num)
             //再起
-            GetRandomNum(num,obj);
+            r=GetRandomNum(num,obj);
         return r;
     }
     private int GetItemRandomNum(int num, int[] itemNumber)
@@ -128,8 +128,10 @@ public class Scene : MonoBehaviourPunCallbacks
         {
             //他アイテムのスポーン座標だったら
             if (r == itemNumber[i])
+            {
                 //再起
-                GetItemRandomNum(num, itemNumber);
+                r=GetItemRandomNum(num, itemNumber);
+            }
         }
         return r;
     }

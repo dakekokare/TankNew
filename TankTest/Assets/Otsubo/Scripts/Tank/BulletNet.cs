@@ -29,61 +29,20 @@ public class BulletNet : MonoBehaviour
     {
         if (other.gameObject.tag == "Barrier")
         {
-            //©•ª‚ÌƒoƒŠƒA
-            if (other.GetComponent<PhotonView>().IsMine)
-            {
-                //©•ª‚Ì’e‚Ì
-                if (this.gameObject.tag == "Shell")
-                {
-                    Debug.Log("Barrier shell Hit return");
-                    return;
-                }
-                //“G‚Ì’e‚Ì
-                else if (this.gameObject.tag == "EnemyShell")
-                {
-                    Debug.Log("Barrier enemyShell Hit");
-                    //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
-                    DestroyShellOtherPlayer();
-                    Destroy(this.gameObject);
-                }
-            }
+            //ƒoƒŠƒAÚGˆ—
+            HitBarrier(other);
         }
-
-
         //ƒvƒŒƒCƒ„[‚¾‚Á‚½‚ç
-        if (other.gameObject.layer == 8)
+        else if (other.gameObject.layer == 8)
         {
-            //enemyShell‚¾‚Á‚½‚ç
-            if (gameObject.tag == "EnemyShell")
-            {
-
-                /////////////////////////////////////////////
-                // 
-                ///////////////////////////////////////////
-                //©•ª‚¶‚á‚È‚©‚Á‚½‚ç
-                if (!other.GetComponent<PhotonView>().IsMine)
-                {
-                    Debug.Log("Boat EnemyShell Hit return");
-                    return;
-                }
-                else
-                {
-                    Debug.Log("Boat EnemyShell Hit");
-                    //‘D‚ÆÚG‚µ‚½‚ç,ƒ_ƒ[ƒWˆ—
-                    //other.gameObject.transform.Find("Boat(Clone)").
-                    //    GetChild(0).gameObject.GetComponent<TankHealth>().HitBullet();
-
-
-                    other.gameObject.GetComponent<TankHealth>().HitBullet();
-
-                    //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
-                    DestroyShellOtherPlayer();
-                    Destroy(this.gameObject);
-                }
-            }
+            //ƒvƒŒƒCƒ„[ÚGˆ—
+            HitPlayer(other);
         }
-
-
+        else 
+        {
+            //‚»‚Ì‘¼‚ÌÚGˆ—
+            HitOthers(other);
+        }
     }
     public void ChengeMaterial()
     {
@@ -92,31 +51,75 @@ public class BulletNet : MonoBehaviour
     }
     private void DestroyShellOtherPlayer()
     {
-        /*
-        player.transform.
-        GetChild(0).
-        GetChild(0).
-        GetChild(0).
-        GetChild(1).
-        GetChild(0).
-        GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
-        */
-        player.transform.
-        GetChild(0).
-        GetChild(0).
-        GetChild(0).
-        GetChild(1).
-        GetChild(0).
-        GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
-
-
         ////’e‚Ìíœ
-        //player.transform.Find("ShotShell").gameObject.
-        //    GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
+        player.transform.
+        GetChild(0).
+        GetChild(0).
+        GetChild(0).
+        GetChild(1).
+        GetChild(0).
+        GetComponent<ShotShell>().DeleteShellOther(Id, OwnerId);
     }
 
     public void SetPlayer(GameObject obj)
     {
         player = obj;
+    }
+
+    private void HitBarrier(Collider other) 
+    {
+        //©•ª‚ÌƒoƒŠƒA
+        if (other.GetComponent<PhotonView>().IsMine)
+        {
+            //©•ª‚Ì’e‚Ì
+            if (this.gameObject.tag == "Shell")
+            {
+                Debug.Log("Barrier shell Hit return");
+                return;
+            }
+            //“G‚Ì’e‚Ì
+            else if (this.gameObject.tag == "EnemyShell")
+            {
+                Debug.Log("Barrier enemyShell Hit");
+                //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
+                DestroyShellOtherPlayer();
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    private void HitPlayer(Collider other)
+    {
+        //enemyShell‚¾‚Á‚½‚ç
+        if (gameObject.tag == "EnemyShell")
+        {
+
+            /////////////////////////////////////////////
+            // 
+            ///////////////////////////////////////////
+            //©•ª‚¶‚á‚È‚©‚Á‚½‚ç
+            if (!other.GetComponent<PhotonView>().IsMine)
+            {
+                Debug.Log("Boat EnemyShell Hit return");
+                return;
+            }
+            else
+            {
+                Debug.Log("Boat EnemyShell Hit");
+                //‘D‚ÆÚG‚µ‚½‚ç,ƒ_ƒ[ƒWˆ—
+                other.gameObject.GetComponent<TankHealth>().HitBullet();
+
+                //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
+                DestroyShellOtherPlayer();
+                Destroy(this.gameObject);
+            }
+        }
+    }
+    private void HitOthers(Collider other)
+    {
+        Debug.Log("Other Hit");
+        //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
+        DestroyShellOtherPlayer();
+        Destroy(this.gameObject);
     }
 }

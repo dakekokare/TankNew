@@ -18,7 +18,7 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
     void Update()
     {
         //プレイヤーが2人じゃなければ
-        if (PhotonNetwork.PlayerList.Length != 2)
+        if (PhotonNetwork.PlayerList.Length != 1)
             return;
         //ゲーム開始前カウントダウン時処理
         InitializeGame();

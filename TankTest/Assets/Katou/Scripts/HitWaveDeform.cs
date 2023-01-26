@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class HitWaveDeform : MonoBehaviour
+{
+    //アニメーション
+    [SerializeField]
+    private GameObject wave;
+
+    //パーティクルシステム
+    private Wave waveParticle;
+    // Start is called before the first frame update
+    void Start()
+    {
+        waveParticle=wave.GetComponent<Wave>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        //wave アニメーション再生
+        //boat の場合
+
+        //shell の場合
+        if (other.gameObject.tag == "Shell"||
+            other.gameObject.tag == "EnemyShell")
+        {
+            //複数回ヒットするバグ　－＞　弾を削除する
+
+            Debug.Log("Wave");
+            //着弾位置にアニメーション再生
+            PlayWave(other.gameObject.transform.position);
+        }
+        //missile の場合
+    }
+    private void PlayWave(Vector3 vec)
+    {
+        //アニメーション再生
+        waveParticle.PlayWave(vec);
+    }
+}

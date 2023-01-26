@@ -5,7 +5,15 @@ using Photon.Pun;
 
 public class TurretItem : MonoBehaviour
 {
-
+    private void Update()
+    {
+        float sin = Mathf.Sin(Time.time);
+        this.transform.position = new Vector3(
+            transform.position.x,
+            (sin * 0.03f) + transform.position.y,
+            transform.position.z
+            );
+    }
     void OnTriggerEnter(Collider t)
     {
         //ÉvÉåÉCÉÑÅ[Ç∆ê⁄êGÇµÇΩÇÁ
