@@ -44,24 +44,27 @@ public class BarrierItem : /*Item*/MonoBehaviourPunCallbacks
 
     void OnTriggerEnter(Collider other)
     {
-        //プレイヤーと接触したら
-        if (other.gameObject.layer == 8)
+        if (photonView.IsMine)
         {
+            //プレイヤーと接触したら
+            if (other.gameObject.layer == 8)
+            {
 
-            //バリアをアクティブにする
-            photonView.RPC(nameof(ActiveBarrier), RpcTarget.All, other.GetComponent<PhotonView>().ViewID);
+                //バリアをアクティブにする
+                photonView.RPC(nameof(ActiveBarrier), RpcTarget.All, other.GetComponent<PhotonView>().ViewID);
 
-            //アイテム非表示
-            gameObject.SetActive(false);
-            //アイテム表示する
-            Invoke("ActiveBarrierItem", 3);
+                //アイテム非表示
+                gameObject.SetActive(false);
+                //アイテム表示する
+                Invoke("ActiveBarrierItem", 3);
 
 
-            // アイテムゲット時にエフェクトを発生させる。
-            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+                // アイテムゲット時にエフェクトを発生させる。
+                GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
 
-            // エフェクトを0.5秒後に消す。
-            Destroy(effect, 0.5f);
+                // エフェクトを0.5秒後に消す。
+                Destroy(effect, 0.5f);
+            }
         }
     }
 

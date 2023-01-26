@@ -130,7 +130,7 @@ public sealed class Homing : MonoBehaviourPunCallbacks
         //“G‚É“–‚½‚Á‚½‚çƒqƒbƒgˆ—‚ğ‚³‚¹‚é
         GameObject boat = PhotonView.Find(id).gameObject;
         
-        boat.gameObject.transform.GetChild(0).GetComponent<TankHealth>().HitBullet();
+        boat.gameObject.GetComponent<TankHealth>().HitBullet();
 
     }
 }

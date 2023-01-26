@@ -92,7 +92,7 @@ public class HomingSpawn : MonoBehaviourPunCallbacks
                 if (!photonView.IsMine)
                 {
                     Debug.Log("[" + GetInstanceID() + "]" + "Enemy Find");
-                    target = PhotonView.Find(photonView.ViewID).gameObject;
+                    target = PhotonView.Find(photonView.ViewID).gameObject.transform.GetChild(0).gameObject;
                 }
             }
         }

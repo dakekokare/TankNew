@@ -28,21 +28,24 @@ public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
     }
     void OnTriggerEnter(Collider t)
     {
-        //プレイヤーと接触したら
-        if (t.gameObject.layer == 8)
+        if (photonView.IsMine)
         {
-            //プレイヤー ismine
-            if(t.gameObject.GetComponent<PhotonView>().IsMine)
-              //接触したら回復
-                HealPlayer();
+            //プレイヤーと接触したら
+            if (t.gameObject.layer == 8)
+            {
+                //プレイヤー ismine
+                if (t.gameObject.GetComponent<PhotonView>().IsMine)
+                    //接触したら回復
+                    HealPlayer();
 
-            //アイテム非表示
-            gameObject.SetActive(false);
-            //3秒後にアイテムアクティブ
-            Invoke("ActiveHealItem", 3);
+                //アイテム非表示
+                gameObject.SetActive(false);
+                //3秒後にアイテムアクティブ
+                Invoke("ActiveHealItem", 3);
 
-            //削除
-            //PhotonNetwork.Destroy(this.gameObject);
+                //削除
+                //PhotonNetwork.Destroy(this.gameObject);
+            }
         }
     }
 
