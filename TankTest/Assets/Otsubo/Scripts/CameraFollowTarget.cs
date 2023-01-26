@@ -24,6 +24,9 @@ public class CameraFollowTarget : MonoBehaviour
     /// </summary>
     void LateUpdate()
     {
+        if (target == null)
+            return;
+
         // カメラの位置をターゲットの位置にオフセットを足した場所にする。
         //TPScamera.gameObject.transform.position = target.transform.position + offset;
         gameObject.transform.position = target.transform.position + offset;

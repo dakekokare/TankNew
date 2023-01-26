@@ -24,7 +24,7 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
     //ゲージ増加スピード
     private float GuageIncSpeed = 0.01f;
     //ゲージ減少スピード
-    private float GuageDecSpeed = 0.01f;
+    private float GuageDecSpeed = 0.004f;
 
     //射撃停止時間
     private int GuageStop = 5;
