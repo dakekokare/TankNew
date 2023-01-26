@@ -19,11 +19,12 @@ public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        float sin = Mathf.Sin(Time.time) + transform.position.y;
+        float sin = Mathf.Sin(Time.time);
         this.transform.position = new Vector3(
             transform.position.x,
-            sin * 0.5f,
-            transform.position.z);
+            (sin * 0.03f) + transform.position.y,
+            transform.position.z
+            );
     }
     void OnTriggerEnter(Collider t)
     {

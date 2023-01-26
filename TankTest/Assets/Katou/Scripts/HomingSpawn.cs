@@ -101,7 +101,6 @@ public class HomingSpawn : MonoBehaviourPunCallbacks
     private void ActiveDefaultTurret()
     {
         //デフォルトタレットアクティブ
-        //gameObject.transform.parent.GetChild(2).gameObject.SetActive(true);
-        gameObject.transform.Find("Turret.001").gameObject.SetActive(true);
+        gameObject.transform.parent.transform.Find("Turret.001").gameObject.SetActive(true);
     }
 }

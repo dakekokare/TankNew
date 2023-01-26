@@ -5,17 +5,25 @@ using Photon.Pun;
 
 public class TurretItem : MonoBehaviour
 {
-
+    private void Update()
+    {
+        float sin = Mathf.Sin(Time.time);
+        this.transform.position = new Vector3(
+            transform.position.x,
+            (sin * 0.03f) + transform.position.y,
+            transform.position.z
+            );
+    }
     void OnTriggerEnter(Collider t)
     {
         //プレイヤーと接触したら
         if (t.gameObject.layer == 8)
         {
             //誘導弾タレットアクティブ
-            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(3)
+            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2)
                 .gameObject.SetActive(true);
             //デフォルトタレットfalse
-            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(2)
+            t.gameObject.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1)
                 .gameObject.SetActive(false);
 
             //アイテム非表示
