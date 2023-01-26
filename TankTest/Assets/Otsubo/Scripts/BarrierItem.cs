@@ -44,26 +44,18 @@ public class BarrierItem : /*Item*/MonoBehaviourPunCallbacks
 
     void OnTriggerEnter(Collider other)
     {
-        if (photonView.IsMine)
+        //プレイヤーと接触したら
+        if (other.gameObject.layer == 8)
         {
-            //プレイヤーと接触したら
-            if (other.gameObject.layer == 8)
-            {
 
+            if (other.gameObject.GetComponent<PhotonView>().IsMine)
+            {
                 //バリアをアクティブにする
                 photonView.RPC(nameof(ActiveBarrier), RpcTarget.All, other.GetComponent<PhotonView>().ViewID);
 
-                //アイテム非表示
-                gameObject.SetActive(false);
                 //アイテム表示する
                 Invoke("ActiveBarrierItem", 3);
 
-
-                // アイテムゲット時にエフェクトを発生させる。
-                GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-
-                // エフェクトを0.5秒後に消す。
-                Destroy(effect, 0.5f);
             }
         }
     }
@@ -90,6 +82,19 @@ public class BarrierItem : /*Item*/MonoBehaviourPunCallbacks
         GameObject obj = PhotonView.Find(id).gameObject;
         //バリアアクティブ
         obj.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+
+
+        /*----------------------------------*/
+        //アイテム非表示
+        gameObject.SetActive(false);
+
+
+        // アイテムゲット時にエフェクトを発生させる。
+        GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+
+        // エフェクトを0.5秒後に消す。
+        Destroy(effect, 0.5f);
+
     }
 
     [PunRPC]
@@ -111,13 +116,23 @@ public class BarrierItem : /*Item*/MonoBehaviourPunCallbacks
             {
                 ////アイテムがスポーンしていない座標の乱数に座標を貰う
                 Vector3 vec = scene.MoveItem(i);
-                //移動
-                this.gameObject.transform.position = vec;
+
+                //バリアをアクティブにする
+                photonView.RPC(nameof(Move), RpcTarget.All, vec);
             }
 
         }
+    }
+
+    [PunRPC]
+
+    private void Move(Vector3 vec)
+    {
+        //移動
+        this.gameObject.transform.position = vec;
         //アイテム表示
         gameObject.SetActive(true);
+
     }
 
 }

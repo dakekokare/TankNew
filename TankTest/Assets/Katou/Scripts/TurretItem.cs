@@ -21,15 +21,8 @@ public class TurretItem : MonoBehaviourPunCallbacks
             //プレイヤーと接触したら
             if (t.gameObject.layer == 8)
             {
-                //誘導弾タレットアクティブ
-                t.gameObject.transform.GetChild(0).GetChild(0).GetChild(2)
-                    .gameObject.SetActive(true);
-                //デフォルトタレットfalse
-                t.gameObject.transform.GetChild(0).GetChild(0).GetChild(1)
-                    .gameObject.SetActive(false);
-
-                //アイテム非表示
-                gameObject.SetActive(false);
+                //タレットをアクティブにする
+                photonView.RPC(nameof(ActiveObj), RpcTarget.All, t.gameObject.GetComponent<PhotonView>().ViewID);
 
                 //数秒後にアイテム表示
                 Invoke("ActiveTurretItem", 3);
@@ -49,12 +42,39 @@ public class TurretItem : MonoBehaviourPunCallbacks
             {
                 ////アイテムがスポーンしていない座標の乱数に座標を貰う
                 Vector3 vec = scene.MoveItem(i);
-                //移動
-                this.gameObject.transform.position = vec;
+                //アイテム移動
+               photonView.RPC(nameof(Move), RpcTarget.All, vec);
             }
 
         }
+    }
+
+    [PunRPC]
+
+    private void Move(Vector3 vec)
+    {
+        //移動
+        this.gameObject.transform.position = vec;
         //アイテム表示
         gameObject.SetActive(true);
+
+    }
+
+    [PunRPC]
+    private void ActiveObj(int id)
+    {
+        GameObject t = PhotonView.Find(id).gameObject;
+
+
+        //誘導弾タレットアクティブ
+        t.gameObject.transform.GetChild(0).GetChild(0).GetChild(2)
+            .gameObject.SetActive(true);
+        //デフォルトタレットfalse
+        t.gameObject.transform.GetChild(0).GetChild(0).GetChild(1)
+            .gameObject.SetActive(false);
+
+        //アイテム非表示
+        gameObject.SetActive(false);
+
     }
 }

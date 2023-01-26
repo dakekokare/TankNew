@@ -38,8 +38,9 @@ public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
                     //接触したら回復
                     HealPlayer();
 
-                //アイテム非表示
-                gameObject.SetActive(false);
+                //非アクティブにする
+                photonView.RPC(nameof(ActiveObj), RpcTarget.All);
+
                 //3秒後にアイテムアクティブ
                 Invoke("ActiveHealItem", 3);
 
@@ -84,12 +85,27 @@ public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
             {
                 ////アイテムがスポーンしていない座標の乱数に座標を貰う
                 Vector3 vec = scene.MoveItem(i);
-                //移動
-                this.gameObject.transform.position = vec;
+                //バリアをアクティブにする
+                photonView.RPC(nameof(Move), RpcTarget.All, vec);
             }
 
         }
+    }
+
+    [PunRPC]
+
+    private void Move(Vector3 vec)
+    {
+        //移動
+        this.gameObject.transform.position = vec;
         //アイテム表示
         gameObject.SetActive(true);
+
+    }
+    [PunRPC]
+    private void ActiveObj()
+    {
+        //アイテム非表示
+        gameObject.SetActive(false);
     }
 }
