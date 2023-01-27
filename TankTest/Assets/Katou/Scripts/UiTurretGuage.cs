@@ -72,6 +72,8 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
 
                         //射撃停止状態
                         state = ShotState.Stop;
+                        //煙のエフェクト表示
+                        player.transform.GetChild(0).gameObject.SetActive(true);
                     }
                 }
                 //左クリックが離されていたら
@@ -95,6 +97,8 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                     TurretBar.fillAmount -= GuageDecSpeed;
                 else
                 {
+                    //煙のエフェクト非表示
+                    player.transform.GetChild(0).gameObject.SetActive(false);
                     //射撃状態へ
                     state = ShotState.Shot;
                     //射撃可能にする
