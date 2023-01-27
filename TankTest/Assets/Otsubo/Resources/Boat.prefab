@@ -638,8 +638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc92fa975a0cbb448ff0bb73f0dd6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab1: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
-  effectPrefab2: {fileID: 1150934714579380, guid: 779aa8c25fbd0e1488637639c9fff976, type: 3}
+  effectPrefab1: {fileID: 1150934714579380, guid: 25887fd90580f6145853d7e64264ec40, type: 3}
+  effectPrefab2: {fileID: 1150934714579380, guid: 25887fd90580f6145853d7e64264ec40, type: 3}
 --- !u!136 &6291458324949321722
 CapsuleCollider:
   m_ObjectHideFlags: 0
