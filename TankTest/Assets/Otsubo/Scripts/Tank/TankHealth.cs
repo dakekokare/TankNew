@@ -151,7 +151,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
     private void DestroyBullet()
     {
         //ŽËŒ‚•s‰Â”\‚É‚·‚é
-        gameObject.GetComponent<ShotShell>().ShotLock();
+        gameObject.transform.GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<ShotShell>().ShotLock();
 
         GameObject[] obj=FindObjectsOfType(typeof(GameObject)) as GameObject[]; ;
 
