@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: ObservedComponents.Array.data[0]
       value: 
       objectReference: {fileID: 7648732226679584949}
+    - target: {fileID: 7059794443047590817, guid: 0ce0ce523b34054478ba73106a599ba7, type: 3}
+      propertyPath: sound
+      value: 
+      objectReference: {fileID: 8300000, guid: be991c818510e1047bfa42fc6a91a677, type: 3}
     - target: {fileID: 7807270992842666801, guid: 0ce0ce523b34054478ba73106a599ba7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -92,7 +96,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 25
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

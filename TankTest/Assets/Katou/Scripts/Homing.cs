@@ -126,10 +126,21 @@ public sealed class Homing : MonoBehaviourPunCallbacks
                     }
             }
             //バリアに当たった時
-            //if(t.gameObject.tag== "Barrier")
-            //{
+            else if(t.gameObject.tag== "Barrier")
+            {
+                if (t.gameObject.TryGetComponent<PhotonView>(out var other))
+                {
+                    //自分のバリアだったら
+                    if (other.IsMine)
+                        return;
+                    else
+                    {
+                        //バリア音再生
+                        other.GetComponent<Barrier>().PlaySound();
+                    }
+                }
 
-            //}
+            }
 
             Debug.Log("[ Missile削除" + t.gameObject.layer + "&" + t.gameObject.tag + "]");
             PhotonNetwork.Destroy(gameObject);
