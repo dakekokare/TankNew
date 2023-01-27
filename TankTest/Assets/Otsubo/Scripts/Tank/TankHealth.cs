@@ -127,6 +127,10 @@ public class TankHealth : MonoBehaviourPunCallbacks
             //win Uiをアクティブする
             photonView.RPC(nameof(WinActive), RpcTarget.Others);
 
+            //ヒエラルキー上のbullet を削除する
+            //射撃不可能にする
+            //win Uiをアクティブする
+            photonView.RPC(nameof(DestroyBullet), RpcTarget.All);
 
             //// プレーヤーを破壊する。
             PhotonNetwork.Destroy(gameObject);
@@ -143,4 +147,22 @@ public class TankHealth : MonoBehaviourPunCallbacks
         win.SetActive(true);
     }
 
+    [PunRPC]
+    private void DestroyBullet()
+    {
+        //射撃不可能にする
+        gameObject.GetComponent<ShotShell>().ShotLock();
+
+        GameObject[] obj=FindObjectsOfType(typeof(GameObject)) as GameObject[]; ;
+
+        foreach (var bullet in obj)
+        {
+            //bullet レイヤーなら
+            if (bullet.layer == 10)
+            {
+                //削除
+                Destroy(bullet);
+            }
+        }
+    }
 }
