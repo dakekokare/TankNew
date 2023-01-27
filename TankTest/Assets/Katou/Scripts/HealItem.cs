@@ -7,6 +7,12 @@ public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
     //プレイヤー
     private GameObject player;
     private float heal;
+    //音
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip sound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +20,9 @@ public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
         heal = 20.0f;
         //プレイヤー探索
         SearchPlayer();
+        //音
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -37,6 +46,9 @@ public class HealItem : /*MonoBehaviour*/ MonoBehaviourPunCallbacks
                 if (t.gameObject.GetComponent<PhotonView>().IsMine)
                     //接触したら回復
                     HealPlayer();
+
+                //取得再生
+                audioSource.PlayOneShot(sound);
 
                 //非アクティブにする
                 photonView.RPC(nameof(ActiveObj), RpcTarget.All);

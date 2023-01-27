@@ -19,11 +19,22 @@ public class BarrierItem : /*Item*/MonoBehaviourPunCallbacks
     //バリアオーブ
     [SerializeField]
     private GameObject barrierPrefab;
+
+    //音
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip sound;
+
+
     // Start is called before the first frame update
     void Start()
     {
         //プレイヤー探索
         SearchPlayer();
+        //音
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -52,7 +63,8 @@ public class BarrierItem : /*Item*/MonoBehaviourPunCallbacks
             {
                 //バリアをアクティブにする
                 photonView.RPC(nameof(ActiveBarrier), RpcTarget.All, other.GetComponent<PhotonView>().ViewID);
-
+                //取得再生
+                audioSource.PlayOneShot(sound);
                 //アイテム表示する
                 Invoke("ActiveBarrierItem", 3);
 

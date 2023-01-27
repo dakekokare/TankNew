@@ -10,11 +10,19 @@ public class Barrier : MonoBehaviourPunCallbacks
 
     private float Barriertime = 10.0f;
     private float timer;
+    //音
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip sound;
 
     // Start is called before the first frame update
     void Start()
     {
         timer = 0.0f;
+        //音
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -32,6 +40,12 @@ public class Barrier : MonoBehaviourPunCallbacks
             // バリアを消す。
             gameObject.SetActive(false);
         }
+    }
+
+    public void PlaySound()
+    {
+        //バリア音再生
+        audioSource.PlayOneShot(sound);
     }
 
     //private void OnTriggerEnter(Collider other)

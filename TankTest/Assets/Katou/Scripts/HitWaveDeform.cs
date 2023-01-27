@@ -10,21 +10,20 @@ public class HitWaveDeform : MonoBehaviour
 
     //パーティクルシステム
     private Wave waveParticle;
+
+    //音
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip sound;
     // Start is called before the first frame update
     void Start()
     {
-        waveParticle=wave.GetComponent<Wave>();
+        //Componentを取得
+        waveParticle = wave.GetComponent<Wave>();
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-
-    }
     private void OnTriggerEnter(Collider other)
     {
         //wave アニメーション再生
@@ -39,6 +38,8 @@ public class HitWaveDeform : MonoBehaviour
             Debug.Log("Wave");
             //着弾位置にアニメーション再生
             PlayWave(other.gameObject.transform.position);
+            //水しぶき音再生
+            audioSource.PlayOneShot(sound);
         }
         //missile の場合
     }

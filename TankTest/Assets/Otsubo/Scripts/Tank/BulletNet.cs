@@ -83,6 +83,10 @@ public class BulletNet : MonoBehaviour
                 Debug.Log("Barrier enemyShell Hit");
                 //©•ª‚Æ‘Šè‚Ì’e‚ğÁ‚·
                 DestroyShellOtherPlayer();
+
+                //ƒoƒŠƒA‰¹Ä¶
+                other.gameObject.GetComponent<Barrier>().PlaySound();
+
                 Destroy(this.gameObject);
             }
         }

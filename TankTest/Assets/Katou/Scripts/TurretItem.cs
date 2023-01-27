@@ -5,6 +5,18 @@ using Photon.Pun;
 
 public class TurretItem : MonoBehaviourPunCallbacks
 {
+    //音
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip sound;
+    void Start()
+    {
+        //音
+        audioSource = GetComponent<AudioSource>();
+
+    }
+
     private void Update()
     {
         float sin = Mathf.Sin(Time.time);
@@ -23,6 +35,9 @@ public class TurretItem : MonoBehaviourPunCallbacks
             {
                 //タレットをアクティブにする
                 photonView.RPC(nameof(ActiveObj), RpcTarget.All, t.gameObject.GetComponent<PhotonView>().ViewID);
+                //取得再生
+                audioSource.PlayOneShot(sound);
+
 
                 //数秒後にアイテム表示
                 Invoke("ActiveTurretItem", 3);

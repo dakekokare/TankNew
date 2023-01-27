@@ -28,6 +28,13 @@ public sealed class Homing : MonoBehaviourPunCallbacks
     //加速度
     Vector3 acceleration;
     Transform thisTransform;
+
+    //音
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip sound;
+
     public GameObject Target
     {
         set
@@ -60,6 +67,11 @@ public sealed class Homing : MonoBehaviourPunCallbacks
             // lifeTime 後に消す
             StartCoroutine(nameof(Timer));
         }
+        //音
+        audioSource = GetComponent<AudioSource>();
+        //ミサイル音再生
+        audioSource.PlayOneShot(sound);
+
     }
     public void Update()
     {
