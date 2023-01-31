@@ -10,6 +10,9 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
     [SerializeField]
     private Image TurretBar = default;
 
+    [SerializeField]
+    private AudioClip overHeatSound;
+
     //keepout
     [SerializeField]
     private Image Keepout1 = default;
@@ -74,6 +77,8 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                         state = ShotState.Stop;
                         //煙のエフェクト表示
                         player.transform.GetChild(0).gameObject.SetActive(true);
+                        // 砲弾の発射音を出す。
+                        AudioSource.PlayClipAtPoint(overHeatSound, transform.position);
                     }
                 }
                 //左クリックが離されていたら

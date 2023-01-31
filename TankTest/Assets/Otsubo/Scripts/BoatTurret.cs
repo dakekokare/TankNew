@@ -40,9 +40,9 @@ public class BoatTurret : MonoBehaviourPunCallbacks
                 angle.y = -30;
             }
 
-            if (angle.y > 10)
+            if (angle.y > 20)
             {
-                angle.y = 10;
+                angle.y = 20;
             }
 
         }

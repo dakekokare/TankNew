@@ -6,6 +6,8 @@ public class CountdownLock : MonoBehaviour
 {
     private GameObject tank;
     private ShotShell shotShell;
+    private GameObject bgm;
+    private BGMSystem BGMsystem;
 
     // Start is called before the first frame update
     private void Start()
@@ -21,10 +23,17 @@ public class CountdownLock : MonoBehaviour
             GetComponent<ShotShell>();
         //tank = GameObject.Find("ShotShell");
         //shotShell = tank.transform.GetComponent<ShotShell>();
+
+        bgm = GameObject.Find("BGM");
+        BGMsystem = bgm.transform.GetComponent<BGMSystem>();
     }
 
     private void ShotUnlock()
     {
         shotShell.ShotUnlock();
+    }
+    private void StartBGM()
+    {
+        BGMsystem.StartBGM();
     }
 }

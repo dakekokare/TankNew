@@ -784,8 +784,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c502748c3cecdc447b5ec5b37a79fdb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 1848968934737910, guid: 700deee54d8315f419ddfb8c2602688c, type: 3}
   TurretBar: {fileID: 8241590923881192637}
+  overHeatSound: {fileID: 8300000, guid: df0a4754d56587c4ba2e8bebce76bc41, type: 3}
   Keepout1: {fileID: 8599428782172065856}
   Keepout2: {fileID: 8241794639964198942}
   Keepout3: {fileID: 6410491585818367320}
