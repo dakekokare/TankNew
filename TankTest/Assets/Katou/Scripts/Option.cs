@@ -13,7 +13,7 @@ public class Option : MonoBehaviour
     private void Start()
     {
         //カラーピッカー
-        colorPicker = canvas.transform.GetChild(4).GetComponent<CUIColorPicker>();
+        colorPicker = canvas.transform.GetChild(3).GetChild(0).GetComponent<CUIColorPicker>();
     }
 
     public void OnClick()
@@ -25,8 +25,6 @@ public class Option : MonoBehaviour
         canvas.transform.GetChild(2).gameObject.SetActive(false);
         //パネル、カラーピッカー、戻るボタンアクティブ
         canvas.transform.GetChild(3).gameObject.SetActive(true);
-        canvas.transform.GetChild(4).gameObject.SetActive(true);
-        canvas.transform.GetChild(5).gameObject.SetActive(true);
 
     }
     public void OnBackClick()
@@ -38,8 +36,6 @@ public class Option : MonoBehaviour
         canvas.transform.GetChild(2).gameObject.SetActive(true);
         //パネル、カラーピッカー、戻るボタン非アクティブ
         canvas.transform.GetChild(3).gameObject.SetActive(false);
-        canvas.transform.GetChild(4).gameObject.SetActive(false);
-        canvas.transform.GetChild(5).gameObject.SetActive(false);
 
         //色情報をシーン共有オブジェクトに渡す
         SceneShare.SetColor(colorPicker.Color);
