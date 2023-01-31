@@ -5,7 +5,7 @@ using UnityEngine;
 public class SceneShare : MonoBehaviour
 {
 	//Fî•ñ
-	public static Color color;
+	public static Color color=Color.blue;
 	// Use this for initialization
 	void Start()
 	{
