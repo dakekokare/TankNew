@@ -27,7 +27,7 @@ public class TankHealth : MonoBehaviourPunCallbacks
         //ダメージ
         damage = 20.0f;
         //hp設定
-        boatHP = 90.0f;
+        boatHP = 190.0f;
         //playerHpUi取得
         playerHpUi= GameObject.Find("HpPlayer(Clone)").GetComponent<HPController>();
         //uiにＨＰをセット
