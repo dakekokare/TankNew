@@ -12,6 +12,7 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private AudioClip overHeatSound;
+    AudioSource audioSource;
 
     //keepout
     [SerializeField]
@@ -50,6 +51,9 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
 
         //射撃状態
         state = ShotState.Shot;
+
+        //Componentを取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -77,8 +81,8 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                         state = ShotState.Stop;
                         //煙のエフェクト表示
                         player.transform.GetChild(0).gameObject.SetActive(true);
-                        // 砲弾の発射音を出す。
-                        AudioSource.PlayClipAtPoint(overHeatSound, transform.position);
+                        // オーバーヒートの音を出す。
+                        audioSource.PlayOneShot(overHeatSound);
                     }
                 }
                 //左クリックが離されていたら

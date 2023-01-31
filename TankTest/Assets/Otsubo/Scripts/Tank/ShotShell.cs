@@ -12,6 +12,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private AudioClip shotSound;
+    AudioSource audioSource;
 
     private float timeBetweenShot = 0.1f;
     private float timer;
@@ -20,6 +21,12 @@ public class ShotShell : MonoBehaviourPunCallbacks
     private BulletNet bulletPre;
 
     private bool shotLock = false;
+
+    void Start()
+    {
+        //Component‚ğæ“¾
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -66,7 +73,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
         shellRb.AddForce(transform.forward * shotSpeed);
     
         // –C’e‚Ì”­Ë‰¹‚ğo‚·B
-        AudioSource.PlayClipAtPoint(shotSound, transform.position);
+        audioSource.PlayOneShot(shotSound);
 
         //“G‚Ì’e‚¾‚Á‚½‚çtag‚ğ•Ï‚¦‚é
         if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
