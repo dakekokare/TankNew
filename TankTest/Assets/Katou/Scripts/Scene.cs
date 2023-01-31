@@ -18,6 +18,9 @@ public class Scene : MonoBehaviourPunCallbacks
     [SerializeField]
     private string[] itemString;
 
+    //色情報
+    private float[] pColor;
+    private float[] eColor;
     private void Start()
     {
         // プレイヤー自身の名前を"Player"に設定する
@@ -49,6 +52,8 @@ public class Scene : MonoBehaviourPunCallbacks
 
         //他プレイヤーのスポーン座標確認
         CheckOtherPlayerSpawnNum();
+
+
     }
     private void CheckOtherPlayerSpawnNum()
     {
@@ -67,6 +72,14 @@ public class Scene : MonoBehaviourPunCallbacks
         }
         //オブジェクト生成
         CreateObject();
+
+        //自身の色情報をセットする
+        Color col = SceneShare.GetColor();
+
+        float[] vec = { col.r, col.g, col.b, col.a };
+
+        pColor = vec;
+
     }
 
     private void CreateObject()
@@ -188,5 +201,21 @@ public class Scene : MonoBehaviourPunCallbacks
     public string[] GetItemString()
     {
         return itemString;
+    }
+
+
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            //データの送信
+            stream.SendNext(pColor);
+        }
+        else
+        {
+            //データの受信
+            eColor = (float[])stream.ReceiveNext();
+        }
     }
 }

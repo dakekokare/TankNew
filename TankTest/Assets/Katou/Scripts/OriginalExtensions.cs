@@ -9,8 +9,10 @@ public static class OriginalExtensions
 
     //アイテムスポーン座標番号
     private const string SpawnItemNum = "SpawnItemNum";
-    
-    
+
+    //カラー情報
+    private const string PlayerColor = "PlayerColor";
+
     private static readonly Hashtable propsToSet = new Hashtable();
 
 
@@ -39,17 +41,26 @@ public static class OriginalExtensions
     // 設定する
     public static void SetItemSpawn(this Room r, int[] num)
     {
-        //for (int i = 0; i < num.Length; i++)
-        //{
-        //    propsToSet[SpawnItemNum] = num[i];
-        //    r.SetCustomProperties(propsToSet);
-        //    propsToSet.Clear();
-        //}
-
         propsToSet[SpawnItemNum] = num;
         r.SetCustomProperties(propsToSet);
         propsToSet.Clear();
 
     }
+    // 取得する
+    public static float[] GetColor(this Room r)
+    {
+        return (r.CustomProperties[PlayerColor] is float[] col) ? col : null;
+    }
+
+
+    // 設定する
+    public static void SetColor(this Room r, float[] col)
+    {
+        propsToSet[PlayerColor] = col;
+        r.SetCustomProperties(propsToSet);
+        propsToSet.Clear();
+
+    }
+
 
 }
