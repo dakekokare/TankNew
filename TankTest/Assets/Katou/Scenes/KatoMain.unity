@@ -156,6 +156,20 @@ CapsuleCollider:
   m_Height: 5.18
   m_Direction: 0
   m_Center: {x: 1, y: -0.05, z: 2.44}
+--- !u!136 &25998817
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25998813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.86
+  m_Height: 3.74
+  m_Direction: 1
+  m_Center: {x: 0.43, y: 2.78, z: 0.55}
 --- !u!1 &70690586
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +503,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5076798556035486163, guid: d2a6599acf6f57f428fe956301b59817, type: 3}
+--- !u!4 &92676808 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 592664080621265513, guid: d2a6599acf6f57f428fe956301b59817, type: 3}
+  m_PrefabInstance: {fileID: 1958632430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &153364870
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,8 +532,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153364870}
-  m_LocalRotation: {x: -0, y: -0.8438048, z: -0, w: 0.53665024}
-  m_LocalPosition: {x: -79.913956, y: 0, z: 2.1057765}
+  m_LocalRotation: {x: -0, y: -0.8516764, z: -0, w: 0.524068}
+  m_LocalPosition: {x: -76.5, y: 0, z: 2.175}
   m_LocalScale: {x: 0.05085703, y: 1, z: 4.665989}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3137,6 +3156,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55e23de551e22564984bf8c0d90b8b2c, type: 3}
+--- !u!1 &995741211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 995741212}
+  - component: {fileID: 995741213}
+  m_Layer: 0
+  m_Name: TowerGuard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &995741212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995741211}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0038, y: 0.011, z: -0.2424}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 92676808}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &995741213
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995741211}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.012
+  m_Height: 0.04
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1007272718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4954,7 +5019,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511887962}
   m_LocalRotation: {x: -0, y: -0.9131144, z: -0, w: 0.40770325}
-  m_LocalPosition: {x: -99.73386, y: 0, z: 1.5696346}
+  m_LocalPosition: {x: -98.95, y: 0, z: 1.533}
   m_LocalScale: {x: 0.035042357, y: 1, z: 3.5140867}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7039,7 +7104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000578768}
   m_LocalRotation: {x: -0, y: 0.46046755, z: -0, w: 0.8876766}
-  m_LocalPosition: {x: -21.939587, y: 0, z: -2.1486316}
+  m_LocalPosition: {x: -22.16, y: 0, z: -2.135}
   m_LocalScale: {x: 0.0819432, y: 1, z: -3.8287745}
   m_ConstrainProportionsScale: 0
   m_Children: []
