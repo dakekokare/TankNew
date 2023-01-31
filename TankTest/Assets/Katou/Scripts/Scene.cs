@@ -19,8 +19,8 @@ public class Scene : MonoBehaviourPunCallbacks
     private string[] itemString;
 
     //色情報
-    private float[] pColor;
-    private float[] eColor;
+    private Vector3 pColor;
+    private Vector3 eColor;
     private void Start()
     {
         // プレイヤー自身の名前を"Player"に設定する
@@ -75,10 +75,7 @@ public class Scene : MonoBehaviourPunCallbacks
 
         //自身の色情報をセットする
         Color col = SceneShare.GetColor();
-
-        float[] vec = { col.r, col.g, col.b, col.a };
-
-        pColor = vec;
+        pColor = new Vector3(col.r, col.g, col.b);
 
     }
 
@@ -207,7 +204,7 @@ public class Scene : MonoBehaviourPunCallbacks
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isWriting)
+        if (stream.IsWriting)
         {
             //データの送信
             stream.SendNext(pColor);
@@ -215,7 +212,7 @@ public class Scene : MonoBehaviourPunCallbacks
         else
         {
             //データの受信
-            eColor = (float[])stream.ReceiveNext();
+            eColor = (Vector3)stream.ReceiveNext();
         }
     }
 }
