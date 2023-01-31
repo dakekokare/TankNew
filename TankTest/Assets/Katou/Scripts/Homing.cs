@@ -35,6 +35,8 @@ public sealed class Homing : MonoBehaviourPunCallbacks
     [SerializeField]
     private AudioClip sound;
 
+    //ミサイルホーミング時間
+    private float homingTime=0;
     public GameObject Target
     {
         set
@@ -82,12 +84,13 @@ public sealed class Homing : MonoBehaviourPunCallbacks
             if (target == null)
                 return;
 
-            //float lt = lifeTime;
-            //if (lt - Time.deltaTime > 0.5f)
-            //    //加速度計算
-            //    acceleration = 2f / (time * time) * (target.transform.position - position - time * velocity);
-            //else
-            //    Debug.Log("tomatta");
+            homingTime += 1.0f;
+            //1.5秒間
+            if (homingTime < 90.0f)
+                //加速度計算
+                acceleration = 2f / (time * time) * (target.transform.position - position - time * velocity);
+            else
+                Debug.Log("tomatta");
 
             //加速度制限がtrue の場合
             //加速度のベクトルの大きさ取得
