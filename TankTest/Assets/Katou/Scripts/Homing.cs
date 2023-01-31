@@ -82,6 +82,12 @@ public sealed class Homing : MonoBehaviourPunCallbacks
             if (target == null)
                 return;
 
+            //float lt = lifeTime;
+            //if (lt - Time.deltaTime > 0.5f)
+            //    //加速度計算
+            //    acceleration = 2f / (time * time) * (target.transform.position - position - time * velocity);
+            //else
+            //    Debug.Log("tomatta");
 
             //加速度制限がtrue の場合
             //加速度のベクトルの大きさ取得
