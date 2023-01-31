@@ -4,7 +4,7 @@ using UnityEngine;
 //using ExitGames.Client.Photon;
 
 // MonoBehaviourPunCallbacksを継承して、PUNのコールバックを受け取れるようにする
-public class Scene : MonoBehaviourPunCallbacks
+public class Scene : MonoBehaviourPunCallbacks, IPunObservable
 {
     //プレイヤースポーン座標
     [SerializeField]
@@ -202,7 +202,7 @@ public class Scene : MonoBehaviourPunCallbacks
 
 
 
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
