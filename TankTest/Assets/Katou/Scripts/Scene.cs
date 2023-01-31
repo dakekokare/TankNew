@@ -100,7 +100,7 @@ public class Scene : MonoBehaviourPunCallbacks
         {
             //他プレイヤーのスポーン座標
             int num = PhotonNetwork.CurrentRoom.GetSpawn();
-            r = GetRandomNum(num,array);
+            r = GetRandomNum(num, array);
         }
         position = array[r].gameObject.transform.position;
         PhotonNetwork.Instantiate("Boat", position, Quaternion.identity);
@@ -120,15 +120,15 @@ public class Scene : MonoBehaviourPunCallbacks
         Instantiate(obj);
     }
 
-    private int GetRandomNum(int num,GameObject[] obj)
+    private int GetRandomNum(int num, GameObject[] obj)
     {
-        
+
         //乱数取得
         int r = Random.Range(1, obj.Length);
         //他プレイヤーのスポーン座標だったら
         if (r == num)
             //再起
-            r=GetRandomNum(num,obj);
+            r = GetRandomNum(num, obj);
         return r;
     }
     private int GetItemRandomNum(int num, int[] itemNumber)
@@ -143,7 +143,7 @@ public class Scene : MonoBehaviourPunCallbacks
             if (r == itemNumber[i])
             {
                 //再起
-                r=GetItemRandomNum(num, itemNumber);
+                r = GetItemRandomNum(num, itemNumber);
             }
         }
         return r;
@@ -179,7 +179,7 @@ public class Scene : MonoBehaviourPunCallbacks
         item[index] = r;
         //カスタムプロパティに使用中の座標番号をセットする
         PhotonNetwork.CurrentRoom.SetItemSpawn(item);
-        
+
         Debug.Log("[" + itemString[index] + r + "]生成");
         return itemPos.transform.GetChild(r).transform.position;
     }
@@ -207,7 +207,7 @@ public class Scene : MonoBehaviourPunCallbacks
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isWriting)
+        if (stream.IsWriting)
         {
             //データの送信
             stream.SendNext(pColor);
