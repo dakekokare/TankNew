@@ -23,6 +23,9 @@ public class Scene : MonoBehaviourPunCallbacks
     //private Vector3 eColor;
 
     private GameObject colorObj;
+
+    //プレイヤー
+    private GameObject player;
     private void Start()
     {
         // プレイヤー自身の名前を"Player"に設定する
@@ -73,11 +76,8 @@ public class Scene : MonoBehaviourPunCallbacks
         }
         else
         {
-            //カラーオブジェクト取得
-            SearchSaveColor();
-            //色情報を追加
-            colorObj.GetComponent<SaveColor>().AddEnemyColor(cVec);
-
+            ////カラーオブジェクト取得
+            Invoke("SetCol",2);
             int num = PhotonNetwork.CurrentRoom.GetSpawn();
             //他プレイヤーのスポーン座標確認
             // num ==0 -> 初期値、マスタークライアントがスポーンしていない
@@ -250,11 +250,56 @@ public class Scene : MonoBehaviourPunCallbacks
         foreach (var photonView in PhotonNetwork.PhotonViewCollection)
         {
             //Color オブジェクト
-            if (photonView.gameObject.name == "Color")
+            if (photonView.gameObject.name == "Color(Clone)")
             {
                 colorObj = PhotonView.Find(photonView.ViewID).gameObject;
 
             }
         }
     }
+
+    private void SetCol()
+    {
+        //自身の色情報をセットする
+        Color col = SceneShare.GetColor();
+        Vector3 cVec = new Vector3(col.r, col.g, col.b);
+
+        //カラーオブジェクト取得
+        SearchSaveColor();
+        ////色情報を追加
+        colorObj.GetComponent<SaveColor>().AddEnemyColor(cVec);
+
+        //shot shell 色情報取得
+        photonView.RPC(nameof(GetSaveColor), RpcTarget.All);
+
+
+    }
+    [PunRPC]
+    private void GetSaveColor()
+    {
+        //プレイヤー情報取得
+        SearchPlayer();
+        ShotShell shell= player.transform.
+            GetChild(0).GetChild(0).GetChild(1).GetChild(0).gameObject.GetComponent<ShotShell>();
+        shell.SetColor();
+    }
+    private void SearchPlayer()
+    {
+        // ルーム内のネットワークオブジェクト
+        foreach (var photonView in PhotonNetwork.PhotonViewCollection)
+        {
+            //boat かつ　自分じゃなかったら
+            if (photonView.gameObject.name == "BoatBody")
+            {
+                if (photonView.IsMine)
+                {                    
+                    Debug.Log("[" + GetInstanceID() + "]" + "Player Find");
+                    player = PhotonView.Find(photonView.ViewID).gameObject;
+
+                }
+
+            }
+        }
+    }
+
 }

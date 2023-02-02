@@ -30,15 +30,6 @@ public class ShotShell : MonoBehaviourPunCallbacks
     {
         //Componentを取得
         audioSource = GetComponent<AudioSource>();
-
-        //save color オブジェクト取得
-        SearchSaveColor();
-        //色情報取得
-        if (PhotonNetwork.IsMasterClient)
-            pColor = sColor.GetPlayerColor();
-        else
-            eColor = sColor.GetEnemyColor();
-
     }
 
     void Update()
@@ -143,7 +134,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
         foreach (var photonView in PhotonNetwork.PhotonViewCollection)
         {
             //Color オブジェクト
-            if (photonView.gameObject.name == "Color")
+            if (photonView.gameObject.name == "Color(Clone)")
             {
                 sColor = PhotonView.Find(photonView.ViewID).gameObject.GetComponent<SaveColor>();
 
@@ -151,4 +142,14 @@ public class ShotShell : MonoBehaviourPunCallbacks
         }
     }
 
+    public void SetColor()
+    {
+        SearchSaveColor();
+        //色情報取得
+        if (PhotonNetwork.IsMasterClient)
+            pColor = sColor.GetPlayerColor();
+        else
+            eColor = sColor.GetEnemyColor();
+
+    }
 }
