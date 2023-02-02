@@ -72,11 +72,13 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
         }
         //オブジェクト生成
         CreateObject();
+        if (photonView.IsMine)
+        {
 
-        //自身の色情報をセットする
-        Color col = SceneShare.GetColor();
-        pColor = new Vector3(col.r, col.g, col.b);
-
+            //自身の色情報をセットする
+            Color col = SceneShare.GetColor();
+            pColor = new Vector3(col.r, col.g, col.b);
+        }
     }
 
     private void CreateObject()
@@ -214,5 +216,11 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
             //データの受信
             eColor = (Vector3)stream.ReceiveNext();
         }
+    }
+
+    private void Update()
+    {
+        Debug.Log("[p"+ pColor +"]");
+        Debug.Log("[e" + eColor + "]");
     }
 }
