@@ -20,12 +20,25 @@ public class ShotShell : MonoBehaviourPunCallbacks
     [SerializeField]
     private BulletNet bulletPre;
 
-    private bool shotLock = false;
+    private bool shotLock = true;
+    //色情報保持　オブジェクト
+    private SaveColor sColor;
+    private Vector3 pColor;
+    private Vector3 eColor;
 
     void Start()
     {
         //Componentを取得
         audioSource = GetComponent<AudioSource>();
+
+        //save color オブジェクト取得
+        SearchSaveColor();
+        //色情報取得
+        if (PhotonNetwork.IsMasterClient)
+            pColor = sColor.GetPlayerColor();
+        else
+            eColor = sColor.GetEnemyColor();
+
     }
 
     void Update()
@@ -123,4 +136,19 @@ public class ShotShell : MonoBehaviourPunCallbacks
             }
         }
     }
+
+    private void SearchSaveColor()
+    {
+        // ルーム内のネットワークオブジェクト
+        foreach (var photonView in PhotonNetwork.PhotonViewCollection)
+        {
+            //Color オブジェクト
+            if (photonView.gameObject.name == "Color")
+            {
+                sColor = PhotonView.Find(photonView.ViewID).gameObject.GetComponent<SaveColor>();
+
+            }
+        }
+    }
+
 }

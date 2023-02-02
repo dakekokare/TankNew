@@ -4,7 +4,7 @@ using UnityEngine;
 //using ExitGames.Client.Photon;
 
 // MonoBehaviourPunCallbacksを継承して、PUNのコールバックを受け取れるようにする
-public class Scene : MonoBehaviourPunCallbacks, IPunObservable
+public class Scene : MonoBehaviourPunCallbacks
 {
     //プレイヤースポーン座標
     [SerializeField]
@@ -18,9 +18,11 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     private string[] itemString;
 
-    //色情報
-    private Vector3 pColor;
-    private Vector3 eColor;
+    ////色情報
+    //private Vector3 pColor;
+    //private Vector3 eColor;
+
+    private GameObject colorObj;
     private void Start()
     {
         // プレイヤー自身の名前を"Player"に設定する
@@ -57,9 +59,25 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
     }
     private void CheckOtherPlayerSpawnNum()
     {
-        //マスタークライアントではないとき
-        if (!PhotonNetwork.IsMasterClient)
+        //自身の色情報をセットする
+        Color col = SceneShare.GetColor();
+        Vector3 cVec = new Vector3(col.r, col.g, col.b);
+        //マスタークライアント
+        if (PhotonNetwork.IsMasterClient)
         {
+            Vector3 position = Vector3.zero;
+            colorObj=PhotonNetwork.Instantiate("Color", position, Quaternion.identity);
+
+            //色情報を追加
+            colorObj.GetComponent<SaveColor>().AddPlayerColor(cVec);
+        }
+        else
+        {
+            //カラーオブジェクト取得
+            SearchSaveColor();
+            //色情報を追加
+            colorObj.GetComponent<SaveColor>().AddEnemyColor(cVec);
+
             int num = PhotonNetwork.CurrentRoom.GetSpawn();
             //他プレイヤーのスポーン座標確認
             // num ==0 -> 初期値、マスタークライアントがスポーンしていない
@@ -69,16 +87,13 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
                 Invoke("CheckOtherPlayerSpawnNum", 1);
                 return;
             }
+
         }
         //オブジェクト生成
         CreateObject();
-        if (photonView.IsMine)
-        {
 
-            //自身の色情報をセットする
-            Color col = SceneShare.GetColor();
-            pColor = new Vector3(col.r, col.g, col.b);
-        }
+
+
     }
 
     private void CreateObject()
@@ -204,23 +219,42 @@ public class Scene : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
-    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            //データの送信
-            stream.SendNext(pColor);
-        }
-        else
-        {
-            //データの受信
-            eColor = (Vector3)stream.ReceiveNext();
-        }
-    }
+    //void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    //{
+    //    if (stream.IsWriting)
+    //    {
+    //        Debug.Log("送信");
+    //        Debug.Log("[p" + pColor + "]");
 
-    private void Update()
+
+    //        //データの送信
+    //        stream.SendNext(pColor);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("受信");
+    //        Debug.Log("[e" + eColor + "]");
+    //        //データの受信
+    //        eColor = (Vector3)stream.ReceiveNext();
+    //    }
+    //}
+
+    //private void Update()
+    //{
+    //}
+
+
+    private void SearchSaveColor()
     {
-        Debug.Log("[p"+ pColor +"]");
-        Debug.Log("[e" + eColor + "]");
+        // ルーム内のネットワークオブジェクト
+        foreach (var photonView in PhotonNetwork.PhotonViewCollection)
+        {
+            //Color オブジェクト
+            if (photonView.gameObject.name == "Color")
+            {
+                colorObj = PhotonView.Find(photonView.ViewID).gameObject;
+
+            }
+        }
     }
 }
