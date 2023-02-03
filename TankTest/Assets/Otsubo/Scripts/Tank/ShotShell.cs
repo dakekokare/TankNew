@@ -58,17 +58,14 @@ public class ShotShell : MonoBehaviourPunCallbacks
                 timer = 0.0f;
 
 
+                FireBullet(nextBulletId, pColor, eColor);
+
                 // 弾を発射するたびに弾のIDを1ずつ増やしていく
-                photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++,pColor,eColor);
+                photonView.RPC(nameof(FireBullet), RpcTarget.Others, nextBulletId++,eColor,pColor);
 
 
-                ////マスタークライアントなら
-                //if(PhotonNetwork.IsMasterClient)
-                //    // 弾を発射するたびに弾のIDを1ずつ増やしていく
-                //    photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++,pColor,eColor);
-                //else
-                //    // 弾を発射するたびに弾のIDを1ずつ増やしていく
-                //    photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++, eColor, pColor);
+                nextBulletId++;
+
             }
         }
     }
@@ -112,8 +109,9 @@ public class ShotShell : MonoBehaviourPunCallbacks
         }
         shell.SetPlayer(gameObject.transform.
             parent.parent.parent.parent.parent.gameObject);
+
     }
-    
+
 
     public void ShotUnlock()
     {
