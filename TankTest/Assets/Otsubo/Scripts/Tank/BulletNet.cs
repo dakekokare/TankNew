@@ -44,10 +44,12 @@ public class BulletNet : MonoBehaviour
             HitOthers(other);
         }
     }
-    public void ChengeMaterial()
+    public void ChengeMaterial(Vector3 col)
     {
         // 生成したプレハブのマテリアルを設定
-        this.gameObject.GetComponent<MeshRenderer>().material = mat;
+        //this.gameObject.GetComponent<MeshRenderer>().material = mat;
+        this.gameObject.GetComponent<MeshRenderer>().material.color 
+            = new Vector4(col.x, col.y, col.z, 1.0f);
     }
     private void DestroyShellOtherPlayer()
     {

@@ -34,6 +34,9 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        //Debug.Log("[p" + pColor + "]");
+        //Debug.Log("[e" + eColor + "]");
+
 
         // タイマーの時間を動かす
         timer += Time.deltaTime;
@@ -79,20 +82,23 @@ public class ShotShell : MonoBehaviourPunCallbacks
         // 砲弾の発射音を出す。
         audioSource.PlayOneShot(shotSound);
 
-        //敵の弾だったらtagを変える
-        if (shell.OwnerId != PhotonNetwork.LocalPlayer.ActorNumber)
+        if (shell.OwnerId == PhotonNetwork.LocalPlayer.ActorNumber)
         {
-            shell.tag = "EnemyShell";
-            //マテリアル色変え
-            shell.ChengeMaterial();
+            //自分の弾の場合
 
-            //軌跡の色を変える
-            TrailRenderer tr = shell.GetComponent<TrailRenderer>();
-            Color color = new Color(255, 0, 0);
-            tr.startColor = color;
-            tr.endColor = color;
+            //マテリアルの変更
+            ChangeMaterial(shell, pColor);
+
         }
+        else
+        {
+            //敵の弾だったらtagを変える
+            shell.tag = "EnemyShell";
 
+            //マテリアルの変更
+            ChangeMaterial(shell, eColor);
+
+        }
         shell.SetPlayer(gameObject.transform.
             parent.parent.parent.parent.parent.gameObject);
     }
@@ -147,9 +153,28 @@ public class ShotShell : MonoBehaviourPunCallbacks
         SearchSaveColor();
         //色情報取得
         if (PhotonNetwork.IsMasterClient)
+        {
             pColor = sColor.GetPlayerColor();
-        else
             eColor = sColor.GetEnemyColor();
+        }
+        else
+        {
+            pColor = sColor.GetEnemyColor();
+            eColor = sColor.GetPlayerColor();
+        }
+    }
+
+    private void ChangeMaterial(BulletNet obj,Vector3 vec)
+    {
+        //マテリアル色変え
+        obj.ChengeMaterial(vec);
+
+        //軌跡の色を変える
+        TrailRenderer tr = obj.GetComponent<TrailRenderer>();
+        Color color = new Color(vec.x, vec.y, vec.z);
+        tr.startColor = color;
+        tr.endColor = color;
 
     }
+
 }
