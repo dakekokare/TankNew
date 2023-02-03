@@ -57,9 +57,13 @@ public class ShotShell : MonoBehaviourPunCallbacks
                 // タイマーの時間を０に戻す。
                 timer = 0.0f;
 
-                // 弾を発射するたびに弾のIDを1ずつ増やしていく
-                photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++,pColor,eColor);
-
+                //マスタークライアントなら
+                if(PhotonNetwork.IsMasterClient)
+                    // 弾を発射するたびに弾のIDを1ずつ増やしていく
+                    photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++,pColor,eColor);
+                else
+                    // 弾を発射するたびに弾のIDを1ずつ増やしていく
+                    photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++, eColor, pColor);
             }
         }
     }
