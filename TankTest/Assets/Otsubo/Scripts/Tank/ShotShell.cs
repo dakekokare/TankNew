@@ -22,7 +22,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
     private bool shotLock = true;
     //色情報保持　オブジェクト
-    private SaveColor sColor;
+    //private SaveColor sColor;
     private Vector3 pColor;
     private Vector3 eColor;
 
@@ -34,9 +34,12 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        //Debug.Log("[p" + pColor + "]");
-        //Debug.Log("[e" + eColor + "]");
+        //if (photonView.IsMine)
+        //{
 
+        //    Debug.Log("[p" + pColor + "]");
+        //    Debug.Log("[e" + eColor + "]");
+        //}
 
         // タイマーの時間を動かす
         timer += Time.deltaTime;
@@ -55,15 +58,16 @@ public class ShotShell : MonoBehaviourPunCallbacks
                 timer = 0.0f;
 
                 // 弾を発射するたびに弾のIDを1ずつ増やしていく
-                photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++);
+                photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++,pColor,eColor);
 
             }
         }
     }
 
-     [PunRPC]
-    private void FireBullet(int id)
-    {       
+    [PunRPC]
+    private void FireBullet(int id,Vector3 p,Vector3 e)
+    {
+
         // 砲弾のプレハブを実体化（インスタンス化）する。
         var shell = Instantiate(bulletPre);
 
@@ -78,7 +82,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
         // forward（青軸＝Z軸）の方向に力を加える。
         shellRb.AddForce(transform.forward * shotSpeed);
-    
+
         // 砲弾の発射音を出す。
         audioSource.PlayOneShot(shotSound);
 
@@ -87,7 +91,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
             //自分の弾の場合
 
             //マテリアルの変更
-            ChangeMaterial(shell, pColor);
+            ChangeMaterial(shell, p);
 
         }
         else
@@ -96,12 +100,13 @@ public class ShotShell : MonoBehaviourPunCallbacks
             shell.tag = "EnemyShell";
 
             //マテリアルの変更
-            ChangeMaterial(shell, eColor);
+            ChangeMaterial(shell, e);
 
         }
         shell.SetPlayer(gameObject.transform.
             parent.parent.parent.parent.parent.gameObject);
     }
+    
 
     public void ShotUnlock()
     {
@@ -136,35 +141,23 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
     private void SearchSaveColor()
     {
-        // ルーム内のネットワークオブジェクト
-        foreach (var photonView in PhotonNetwork.PhotonViewCollection)
-        {
-            //Color オブジェクト
-            if (photonView.gameObject.name == "Color(Clone)")
-            {
-                sColor = PhotonView.Find(photonView.ViewID).gameObject.GetComponent<SaveColor>();
+        //// ルーム内のネットワークオブジェクト
+        //foreach (var photonView in PhotonNetwork.PhotonViewCollection)
+        //{
+        //    //Color オブジェクト
+        //    if (photonView.gameObject.name == "Color(Clone)")
+        //    {
+        //        sColor = PhotonView.Find(photonView.ViewID).gameObject.GetComponent<SaveColor>();
 
-            }
-        }
+        //    }
+        //}
     }
 
     public void SetColor(Vector3 p,Vector3 e)
     {
-        //SearchSaveColor();
         //色情報取得
-        if (PhotonNetwork.IsMasterClient)
-        {
-            //pColor = sColor.GetPlayerColor();
-            //eColor = sColor.GetEnemyColor();
-            pColor = p;
-            eColor = e;
-
-        }
-        else
-        {
-            pColor = e;
-            eColor = p;
-        }
+        pColor = p;
+        eColor = e;
     }
 
     private void ChangeMaterial(BulletNet obj,Vector3 vec)
