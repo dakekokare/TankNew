@@ -264,19 +264,9 @@ public class Scene : MonoBehaviourPunCallbacks
         Color col = SceneShare.GetColor();
         Vector3 cVec = new Vector3(col.r, col.g, col.b);
 
-        ////カラーオブジェクト取得
-        //SearchSaveColor();
-        //////色情報を追加
-        //colorObj.GetComponent<SaveColor>().AddEnemyColor(cVec);
 
-
-        //色情報　設定
-        photonView.RPC(nameof(SetSaveColor), RpcTarget.Others,cVec);
-
-
-        //shot shell 色情報取得
-        photonView.RPC(nameof(GetSaveColor), RpcTarget.All);
-
+        //色情報　設定 マスタークライアント　設定
+        photonView.RPC(nameof(SetSaveColor), RpcTarget.MasterClient,cVec);
 
     }
     [PunRPC]
@@ -294,6 +284,13 @@ public class Scene : MonoBehaviourPunCallbacks
     {
         //色情報を追加
         colorObj.GetComponent<SaveColor>().AddEnemyColor(vec);
+
+        //マスタークライアント　カラー取得
+        GetSaveColor();
+
+        //master cliant 以外の処理
+        photonView.RPC(nameof(GetSaveColor), RpcTarget.Others);
+
     }
 
 
@@ -303,7 +300,7 @@ public class Scene : MonoBehaviourPunCallbacks
         // ルーム内のネットワークオブジェクト
         foreach (var photonView in PhotonNetwork.PhotonViewCollection)
         {
-            //boat かつ　自分じゃなかったら
+            //boat かつ　自分
             if (photonView.gameObject.name == "BoatBody")
             {
                 if (photonView.IsMine)
