@@ -200,7 +200,7 @@ public class ShotShell : MonoBehaviourPunCallbacks
     {
         GameObject obj = PhotonView.Find(id).gameObject;
         //煙のエフェクト表示
-        this.gameObject.transform.GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0).gameObject.SetActive(true);
+        obj.transform.GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0).gameObject.SetActive(true);
 
     }
     //public void DisActiveSmoke()
