@@ -97,14 +97,8 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
         if (shell.OwnerId == PhotonNetwork.LocalPlayer.ActorNumber)
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
                 //マテリアルの変更
                 ChangeMaterial(shell, p);
-            }
-            else
-                //マテリアルの変更
-                ChangeMaterial(shell, e);
 
         }
         else
@@ -112,12 +106,6 @@ public class ShotShell : MonoBehaviourPunCallbacks
             //敵の弾だったらtagを変える
             shell.tag = "EnemyShell";
 
-            if (PhotonNetwork.IsMasterClient)
-            {
-                //マテリアルの変更
-                ChangeMaterial(shell, p);
-            }
-            else
                 //マテリアルの変更
                 ChangeMaterial(shell, e);
 
@@ -174,9 +162,18 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
     public void SetColor(Vector3 p,Vector3 e)
     {
-        //色情報取得
-        pColor = p;
-        eColor = e;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            //色情報取得
+            pColor = p;
+            eColor = e;
+        }
+        else
+        {
+            //色情報取得
+            pColor = e;
+            eColor = p;
+        }
     }
 
     private void ChangeMaterial(BulletNet obj,Vector3 vec)
