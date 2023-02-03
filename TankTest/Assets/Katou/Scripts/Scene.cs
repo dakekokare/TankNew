@@ -264,10 +264,15 @@ public class Scene : MonoBehaviourPunCallbacks
         Color col = SceneShare.GetColor();
         Vector3 cVec = new Vector3(col.r, col.g, col.b);
 
-        //カラーオブジェクト取得
-        SearchSaveColor();
-        ////色情報を追加
-        colorObj.GetComponent<SaveColor>().AddEnemyColor(cVec);
+        ////カラーオブジェクト取得
+        //SearchSaveColor();
+        //////色情報を追加
+        //colorObj.GetComponent<SaveColor>().AddEnemyColor(cVec);
+
+
+        //色情報　設定
+        photonView.RPC(nameof(SetSaveColor), RpcTarget.Others,cVec);
+
 
         //shot shell 色情報取得
         photonView.RPC(nameof(GetSaveColor), RpcTarget.All);
@@ -283,6 +288,16 @@ public class Scene : MonoBehaviourPunCallbacks
             GetChild(0).GetChild(0).GetChild(1).GetChild(0).gameObject.GetComponent<ShotShell>();
         shell.SetColor();
     }
+
+    [PunRPC]
+    private void SetSaveColor(Vector3 vec)
+    {
+        //色情報を追加
+        colorObj.GetComponent<SaveColor>().AddEnemyColor(vec);
+    }
+
+
+
     private void SearchPlayer()
     {
         // ルーム内のネットワークオブジェクト
