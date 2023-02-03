@@ -186,5 +186,31 @@ public class ShotShell : MonoBehaviourPunCallbacks
         tr.endColor = color;
 
     }
+    public void ActiveSmoke(int id)
+    {
+        //煙のエフェクト表示
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        //他プレイヤースモーク表示
+        photonView.RPC(nameof(OtherPlayerActiveSmoke), RpcTarget.Others, id);
 
+
+    }
+    [PunRPC]
+    private void OtherPlayerActiveSmoke(int id)
+    {
+        GameObject obj = PhotonView.Find(id).gameObject;
+        //煙のエフェクト表示
+        this.gameObject.transform.GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0).gameObject.SetActive(true);
+
+    }
+    //public void DisActiveSmoke()
+    //{
+    //    //他プレイヤースモーク非表示
+    //    photonView.RPC(nameof(DisActiveOtherSmoke), RpcTarget.Others, id);
+    //}
+    //[PunRPC]
+    //private void DisActiveOtherSmoke()
+    //{
+
+    //}
 }

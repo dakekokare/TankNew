@@ -23,7 +23,8 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
     private Image Keepout3 = default;
 
     //プレイヤー
-    private ShotShell player;
+    private GameObject player;
+    private ShotShell shotShell;
 
     //ゲージ増加スピード
     private float GuageIncSpeed = 0.01f;
@@ -80,7 +81,11 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                         //射撃停止状態
                         state = ShotState.Stop;
                         //煙のエフェクト表示
-                        player.transform.GetChild(0).gameObject.SetActive(true);
+                        //player.transform.GetChild(0).gameObject.SetActive(true);
+                        //バリアをアクティブにする
+                        player.transform.
+                            GetChild(0).GetChild(0).GetChild(1).GetChild(0).
+                            gameObject.GetComponent<ShotShell>().ActiveSmoke(player.GetComponent<PhotonView>().ViewID);
                         // オーバーヒートの音を出す。
                         audioSource.PlayOneShot(overHeatSound);
                     }
@@ -95,7 +100,7 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                 break;
             case ShotState.Stop:
                 //射撃不可能にする
-                player.ShotLock();
+                shotShell.ShotLock();
                 //3秒停止 射撃ゲージ回復状態にする
                 Invoke("RecovaryShotGuage", GuageStop);
                 break;
@@ -107,11 +112,11 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
                 else
                 {
                     //煙のエフェクト非表示
-                    player.transform.GetChild(0).gameObject.SetActive(false);
+                    //player.transform.GetChild(0).gameObject.SetActive(false);
                     //射撃状態へ
                     state = ShotState.Shot;
                     //射撃可能にする
-                    player.ShotUnlock();
+                    shotShell.ShotUnlock();
                     //keep out 非アクティブ
                     Keepout1.gameObject.SetActive(false);
                     Keepout2.gameObject.SetActive(false);
@@ -123,7 +128,8 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
         }
     }
 
-    private void Initialize()
+
+        private void Initialize()
     {
         //プレイヤー探索
         SearchPlayer();
@@ -142,7 +148,8 @@ public class UiTurretGuage : MonoBehaviourPunCallbacks
 
                     Debug.Log("[" + GetInstanceID() + "]" + "Player Find");
                     GameObject obj = PhotonView.Find(photonView.ViewID).gameObject;
-                    player= obj.transform.
+                    player = obj.gameObject.transform.GetChild(0).gameObject;
+                    shotShell = obj.transform.
                         GetChild(0).
                         GetChild(0).
                         GetChild(0).
