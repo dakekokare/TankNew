@@ -57,13 +57,18 @@ public class ShotShell : MonoBehaviourPunCallbacks
                 // タイマーの時間を０に戻す。
                 timer = 0.0f;
 
-                //マスタークライアントなら
-                if(PhotonNetwork.IsMasterClient)
-                    // 弾を発射するたびに弾のIDを1ずつ増やしていく
-                    photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++,pColor,eColor);
-                else
-                    // 弾を発射するたびに弾のIDを1ずつ増やしていく
-                    photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++, eColor, pColor);
+
+                // 弾を発射するたびに弾のIDを1ずつ増やしていく
+                photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++,pColor,eColor);
+
+
+                ////マスタークライアントなら
+                //if(PhotonNetwork.IsMasterClient)
+                //    // 弾を発射するたびに弾のIDを1ずつ増やしていく
+                //    photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++,pColor,eColor);
+                //else
+                //    // 弾を発射するたびに弾のIDを1ずつ増やしていく
+                //    photonView.RPC(nameof(FireBullet), RpcTarget.All, nextBulletId++, eColor, pColor);
             }
         }
     }
@@ -92,10 +97,14 @@ public class ShotShell : MonoBehaviourPunCallbacks
 
         if (shell.OwnerId == PhotonNetwork.LocalPlayer.ActorNumber)
         {
-            //自分の弾の場合
-
-            //マテリアルの変更
-            ChangeMaterial(shell, p);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //マテリアルの変更
+                ChangeMaterial(shell, p);
+            }
+            else
+                //マテリアルの変更
+                ChangeMaterial(shell, e);
 
         }
         else
@@ -103,8 +112,14 @@ public class ShotShell : MonoBehaviourPunCallbacks
             //敵の弾だったらtagを変える
             shell.tag = "EnemyShell";
 
-            //マテリアルの変更
-            ChangeMaterial(shell, e);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //マテリアルの変更
+                ChangeMaterial(shell, p);
+            }
+            else
+                //マテリアルの変更
+                ChangeMaterial(shell, e);
 
         }
         shell.SetPlayer(gameObject.transform.
