@@ -22,6 +22,11 @@ public class Ramp : MonoBehaviour
     [SerializeField, Range(0F, 90F), Tooltip("射出する角度")]
     private float ThrowingAngle;
 
+    // 効果音
+    [SerializeField]
+    private AudioClip jumpSound;
+    AudioSource audioSource;
+
     private void Start()
     {
         //Collider collider = GetComponent<Collider>();
@@ -30,6 +35,9 @@ public class Ramp : MonoBehaviour
         //    // 干渉しないようにisTriggerをつける
         //    collider.isTrigger = true;
         //}
+
+        //Componentを取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -116,10 +124,14 @@ public class Ramp : MonoBehaviour
         //        r.AddForce(dir * 10.0f, ForceMode.Impulse);
         //}
 
-
-        //射出するオブジェクト
-        ThrowingObject = other.gameObject;
-        //射出
-        ThrowingBoat();
+        if (other.gameObject.layer == 8)
+        {
+            //射出するオブジェクト
+            ThrowingObject = other.gameObject;
+            //射出
+            ThrowingBoat();
+            // 射出の音を出す。
+            audioSource.PlayOneShot(jumpSound);
+        }
     }
 }
