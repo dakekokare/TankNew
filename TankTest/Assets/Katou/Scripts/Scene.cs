@@ -270,26 +270,27 @@ public class Scene : MonoBehaviourPunCallbacks
 
     }
     [PunRPC]
-    private void GetSaveColor()
+    private void GetSaveColor(Vector3 p,Vector3 e)
     {
         //プレイヤー情報取得
         SearchPlayer();
         ShotShell shell= player.transform.
             GetChild(0).GetChild(0).GetChild(1).GetChild(0).gameObject.GetComponent<ShotShell>();
-        shell.SetColor();
+        shell.SetColor(p,e);
     }
 
     [PunRPC]
     private void SetSaveColor(Vector3 vec)
     {
         //色情報を追加
-        colorObj.GetComponent<SaveColor>().AddEnemyColor(vec);
-
+        SaveColor sc = colorObj.GetComponent<SaveColor>();
+        sc.AddEnemyColor(vec);
         //マスタークライアント　カラー取得
-        GetSaveColor();
+        GetSaveColor(sc.GetPlayerColor(),sc.GetEnemyColor());
 
         //master cliant 以外の処理
-        photonView.RPC(nameof(GetSaveColor), RpcTarget.Others);
+        photonView.RPC(nameof(GetSaveColor), RpcTarget.Others,
+            sc.GetPlayerColor(), sc.GetEnemyColor());
 
     }
 

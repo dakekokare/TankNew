@@ -148,19 +148,22 @@ public class ShotShell : MonoBehaviourPunCallbacks
         }
     }
 
-    public void SetColor()
+    public void SetColor(Vector3 p,Vector3 e)
     {
-        SearchSaveColor();
+        //SearchSaveColor();
         //êFèÓïÒéÊìæ
         if (PhotonNetwork.IsMasterClient)
         {
-            pColor = sColor.GetPlayerColor();
-            eColor = sColor.GetEnemyColor();
+            //pColor = sColor.GetPlayerColor();
+            //eColor = sColor.GetEnemyColor();
+            pColor = p;
+            eColor = e;
+
         }
         else
         {
-            pColor = sColor.GetEnemyColor();
-            eColor = sColor.GetPlayerColor();
+            pColor = e;
+            eColor = p;
         }
     }
 
